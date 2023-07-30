@@ -41,11 +41,13 @@ public class LoginRepository {
                     }else{
                         Log.d(TAG, "on failed response: " + response.body().toString());
                     }
+                    result.postValue(new LoggedInUser(response.body()));
                 }
 
                 @Override
                 public void onFailure(Call<LoginResponse> call, Throwable t) {
                     Log.d(TAG, "on failure: " + t.getMessage());
+                    result.postValue(new LoggedInUser());
                 }
             });
         }catch (Exception e){
