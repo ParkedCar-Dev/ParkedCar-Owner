@@ -1,4 +1,4 @@
-package com.example.spaceowner.dashboard;
+package com.example.spaceowner.view.dashboard;
 
 import androidx.appcompat.app.AppCompatActivity;
 

@@ -1,10 +1,11 @@
-package com.example.spaceowner.auth;
+package com.example.spaceowner.view.auth;
 
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 
@@ -16,17 +17,19 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.spaceowner.R;
+import com.example.spaceowner.viewmodel.LoginViewModel;
+import com.example.spaceowner.viewmodel.LoginViewModelFactory;
 import com.google.android.material.textfield.TextInputLayout;
 
 public class LoginFragment extends Fragment {
     public LoginFragment() {}
     TextInputLayout email, password;
     Button loginButton, signupButton;
+    LoginViewModel viewModel;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_login, container, false);
     }
 
@@ -43,9 +46,19 @@ public class LoginFragment extends Fragment {
         password = getView().findViewById(R.id.login_pass);
         loginButton = getView().findViewById(R.id.login_button);
         signupButton = getView().findViewById(R.id.login_to_signup);
-
+        viewModel = new ViewModelProvider(this, new LoginViewModelFactory()).get(LoginViewModel.class);
         loginButton.setOnClickListener((v) -> {
-            tryToLogin();
+            viewModel.login(email.getEditText().getText().toString(), password.getEditText().getText().toString());
+        });
+
+        viewModel.getLoginResult().observe(getViewLifecycleOwner(), (result) -> {
+            if(result == null) return;
+            if(result.getError() != null){
+                Toast.makeText(getContext(), result.getError(), Toast.LENGTH_SHORT).show();
+            }
+            else{
+                Toast.makeText(getContext(), "Login Successful", Toast.LENGTH_SHORT).show();
+            }
         });
 
         signupButton.setOnClickListener((v) -> {

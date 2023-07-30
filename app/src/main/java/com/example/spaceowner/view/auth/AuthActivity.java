@@ -1,4 +1,4 @@
-package com.example.spaceowner.auth;
+package com.example.spaceowner.view.auth;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.navigation.NavController;
@@ -10,7 +10,6 @@ import android.os.Bundle;
 import com.example.spaceowner.R;
 
 public class AuthActivity extends AppCompatActivity {
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
