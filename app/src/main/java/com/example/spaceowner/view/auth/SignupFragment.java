@@ -1,4 +1,4 @@
-package com.example.spaceowner.auth;
+package com.example.spaceowner.view.auth;
 
 import android.os.Bundle;
 
