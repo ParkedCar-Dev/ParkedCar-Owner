@@ -3,12 +3,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".view.dashboard.fragments.DisabledFragment">
+    tools:context=".view.dashboard.fragments.ActiveSpotsFragment">
 
     <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <androidx.recyclerview.widget.RecyclerView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="DISABLED" />
+        android:id="@+id/disabled_spots_recycler_view"
+        />
 
 </FrameLayout>

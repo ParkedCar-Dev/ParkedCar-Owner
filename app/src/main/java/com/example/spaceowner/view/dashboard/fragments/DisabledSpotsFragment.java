@@ -10,12 +10,17 @@ import android.view.ViewGroup;
 
 import com.example.spaceowner.R;
 
-public class DisabledFragment extends Fragment {
-    public DisabledFragment() {}
+public class DisabledSpotsFragment extends Fragment {
+    public DisabledSpotsFragment() {}
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_disabled, container, false);
+        // Inflate the layout for this fragment
+        return inflater.inflate(R.layout.fragment_disabled_spots, container, false);
+    }
+    @Override
+    public void onViewCreated(View view, Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
     }
 }

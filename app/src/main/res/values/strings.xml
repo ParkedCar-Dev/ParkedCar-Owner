@@ -34,4 +34,10 @@
     <string name="length">Length</string>
     <string name="width">Width</string>
     <string name="height">Height</string>
+    <string name="disable">Disable</string>
+    <string name="activate">Activate</string>
+    <string name="delete">Delete</string>
+    <string name="update">Update</string>
+    <string name="disabled">Disabled</string>
+    <string name="requested">Requested</string>
 </resources>

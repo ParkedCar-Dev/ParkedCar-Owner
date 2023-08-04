@@ -6,8 +6,8 @@ import androidx.fragment.app.FragmentActivity;
 import androidx.viewpager2.adapter.FragmentStateAdapter;
 
 import com.example.spaceowner.view.dashboard.fragments.ActiveSpotsFragment;
-import com.example.spaceowner.view.dashboard.fragments.BookedSpotsFragment;
-import com.example.spaceowner.view.dashboard.fragments.DisabledFragment;
+import com.example.spaceowner.view.dashboard.fragments.DisabledSpotsFragment;
+import com.example.spaceowner.view.dashboard.fragments.RequestedSpotsFragment;
 
 public class DashboardViewpagerAdapter extends FragmentStateAdapter {
     public DashboardViewpagerAdapter(@NonNull FragmentActivity fragmentActivity) {
@@ -18,8 +18,8 @@ public class DashboardViewpagerAdapter extends FragmentStateAdapter {
     @Override
     public Fragment createFragment(int position) {
         switch (position){
-            case 1: return new DisabledFragment();
-            case 2: return new BookedSpotsFragment();
+            case 1: return new RequestedSpotsFragment();
+            case 2: return new DisabledSpotsFragment();
             default: return new ActiveSpotsFragment();
         }
     }

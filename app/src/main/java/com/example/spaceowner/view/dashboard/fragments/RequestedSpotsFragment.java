@@ -10,17 +10,12 @@ import android.view.ViewGroup;
 
 import com.example.spaceowner.R;
 
-public class BookedSpotsFragment extends Fragment {
-    public BookedSpotsFragment() {}
+public class RequestedSpotsFragment extends Fragment {
+    public RequestedSpotsFragment() {}
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_booked_spots, container, false);
-    }
-    @Override
-    public void onViewCreated(View view, Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
+        return inflater.inflate(R.layout.fragment_requested_spots, container, false);
     }
 }

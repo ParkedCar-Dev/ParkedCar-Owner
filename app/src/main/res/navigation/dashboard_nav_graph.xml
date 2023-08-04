@@ -19,9 +19,9 @@
     </fragment>
     <fragment
         android:id="@+id/bookedSpotsFragment"
-        android:name="com.example.spaceowner.view.dashboard.fragments.BookedSpotsFragment"
+        android:name="com.example.spaceowner.view.dashboard.fragments.DisabledSpotsFragment"
         android:label="fragment_booked_spots"
-        tools:layout="@layout/fragment_booked_spots" >
+        tools:layout="@layout/fragment_requested_spots" >
         <action
             android:id="@+id/action_bookedSpotsFragment_to_activeSpotsFragment"
             app:destination="@id/activeSpotsFragment" />
@@ -31,9 +31,9 @@
     </fragment>
     <fragment
         android:id="@+id/disabledFragment"
-        android:name="com.example.spaceowner.view.dashboard.fragments.DisabledFragment"
+        android:name="com.example.spaceowner.view.dashboard.fragments.RequestedSpotsFragment"
         android:label="fragment_disabled"
-        tools:layout="@layout/fragment_disabled" >
+        tools:layout="@layout/fragment_disabled_spots" >
         <action
             android:id="@+id/action_disabledFragment_to_activeSpotsFragment"
             app:destination="@id/activeSpotsFragment" />
