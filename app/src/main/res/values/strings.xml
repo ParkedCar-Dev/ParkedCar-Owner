@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">SpaceOwner</string>
+    <string name="app_name">Parked Car - Owner</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="email">email</string>
@@ -11,4 +11,27 @@
     <string name="phone">Phone No</string>
     <string name="signup">Sign Up</string>
     <string name="go_to_login">Already have an account.</string>
+    <string name="active_spaces">Active</string>
+    <string name="booked_spaces">Booked</string>
+    <string name="disabled_spaces">Disabled</string>
+    <string name="address">Address</string>
+    <string name="base_fare">Base Fare</string>
+    <string name="requests">Requests</string>
+    <string name="rating">rating</string>
+    <string name="accept">Accept</string>
+    <string name="reject">Reject</string>
+    <string name="name">Name</string>
+    <string name="date_and_time">Date and Time</string>
+    <string name="latitude">Latitude</string>
+    <string name="longitude">Longitude</string>
+    <string name="request_auto_approval">Request Auto Approval</string>
+    <string name="cc_camera">CC Camera</string>
+    <string name="guards">Guards</string>
+    <string name="indoor">Indoor</string>
+    <string name="preview">Preview</string>
+    <string name="submit">Submit</string>
+    <string name="add_photos">Add Photos</string>
+    <string name="length">Length</string>
+    <string name="width">Width</string>
+    <string name="height">Height</string>
 </resources>

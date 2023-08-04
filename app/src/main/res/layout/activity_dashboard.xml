@@ -4,14 +4,35 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:gravity="center"
+    android:orientation="vertical"
     tools:context=".view.dashboard.DashboardActivity">
+    <com.google.android.material.tabs.TabLayout
+        android:id="@+id/tab_layout_dashboard"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <com.google.android.material.tabs.TabItem
+            android:id="@+id/tab_item_active_spaces"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/active_spaces"/>
+        <com.google.android.material.tabs.TabItem
+            android:id="@+id/tab_item_booked_spaces"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/booked_spaces"/>
+        <com.google.android.material.tabs.TabItem
+            android:id="@+id/tab_item_disabled_spaces"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/disabled_spaces"/>
+    </com.google.android.material.tabs.TabLayout>
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="DASHBOARD"
-        android:textSize="30sp"
-        />
+    <androidx.viewpager2.widget.ViewPager2
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/dashboard_viewpager">
+
+    </androidx.viewpager2.widget.ViewPager2>
+
 
 </LinearLayout>

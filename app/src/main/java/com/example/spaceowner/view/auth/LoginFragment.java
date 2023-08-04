@@ -22,21 +22,15 @@ import com.example.spaceowner.viewmodel.LoginViewModelFactory;
 import com.google.android.material.textfield.TextInputLayout;
 
 public class LoginFragment extends Fragment {
-    public LoginFragment() {}
     TextInputLayout email, password;
     Button loginButton, signupButton;
     LoginViewModel viewModel;
+    public LoginFragment() {}
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         return inflater.inflate(R.layout.fragment_login, container, false);
-    }
-
-    private void tryToLogin(){
-        String email = this.email.getEditText().getText().toString();
-        String password = this.password.getEditText().getText().toString();
-        Toast.makeText(getContext(), "Email: " + email + " Password: " + password, Toast.LENGTH_SHORT).show();
     }
 
     @Override

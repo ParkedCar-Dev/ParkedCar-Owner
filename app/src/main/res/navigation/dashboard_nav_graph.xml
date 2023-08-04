@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/dashboard_nav_graph"
+    app:startDestination="@id/activeSpotsFragment">
+
+    <fragment
+        android:id="@+id/activeSpotsFragment"
+        android:name="com.example.spaceowner.view.dashboard.fragments.ActiveSpotsFragment"
+        android:label="fragment_active_spots"
+        tools:layout="@layout/fragment_active_spots" >
+        <action
+            android:id="@+id/action_activeSpotsFragment_to_bookedSpotsFragment"
+            app:destination="@id/bookedSpotsFragment" />
+        <action
+            android:id="@+id/action_activeSpotsFragment_to_disabledFragment"
+            app:destination="@id/disabledFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/bookedSpotsFragment"
+        android:name="com.example.spaceowner.view.dashboard.fragments.BookedSpotsFragment"
+        android:label="fragment_booked_spots"
+        tools:layout="@layout/fragment_booked_spots" >
+        <action
+            android:id="@+id/action_bookedSpotsFragment_to_activeSpotsFragment"
+            app:destination="@id/activeSpotsFragment" />
+        <action
+            android:id="@+id/action_bookedSpotsFragment_to_disabledFragment"
+            app:destination="@id/disabledFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/disabledFragment"
+        android:name="com.example.spaceowner.view.dashboard.fragments.DisabledFragment"
+        android:label="fragment_disabled"
+        tools:layout="@layout/fragment_disabled" >
+        <action
+            android:id="@+id/action_disabledFragment_to_activeSpotsFragment"
+            app:destination="@id/activeSpotsFragment" />
+        <action
+            android:id="@+id/action_disabledFragment_to_bookedSpotsFragment"
+            app:destination="@id/bookedSpotsFragment" />
+    </fragment>
+</navigation>
