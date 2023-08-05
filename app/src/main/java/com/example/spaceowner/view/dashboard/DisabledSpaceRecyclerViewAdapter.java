@@ -18,44 +18,38 @@ import com.example.spaceowner.view.dashboard.fragments.SpaceType;
 import java.util.LinkedList;
 import java.util.List;
 
-class ActiveSpaceViewHolder extends RecyclerView.ViewHolder{
+class DisabledSpaceViewHolder extends RecyclerView.ViewHolder{
     TextView address, basefare, rating;
-    Button requestButton, disableButton;
+    Button activateButton;
     Space space;
-    public ActiveSpaceViewHolder(@NonNull View itemView) {
+    public DisabledSpaceViewHolder(@NonNull View itemView) {
         super(itemView);
-        address = itemView.findViewById(R.id.active_address);
-        basefare = itemView.findViewById(R.id.active_base_fare);
-        rating = itemView.findViewById(R.id.active_rating);
+        Log.d("SpaceViewHolder", itemView.toString()+" is created");
+        address = itemView.findViewById(R.id.disabled_address);
+        basefare = itemView.findViewById(R.id.disabled_base_fare);
+        rating = itemView.findViewById(R.id.disabled_rating);
 
+        activateButton = itemView.findViewById(R.id.activate);
         itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Toast.makeText(itemView.getContext(), "Show "+space.getLocationId()+" Details", Toast.LENGTH_SHORT).show();
             }
         });
-        requestButton = itemView.findViewById(R.id.requests);
-        disableButton = itemView.findViewById(R.id.disable);
 
-        requestButton.setOnClickListener(new View.OnClickListener(){
+        activateButton.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
-                Toast.makeText(itemView.getContext(), "Show "+space.getLocationId()+" Requests", Toast.LENGTH_SHORT).show();
-            }
-        });
-        disableButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(itemView.getContext(), "Disable "+space.getLocationId(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(itemView.getContext(), "Activate "+space.getLocationId(), Toast.LENGTH_SHORT).show();
             }
         });
     }
 }
 
-public class ActiveSpaceRecyclerViewAdapter extends RecyclerView.Adapter<ActiveSpaceViewHolder>{
+public class DisabledSpaceRecyclerViewAdapter extends RecyclerView.Adapter<DisabledSpaceViewHolder>{
     private List<Space> ACTIVE_SPACES = new LinkedList<>();
     private SpaceType spaceType;
-    public ActiveSpaceRecyclerViewAdapter(SpaceType spaceType){
+    public DisabledSpaceRecyclerViewAdapter(SpaceType spaceType){
         ACTIVE_SPACES.add(new Space());
         ACTIVE_SPACES.add(new Space());
         ACTIVE_SPACES.add(new Space());
@@ -66,17 +60,15 @@ public class ActiveSpaceRecyclerViewAdapter extends RecyclerView.Adapter<ActiveS
     }
     @NonNull
     @Override
-    public ActiveSpaceViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public DisabledSpaceViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
-        View view = inflater.inflate(R.layout.active_space_card_item, parent, false);
-        return new ActiveSpaceViewHolder(view);
+        View view = inflater.inflate(R.layout.disabled_card_item, parent, false);
+        return new DisabledSpaceViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ActiveSpaceViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull DisabledSpaceViewHolder holder, int position) {
         Space space = ACTIVE_SPACES.get(position);
-        if(holder == null)
-            Log.d("SpaceRecyclerViewAdapter", "holder is null");
         holder.address.setText(space.getLocationAddress());
         holder.basefare.setText(space.getBaseFare());
         holder.rating.setText(Double.toString(space.getRating()));

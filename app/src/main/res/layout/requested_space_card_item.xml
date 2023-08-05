@@ -13,7 +13,7 @@
         android:layout_height="match_parent">
 
         <ImageView
-            android:id="@+id/space_card_house_icon"
+            android:id="@+id/requested_home_icon"
             android:layout_width="44dp"
             android:layout_height="44dp"
             android:scaleType="centerCrop"
@@ -26,7 +26,7 @@
             app:layout_constraintVertical_bias="0.489" />
 
         <TextView
-            android:id="@+id/space_card_address"
+            android:id="@+id/requested_address"
             android:layout_width="202dp"
             android:layout_height="44dp"
             android:layout_marginTop="12dp"
@@ -38,11 +38,11 @@
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.076"
-            app:layout_constraintStart_toEndOf="@+id/space_card_house_icon"
+            app:layout_constraintStart_toEndOf="@+id/requested_home_icon"
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/space_card_base_fare"
+            android:id="@+id/requested_base_fare"
             android:layout_width="75dp"
             android:layout_height="31dp"
             android:layout_marginTop="4dp"
@@ -55,10 +55,10 @@
             app:layout_constraintEnd_toStartOf="@+id/update"
             app:layout_constraintHorizontal_bias="0.321"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/space_card_address" />
+            app:layout_constraintTop_toBottomOf="@+id/requested_address" />
 
         <TextView
-            android:id="@+id/space_card_rating"
+            android:id="@+id/requested_rating"
             android:layout_width="75dp"
             android:layout_height="31dp"
             android:ellipsize="end"
@@ -70,7 +70,7 @@
             app:layout_constraintBottom_toTopOf="@+id/update"
             app:layout_constraintEnd_toStartOf="@+id/imageView"
             app:layout_constraintHorizontal_bias="0.625"
-            app:layout_constraintStart_toEndOf="@+id/space_card_address"
+            app:layout_constraintStart_toEndOf="@+id/requested_address"
             app:layout_constraintTop_toTopOf="parent" />
 
         <ImageView
