@@ -6,7 +6,9 @@ public class LoggedInUser {
     private String displayName;
     private String email;
     private String error_message;
-    public LoggedInUser() {}
+    public LoggedInUser(String error_message) {
+        this.error_message = error_message;
+    }
     public String getDisplayName() {
         return displayName;
     }

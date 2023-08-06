@@ -38,16 +38,17 @@ public class LoginRepository {
                 public void onResponse(Call<LoginResponse> call, Response<LoginResponse> response) {
                     if(response.isSuccessful()){
                         Log.d(TAG, "on successful response: " + response.body().toString());
+                        result.postValue(new LoggedInUser(response.body()));
                     }else{
                         Log.d(TAG, "on failed response: " + response.body().toString());
+                        result.postValue(new LoggedInUser(response.body().getMessage()));
                     }
-                    result.postValue(new LoggedInUser(response.body()));
                 }
 
                 @Override
                 public void onFailure(Call<LoginResponse> call, Throwable t) {
                     Log.d(TAG, "on failure: " + t.getMessage());
-                    result.postValue(new LoggedInUser());
+                    result.postValue(new LoggedInUser(t.getMessage()));
                 }
             });
         }catch (Exception e){

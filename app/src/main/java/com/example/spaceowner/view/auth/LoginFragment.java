@@ -1,5 +1,6 @@
 package com.example.spaceowner.view.auth;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -17,6 +18,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.spaceowner.R;
+import com.example.spaceowner.view.dashboard.DashboardActivity;
 import com.example.spaceowner.viewmodel.LoginViewModel;
 import com.example.spaceowner.viewmodel.LoginViewModelFactory;
 import com.google.android.material.textfield.TextInputLayout;
@@ -52,6 +54,11 @@ public class LoginFragment extends Fragment {
             }
             else{
                 Toast.makeText(getContext(), "Login Successful", Toast.LENGTH_SHORT).show();
+
+//                go to dashboard activity
+                Intent intent = new Intent(getContext(), DashboardActivity.class);
+                startActivity(intent);
+                getActivity().finish();
             }
         });
 
