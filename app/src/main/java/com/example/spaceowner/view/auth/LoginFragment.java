@@ -14,13 +14,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.spaceowner.R;
 import com.example.spaceowner.view.dashboard.DashboardActivity;
 import com.example.spaceowner.viewmodel.LoginViewModel;
-import com.example.spaceowner.viewmodel.LoginViewModelFactory;
+import com.example.spaceowner.viewmodel.ViewModelFactory;
 import com.google.android.material.textfield.TextInputLayout;
 
 public class LoginFragment extends Fragment {
@@ -42,9 +41,19 @@ public class LoginFragment extends Fragment {
         password = getView().findViewById(R.id.login_pass);
         loginButton = getView().findViewById(R.id.login_button);
         signupButton = getView().findViewById(R.id.login_to_signup);
-        viewModel = new ViewModelProvider(this, new LoginViewModelFactory()).get(LoginViewModel.class);
+        viewModel = new ViewModelProvider(this, new ViewModelFactory()).get(LoginViewModel.class);
         loginButton.setOnClickListener((v) -> {
-            viewModel.login(email.getEditText().getText().toString(), password.getEditText().getText().toString());
+            String emailString = email.getEditText().getText().toString();
+            String passwordString = password.getEditText().getText().toString();
+            if(emailString.isEmpty()){
+                email.setError("Email is required");
+                return;
+            }
+            if(passwordString.isEmpty()){
+                password.setError("Password is required");
+                return;
+            }
+            viewModel.login(emailString, passwordString);
         });
 
         viewModel.getLoginResult().observe(getViewLifecycleOwner(), (result) -> {

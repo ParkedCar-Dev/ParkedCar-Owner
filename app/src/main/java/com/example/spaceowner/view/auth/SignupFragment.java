@@ -5,6 +5,7 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,6 +14,8 @@ import android.widget.Button;
 import android.widget.Toast;
 
 import com.example.spaceowner.R;
+import com.example.spaceowner.viewmodel.SignupViewModel;
+import com.example.spaceowner.viewmodel.ViewModelFactory;
 import com.google.android.material.textfield.TextInputLayout;
 
 public class SignupFragment extends Fragment {
@@ -20,6 +23,7 @@ public class SignupFragment extends Fragment {
     private static final String TAG = "SignupFragment";
     private TextInputLayout email, password, confirmPassword, name, phone;
     private Button signupButton, gotoLoginButton;
+    SignupViewModel viewModel;
     public SignupFragment() {}
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -43,11 +47,52 @@ public class SignupFragment extends Fragment {
         phone = getView().findViewById(R.id.signup_phone);
         signupButton = getView().findViewById(R.id.signup_button);
         gotoLoginButton = getView().findViewById(R.id.signup_to_login);
+        viewModel = new ViewModelProvider(this, new ViewModelFactory()).get(SignupViewModel.class);
 
         signupButton.setOnClickListener((v) -> {
-            tryToSignup();
+            String emailString = email.getEditText().getText().toString();
+            String passwordString = password.getEditText().getText().toString();
+            String confirmPasswordString = confirmPassword.getEditText().getText().toString();
+            String nameString = name.getEditText().getText().toString();
+            String phoneString = phone.getEditText().getText().toString();
+            if(emailString.isEmpty()){
+                email.setError("Email is required");
+                return;
+            }
+            if(passwordString.isEmpty()){
+                password.setError("Password is required");
+                return;
+            }
+            if(confirmPasswordString.isEmpty()){
+                confirmPassword.setError("Confirm Password is required");
+                return;
+            }
+            if(nameString.isEmpty()){
+                name.setError("Name is required");
+                return;
+            }
+            if(phoneString.isEmpty()){
+                phone.setError("Phone is required");
+                return;
+            }
+            if(!passwordString.equals(confirmPasswordString)){
+                confirmPassword.setError("Password and Confirm Password must be same");
+                return;
+            }
+            viewModel.signup(nameString, emailString, phoneString, passwordString);
+
         });
 
+        viewModel.getSignupResult().observe(getViewLifecycleOwner(), (result) -> {
+            if(result == null) return;
+            if(result.getError() != null){
+                Toast.makeText(getContext(), result.getError(), Toast.LENGTH_SHORT).show();
+            }
+            else{
+                Toast.makeText(getContext(), "Signup Successful", Toast.LENGTH_SHORT).show();
+                getActivity().onBackPressed();
+            }
+        });
         gotoLoginButton.setOnClickListener((v) -> { getActivity().onBackPressed(); });
 
     }
