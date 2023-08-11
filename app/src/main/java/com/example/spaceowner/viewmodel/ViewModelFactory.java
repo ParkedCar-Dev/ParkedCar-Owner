@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.example.spaceowner.model.repositories.LoginRepository;
 import com.example.spaceowner.model.repositories.SignupRepository;
+import com.example.spaceowner.model.repositories.SpaceRepository;
 
 public class ViewModelFactory implements ViewModelProvider.Factory {
     @NonNull
@@ -15,6 +16,8 @@ public class ViewModelFactory implements ViewModelProvider.Factory {
             return (T) new LoginViewModel(LoginRepository.getInstance());
         }else if(modelClass.isAssignableFrom(SignupViewModel.class)){
             return (T) new SignupViewModel(SignupRepository.getInstance());
+        }else if(modelClass.isAssignableFrom(SpaceListViewModel.class)){
+            return (T) new SpaceListViewModel(SpaceRepository.getInstance());
         }else{
             throw new IllegalArgumentException("Unknown ViewModel Class");
         }

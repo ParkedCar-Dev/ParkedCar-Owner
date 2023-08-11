@@ -1,41 +1,84 @@
 package com.example.spaceowner.model.data;
 
+import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.DiffUtil;
 
+import com.google.gson.annotations.SerializedName;
+
+import java.util.Arrays;
 import java.util.Random;
 
 public class Space {
+    @SerializedName("space_id")
     private int locationId;
+    @SerializedName("space_name")
     private String locationName;
+    @SerializedName("address")
     private String locationAddress;
     private String owner;
+    @SerializedName("latitude")
     private double latitude;
+
+    public String getSecurityMeasured() {
+        return securityMeasured;
+    }
+
+    public void setSecurityMeasured(String securityMeasured) {
+        this.securityMeasured = securityMeasured;
+    }
+
+    public Random getRandom() {
+        return random;
+    }
+
+    public void setRandom(Random random) {
+        this.random = random;
+    }
+
+    public static DiffUtil.ItemCallback<Space> getDiffCallback() {
+        return DIFF_CALLBACK;
+    }
+
+    public static void setDiffCallback(DiffUtil.ItemCallback<Space> diffCallback) {
+        DIFF_CALLBACK = diffCallback;
+    }
+
+    @SerializedName("longitude")
     private double longitude;
+    @SerializedName("base_fare")
     private String baseFare;
-    private double length, width, height;
+    @SerializedName("length")
+    private double length;
+    @SerializedName("width")
+    private double width;
+    @SerializedName("height")
+    private double height;
     private String status;
+    @SerializedName("security_measured")
+    private String securityMeasured;
     private String[] security;
+    @SerializedName("auto_approve")
     private boolean autoApproval;
     private String[] images;
     private double rating;
 
     Random random = new Random();
     public Space() {
-        locationId = random.nextInt();
-        locationAddress = "demo address";
-        baseFare = "100";
-        rating = 4.5;
-        owner = "demo owner";
-        locationName = "demo name";
-        latitude = 0.0;
-        longitude = 0.0;
-        length = 0.0;
-        width = 0.0;
-        height = 0.0;
-        status = "demo status";
-        security = new String[]{"demo security"};
-        autoApproval = false;
-        images = new String[]{"demo image"};
+//        locationId = random.nextInt();
+//        locationAddress = "demo address";
+//        baseFare = "100";
+//        rating = 4.5;
+//        owner = "demo owner";
+//        locationName = "demo name";
+//        latitude = 0.0;
+//        longitude = 0.0;
+//        length = 0.0;
+//        width = 0.0;
+//        height = 0.0;
+//        status = "demo status";
+//        security = new String[]{"demo security"};
+//        autoApproval = false;
+//        images = new String[]{"demo image"};
     }
 
     public double getRating() {
@@ -46,7 +89,7 @@ public class Space {
         this.rating = rating;
     }
 
-    public Space(int locationId, String locationName, String locationAddress, String owner, double latitude, double longitude, String baseFare, double length, double width, double height, String status, String[] security, boolean autoApproval, String[] images, double rating) {
+    public Space(int locationId, String locationName, String locationAddress, String owner, double latitude, double longitude, String baseFare, double length, double width, double height, String status, String[] security, boolean autoApproval, String[] images, double rating, String securityMeasured) {
         this.locationId = locationId;
         this.locationName = locationName;
         this.locationAddress = locationAddress;
@@ -62,6 +105,7 @@ public class Space {
         this.autoApproval = autoApproval;
         this.images = images;
         this.rating = rating;
+        this.securityMeasured = securityMeasured;
     }
 
     public int getLocationId() {
@@ -174,6 +218,30 @@ public class Space {
 
     public void setImages(String[] images) {
         this.images = images;
+    }
+
+    @NonNull
+    @Override
+    public String toString() {
+        return "{" +
+                "locationId=" + locationId +
+                ", locationName='" + locationName + '\'' +
+                ", locationAddress='" + locationAddress + '\'' +
+                ", owner='" + owner + '\'' +
+                ", latitude=" + latitude +
+                ", longitude=" + longitude +
+                ", baseFare='" + baseFare + '\'' +
+                ", length=" + length +
+                ", width=" + width +
+                ", height=" + height +
+                ", status='" + status + '\'' +
+                ", security=" + Arrays.toString(security) +
+                ", autoApproval=" + autoApproval +
+                ", images=" + Arrays.toString(images) +
+                ", rating=" + rating +
+                ", securityMeasured='" + securityMeasured + '\'' +
+                '}';
+
     }
 
     @Override

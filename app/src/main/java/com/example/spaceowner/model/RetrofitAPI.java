@@ -4,10 +4,15 @@ import com.example.spaceowner.model.data.LoginRequest;
 import com.example.spaceowner.model.data.LoginResponse;
 import com.example.spaceowner.model.data.SignupRequest;
 import com.example.spaceowner.model.data.SignupResponse;
+import com.example.spaceowner.model.data.Space;
+import com.example.spaceowner.model.data.SpaceListResponse;
 import com.example.spaceowner.model.repositories.SignupRepository;
+
+import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.http.Body;
+import retrofit2.http.GET;
 import retrofit2.http.POST;
 
 public interface RetrofitAPI {
@@ -16,4 +21,7 @@ public interface RetrofitAPI {
 
     @POST("/register/")
     Call<SignupResponse> signup(@Body SignupRequest signupReq);
+
+    @GET("/space/getMySpaces/")
+    Call<SpaceListResponse> getSpaces();
 }

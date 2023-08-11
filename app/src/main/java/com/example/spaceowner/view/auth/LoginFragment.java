@@ -18,10 +18,13 @@ import android.widget.Button;
 import android.widget.Toast;
 
 import com.example.spaceowner.R;
+import com.example.spaceowner.utils.TokenManager;
 import com.example.spaceowner.view.dashboard.DashboardActivity;
 import com.example.spaceowner.viewmodel.LoginViewModel;
 import com.example.spaceowner.viewmodel.ViewModelFactory;
 import com.google.android.material.textfield.TextInputLayout;
+
+import java.util.Objects;
 
 public class LoginFragment extends Fragment {
     TextInputLayout email, password;
@@ -65,10 +68,11 @@ public class LoginFragment extends Fragment {
             else{
                 Toast.makeText(getContext(), "Login Successful", Toast.LENGTH_SHORT).show();
                 //save token and refresh token to shared preferences
-                SharedPreferences sharedPreferences = getActivity().getSharedPreferences("com.example.spaceowner", getContext().MODE_PRIVATE);
-                sharedPreferences.edit().putString("token", result.getToken()).apply();
-                sharedPreferences.edit().putString("refreshToken", result.getRefreshToken()).apply();
+//                SharedPreferences sharedPreferences = getActivity().getSharedPreferences("com.example.spaceowner", getContext().MODE_PRIVATE);
+//                sharedPreferences.edit().putString("token", result.getToken()).apply();
+//                sharedPreferences.edit().putString("refreshToken", result.getRefreshToken()).apply();
 //                go to dashboard activity
+                TokenManager.getInstance().setToken(result.getToken());
                 Intent intent = new Intent(getContext(), DashboardActivity.class);
                 startActivity(intent);
                 getActivity().finish();
