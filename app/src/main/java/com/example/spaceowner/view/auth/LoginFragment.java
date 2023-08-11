@@ -1,6 +1,7 @@
 package com.example.spaceowner.view.auth;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -63,7 +64,10 @@ public class LoginFragment extends Fragment {
             }
             else{
                 Toast.makeText(getContext(), "Login Successful", Toast.LENGTH_SHORT).show();
-
+                //save token and refresh token to shared preferences
+                SharedPreferences sharedPreferences = getActivity().getSharedPreferences("com.example.spaceowner", getContext().MODE_PRIVATE);
+                sharedPreferences.edit().putString("token", result.getToken()).apply();
+                sharedPreferences.edit().putString("refreshToken", result.getRefreshToken()).apply();
 //                go to dashboard activity
                 Intent intent = new Intent(getContext(), DashboardActivity.class);
                 startActivity(intent);
