@@ -51,4 +51,30 @@ public class SpaceRepository {
             }
         });
     }
+
+    public void addNewSpace(Space space, MutableLiveData<Space> result){
+        RetrofitAPI api = RetrofitClient.getInstance().create(RetrofitAPI.class);
+        Call<Space> call = api.addNewSpace(space);
+        call.enqueue(new Callback<Space>() {
+            @Override
+            public void onResponse(Call<Space> call, Response<Space> response) {
+                if(response.isSuccessful()){
+                    Log.d("SPACE_REPOSITORY", "on successful response: " + response);
+                    if(response.body() != null){
+                        Log.d("SPACE_REPOSITORY", "on successful response: " + response.body());
+//                        result.setValue(response.body());
+                        result.setValue(space);
+                    }
+                }else{
+                    Log.d("SPACE_REPOSITORY", "on failed response: " + response);
+                    result.setValue(null);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Space> call, Throwable t) {
+                Log.d("SPACE_REPOSITORY", "on failure: " + t.getMessage());
+            }
+        });
+    }
 }

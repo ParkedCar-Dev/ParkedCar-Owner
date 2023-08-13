@@ -78,7 +78,7 @@ public class ActiveSpaceRecyclerViewAdapter extends RecyclerView.Adapter<ActiveS
         if(holder == null)
             Log.d("SpaceRecyclerViewAdapter", "holder is null");
         holder.address.setText(space.getLocationAddress());
-        holder.basefare.setText(space.getBaseFare());
+        holder.basefare.setText(Double.toString(space.getBaseFare()));
         holder.rating.setText(Double.toString(space.getRating()));
 
         holder.space = space;

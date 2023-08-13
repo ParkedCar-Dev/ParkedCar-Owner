@@ -1,5 +1,6 @@
 package com.example.spaceowner.model;
 
+import com.example.spaceowner.model.data.GenericResponse;
 import com.example.spaceowner.model.data.LoginRequest;
 import com.example.spaceowner.model.data.LoginResponse;
 import com.example.spaceowner.model.data.SignupRequest;
@@ -24,4 +25,7 @@ public interface RetrofitAPI {
 
     @GET("/space/getMySpaces/")
     Call<SpaceListResponse> getSpaces();
+
+    @POST("/space/add/")
+    Call<Space> addNewSpace(@Body Space space);
 }

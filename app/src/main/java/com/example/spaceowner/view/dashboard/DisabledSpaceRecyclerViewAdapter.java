@@ -70,7 +70,7 @@ public class DisabledSpaceRecyclerViewAdapter extends RecyclerView.Adapter<Disab
     public void onBindViewHolder(@NonNull DisabledSpaceViewHolder holder, int position) {
         Space space = ACTIVE_SPACES.get(position);
         holder.address.setText(space.getLocationAddress());
-        holder.basefare.setText(space.getBaseFare());
+        holder.basefare.setText(Double.toString(space.getBaseFare()));
         holder.rating.setText(Double.toString(space.getRating()));
 
         holder.space = space;

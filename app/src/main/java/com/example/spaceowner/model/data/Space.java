@@ -46,7 +46,7 @@ public class Space {
     @SerializedName("longitude")
     private double longitude;
     @SerializedName("base_fare")
-    private String baseFare;
+    private double baseFare;
     @SerializedName("length")
     private double length;
     @SerializedName("width")
@@ -61,6 +61,11 @@ public class Space {
     private boolean autoApproval;
     private String[] images;
     private double rating;
+
+    @SerializedName("availability_mask")
+    private String availabilityMask;
+    @SerializedName("time_slots")
+    private boolean[] timeSlots;
 
     Random random = new Random();
     public Space() {
@@ -89,7 +94,7 @@ public class Space {
         this.rating = rating;
     }
 
-    public Space(int locationId, String locationName, String locationAddress, String owner, double latitude, double longitude, String baseFare, double length, double width, double height, String status, String[] security, boolean autoApproval, String[] images, double rating, String securityMeasured) {
+    public Space(int locationId, String locationName, String locationAddress, String owner, double latitude, double longitude, double baseFare, double length, double width, double height, String status, String[] security, boolean autoApproval, String[] images, double rating, String securityMeasured) {
         this.locationId = locationId;
         this.locationName = locationName;
         this.locationAddress = locationAddress;
@@ -156,11 +161,11 @@ public class Space {
         this.longitude = longitude;
     }
 
-    public String getBaseFare() {
+    public double getBaseFare() {
         return baseFare;
     }
 
-    public void setBaseFare(String baseFare) {
+    public void setBaseFare(double baseFare) {
         this.baseFare = baseFare;
     }
 
@@ -264,4 +269,12 @@ public class Space {
             return oldItem.equals(newItem);
         }
     };
+
+    public void setAvailabilityMask() {
+        availabilityMask = "maskmask";
+    }
+
+    public void setTimeSlots(){
+        timeSlots = new boolean[]{true, false, true, false, true, false, true, false, true, false, true, false, true, false, true, false};
+    }
 }

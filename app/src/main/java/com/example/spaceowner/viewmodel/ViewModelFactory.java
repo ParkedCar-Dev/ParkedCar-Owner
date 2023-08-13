@@ -18,6 +18,8 @@ public class ViewModelFactory implements ViewModelProvider.Factory {
             return (T) new SignupViewModel(SignupRepository.getInstance());
         }else if(modelClass.isAssignableFrom(SpaceListViewModel.class)){
             return (T) new SpaceListViewModel(SpaceRepository.getInstance());
+        }else if(modelClass.isAssignableFrom(AddSpaceViewModel.class)){
+            return (T) new AddSpaceViewModel(SpaceRepository.getInstance());
         }else{
             throw new IllegalArgumentException("Unknown ViewModel Class");
         }

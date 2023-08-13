@@ -11,6 +11,7 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -43,10 +44,15 @@ public class LoginFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         email = getView().findViewById(R.id.login_email);
         password = getView().findViewById(R.id.login_pass);
+
+        email.getEditText().setText("user1@test.com");
+        password.getEditText().setText("123456");
+
         loginButton = getView().findViewById(R.id.login_button);
         signupButton = getView().findViewById(R.id.login_to_signup);
         viewModel = new ViewModelProvider(this, new ViewModelFactory()).get(LoginViewModel.class);
         loginButton.setOnClickListener((v) -> {
+            Log.d("LOGIN", "onViewCreated: " + email.getEditText().getText().toString() + " " + password.getEditText().getText().toString());
             String emailString = email.getEditText().getText().toString();
             String passwordString = password.getEditText().getText().toString();
             if(emailString.isEmpty()){
