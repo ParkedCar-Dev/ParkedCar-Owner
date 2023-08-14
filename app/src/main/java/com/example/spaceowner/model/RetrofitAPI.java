@@ -7,9 +7,6 @@ import com.example.spaceowner.model.data.SignupRequest;
 import com.example.spaceowner.model.data.SignupResponse;
 import com.example.spaceowner.model.data.Space;
 import com.example.spaceowner.model.data.SpaceListResponse;
-import com.example.spaceowner.model.repositories.SignupRepository;
-
-import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.http.Body;
@@ -26,6 +23,19 @@ public interface RetrofitAPI {
     @GET("/space/getMySpaces/")
     Call<SpaceListResponse> getSpaces();
 
+    @GET("/space/getActiveSpaces/")
+    Call<SpaceListResponse> getActiveSpaces();
+
+    @GET("/space/getDisabledSpaces/")
+    Call<SpaceListResponse> getDisabledSpaces();
+
+    @GET("/space/getRequestedSpaces/")
+    Call<SpaceListResponse> getRequestedSpaces();
+
+
+    @POST("/space/add2/")
+    Call<Space> addNewSpaceOld(@Body Space space);
+
     @POST("/space/add/")
-    Call<Space> addNewSpace(@Body Space space);
+    Call<GenericResponse> addNewSpace(@Body Space space);
 }

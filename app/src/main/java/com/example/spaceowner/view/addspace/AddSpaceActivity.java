@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 
 import android.Manifest;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.os.Bundle;
@@ -13,6 +14,7 @@ import android.widget.CheckBox;
 import android.widget.ImageView;
 
 import com.example.spaceowner.R;
+import com.example.spaceowner.view.dashboard.DashboardActivity;
 import com.example.spaceowner.viewmodel.AddSpaceViewModel;
 import com.example.spaceowner.viewmodel.ViewModelFactory;
 import com.google.android.gms.location.FusedLocationProviderClient;
@@ -62,19 +64,41 @@ public class AddSpaceActivity extends AppCompatActivity {
             }
         });
 
-        addSpaceViewModel.getResult().observe(this, result -> {
-            if(result != null){
-                if(result != null){
-                    Log.d("ADD_SPACE", "onCreate: " + result);
-                }else{
-                    Log.d("ADD_SPACE", "onCreate: NULL");
-                }
+        addSpaceViewModel.getResponse().observe(this, response -> {
+            if(response != null && response.isSuccessful()){
+                Log.d("ADD_SPACE", "onCreate: " + response.toString());
+                Intent intent = new Intent(this, DashboardActivity.class);
+                startActivity(intent);
+                this.finish();
+            }else{
+                Log.d("ADD_SPACE", "onCreate: " + response.toString());
             }
         });
 
         findViewById(R.id.submit_button).setOnClickListener(new View.OnClickListener() {
+            private boolean validate(){
+                if(locationAddress.getText().toString().isEmpty()){
+                    locationAddress.setError("Location address is required");
+                    return false;
+                }
+                if(latitudeEditText.getText().toString().isEmpty() || longitudeEditText.getText().toString().isEmpty()){
+                    latitudeEditText.setError("Latitude is required");
+                    longitudeEditText.setError("Longitude is required");
+                    return false;
+                }
+                if(length.getText().toString().isEmpty() || width.getText().toString().isEmpty() || height.getText().toString().isEmpty()){
+                    length.setError("Length is required");
+                    width.setError("Width is required");
+                    height.setError("Height is required");
+                    return false;
+                }
+                return true;
+            }
+
+
             @Override
             public void onClick(View view) {
+                if(!validate()) return;
                 addSpaceViewModel.addSpace(
                         locationAddress.getText().toString(),
                         Double.parseDouble(latitudeEditText.getText().toString()),

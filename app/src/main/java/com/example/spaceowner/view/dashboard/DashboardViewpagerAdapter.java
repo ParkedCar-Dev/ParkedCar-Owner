@@ -18,8 +18,8 @@ public class DashboardViewpagerAdapter extends FragmentStateAdapter {
     @Override
     public Fragment createFragment(int position) {
         switch (position){
-            case 1: return new RequestedSpotsFragment();
-            case 2: return new DisabledSpotsFragment();
+            case 1: return new DisabledSpotsFragment();
+            case 2: return new RequestedSpotsFragment();
             default: return new ActiveSpotsFragment();
         }
     }

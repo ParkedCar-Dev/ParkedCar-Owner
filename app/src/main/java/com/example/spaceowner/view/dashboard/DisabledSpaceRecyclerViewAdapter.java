@@ -81,7 +81,7 @@ public class DisabledSpaceRecyclerViewAdapter extends RecyclerView.Adapter<Disab
         return ACTIVE_SPACES.size();
     }
 
-    public void setACTIVE_SPACES(List<Space> spaces) {
+    public void setDisabledSpaces(List<Space> spaces) {
         ACTIVE_SPACES.clear();
         ACTIVE_SPACES.addAll(spaces);
     }

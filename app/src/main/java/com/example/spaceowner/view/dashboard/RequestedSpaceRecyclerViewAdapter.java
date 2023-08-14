@@ -86,7 +86,7 @@ public class RequestedSpaceRecyclerViewAdapter extends RecyclerView.Adapter<Requ
         return ACTIVE_SPACES.size();
     }
 
-    public void setACTIVE_SPACES(List<Space> spaces) {
+    public void setRequestedSpaces(List<Space> spaces) {
         ACTIVE_SPACES.clear();
         ACTIVE_SPACES.addAll(spaces);
     }

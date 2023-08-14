@@ -11,6 +11,8 @@ import android.os.Bundle;
 
 import com.example.spaceowner.R;
 import com.example.spaceowner.view.addspace.AddSpaceActivity;
+import com.example.spaceowner.viewmodel.SpaceListViewModel;
+import com.example.spaceowner.viewmodel.ViewModelFactory;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.tabs.TabLayout;
 
@@ -19,11 +21,16 @@ public class DashboardActivity extends AppCompatActivity {
     ViewPager2 viewPager;
     DashboardViewpagerAdapter adapter;
     FloatingActionButton addSpaceButton;
+
+    SpaceListViewModel viewModel;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_dashboard);
 
+        viewModel = new ViewModelFactory().create(SpaceListViewModel.class);
+
+        setContentView(R.layout.activity_dashboard);
         tabLayout = findViewById(R.id.tab_layout_dashboard);
         viewPager = findViewById(R.id.dashboard_viewpager);
         addSpaceButton = findViewById(R.id.fab_add_space);
@@ -48,11 +55,14 @@ public class DashboardActivity extends AppCompatActivity {
         });
 
         addSpaceButton.setOnClickListener((v) -> {
-//            go to add space activity
             Intent intent = new Intent(this, AddSpaceActivity.class);
             startActivity(intent);
             this.finish();
         });
 
+    }
+
+    public SpaceListViewModel getViewModel(){
+        return viewModel;
     }
 }

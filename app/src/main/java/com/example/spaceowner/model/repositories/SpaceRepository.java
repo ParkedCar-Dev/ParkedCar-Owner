@@ -6,6 +6,7 @@ import androidx.lifecycle.MutableLiveData;
 
 import com.example.spaceowner.model.RetrofitAPI;
 import com.example.spaceowner.model.RetrofitClient;
+import com.example.spaceowner.model.data.GenericResponse;
 import com.example.spaceowner.model.data.Space;
 import com.example.spaceowner.model.data.SpaceListResponse;
 
@@ -22,10 +23,8 @@ public class SpaceRepository {
         if(spaceRepository == null) spaceRepository = new SpaceRepository();
         return spaceRepository;
     }
-    public void fetchSpaces(MutableLiveData<List<Space>> spaceList){
-        Log.d("SPACE_REPOSITORY", "fetchSpaces: ");
-        RetrofitAPI api = RetrofitClient.getInstance().create(RetrofitAPI.class);
-        Call<SpaceListResponse> call = api.getSpaces();
+
+    public void fetchGenericSpaces(Call<SpaceListResponse> call, MutableLiveData<List<Space>> spaceList){
         call.enqueue(new Callback<SpaceListResponse>() {
             @Override
             public void onResponse(Call<SpaceListResponse> call, Response<SpaceListResponse> response) {
@@ -35,13 +34,11 @@ public class SpaceRepository {
                         Log.d("SPACE_REPOSITORY", "on successful response: " + response.body().getSpaces());
                         spaceList.setValue(response.body().getSpaces());
                     }
-//                    List<Space> spaces = response.body().getSpaces();
-//                    for(Space space : spaces){
-//                        System.out.println(space.toString());
-//                    }
-
                 }else{
                     Log.d("SPACE_REPOSITORY", "on failed response: " + response);
+                    if(response.code() == 401){
+                        spaceList.setValue(null);
+                    }
                 }
             }
 
@@ -52,9 +49,30 @@ public class SpaceRepository {
         });
     }
 
-    public void addNewSpace(Space space, MutableLiveData<Space> result){
+    public void fetchActiveSpaces(MutableLiveData<List<Space>> spaceList){
+        Log.d("SPACE_REPOSITORY", "fetchSpaces: ");
         RetrofitAPI api = RetrofitClient.getInstance().create(RetrofitAPI.class);
-        Call<Space> call = api.addNewSpace(space);
+        Call<SpaceListResponse> call = api.getActiveSpaces();
+        fetchGenericSpaces(call, spaceList);
+    }
+
+    public void fetchDisabledSpaces(MutableLiveData<List<Space>> disabledSpaceList) {
+        Log.d("SPACE_REPOSITORY", "fetchSpaces: ");
+        RetrofitAPI api = RetrofitClient.getInstance().create(RetrofitAPI.class);
+        Call<SpaceListResponse> call = api.getDisabledSpaces();
+        fetchGenericSpaces(call, disabledSpaceList);
+    }
+
+    public void fetchRequestedSpaces(MutableLiveData<List<Space>> requestedSpaceList) {
+        Log.d("SPACE_REPOSITORY", "fetchSpaces: ");
+        RetrofitAPI api = RetrofitClient.getInstance().create(RetrofitAPI.class);
+        Call<SpaceListResponse> call = api.getRequestedSpaces();
+        fetchGenericSpaces(call, requestedSpaceList);
+    }
+
+    public void addNewSpaceOld(Space space, MutableLiveData<Space> result){
+        RetrofitAPI api = RetrofitClient.getInstance().create(RetrofitAPI.class);
+        Call<Space> call = api.addNewSpaceOld(space);
         call.enqueue(new Callback<Space>() {
             @Override
             public void onResponse(Call<Space> call, Response<Space> response) {
@@ -77,4 +95,37 @@ public class SpaceRepository {
             }
         });
     }
+
+    public void addNewSpace(Space space, MutableLiveData<GenericResponse> result){
+        Log.d("SPACE_REPOSITORY", "addNewSpace: " + space);
+        RetrofitAPI api = RetrofitClient.getInstance().create(RetrofitAPI.class);
+        Call<GenericResponse> call = api.addNewSpace(space);
+        call.enqueue(new Callback<GenericResponse>() {
+            @Override
+            public void onResponse(Call<GenericResponse> call, Response<GenericResponse> response) {
+                if (response.isSuccessful()) {
+                    Log.d("SPACE_REPOSITORY", "on successful response: " + response);
+                    if (response.body() != null) {
+                        Log.d("SPACE_REPOSITORY", "on successful response: " + response.body());
+                        if(response.body().isSuccess()) {
+                            result.setValue(response.body());
+                        } else {
+                            result.setValue(null);
+                        }
+                    } else {
+                        Log.d("SPACE_REPOSITORY", "on successful response: " + response);
+                    }
+                } else {
+                    Log.d("SPACE_REPOSITORY", "on failed response: " + response);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<GenericResponse> call, Throwable t) {
+                Log.d("SPACE_REPOSITORY", "on failure: " + t.getMessage());
+            }
+        });
+    }
+
+
 }

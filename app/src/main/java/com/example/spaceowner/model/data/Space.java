@@ -18,31 +18,6 @@ public class Space {
     private String owner;
     @SerializedName("latitude")
     private double latitude;
-
-    public String getSecurityMeasured() {
-        return securityMeasured;
-    }
-
-    public void setSecurityMeasured(String securityMeasured) {
-        this.securityMeasured = securityMeasured;
-    }
-
-    public Random getRandom() {
-        return random;
-    }
-
-    public void setRandom(Random random) {
-        this.random = random;
-    }
-
-    public static DiffUtil.ItemCallback<Space> getDiffCallback() {
-        return DIFF_CALLBACK;
-    }
-
-    public static void setDiffCallback(DiffUtil.ItemCallback<Space> diffCallback) {
-        DIFF_CALLBACK = diffCallback;
-    }
-
     @SerializedName("longitude")
     private double longitude;
     @SerializedName("base_fare")
@@ -53,65 +28,51 @@ public class Space {
     private double width;
     @SerializedName("height")
     private double height;
+    @SerializedName("status")
     private String status;
-    @SerializedName("security_measured")
-    private String securityMeasured;
+    @SerializedName("security_measures")
+    private String securityMeasures;
     private String[] security;
     @SerializedName("auto_approve")
     private boolean autoApproval;
     private String[] images;
+    @SerializedName("rating")
     private double rating;
-
     @SerializedName("availability_mask")
     private String availabilityMask;
     @SerializedName("time_slots")
     private boolean[] timeSlots;
+    @SerializedName("total_books")
+    private int totalBooks;
+    @SerializedName("city")
+    private String city;
+    @SerializedName("message")
+    private String message;
 
-    Random random = new Random();
     public Space() {
-//        locationId = random.nextInt();
-//        locationAddress = "demo address";
-//        baseFare = "100";
-//        rating = 4.5;
-//        owner = "demo owner";
-//        locationName = "demo name";
-//        latitude = 0.0;
-//        longitude = 0.0;
-//        length = 0.0;
-//        width = 0.0;
-//        height = 0.0;
-//        status = "demo status";
-//        security = new String[]{"demo security"};
-//        autoApproval = false;
-//        images = new String[]{"demo image"};
+        locationId = new Random().nextInt(1000);
+        length = width = height = 1;
+        latitude = longitude = 1;
+        baseFare = 1;
+        status = "requested";
+        security = new String[]{"", "", ""};
+        autoApproval = false;
+        images = new String[]{};
+        rating = 1;
+        availabilityMask = "AVAILABILITY_MASK";
+        timeSlots = new boolean[]{true, true, true, false, false, false, false};
+        totalBooks = 1;
+        city = "DHAKA";
     }
 
-    public double getRating() {
-        return rating;
+    public String getMessage() {
+        return message;
     }
 
-    public void setRating(double rating) {
-        this.rating = rating;
+    public void setMessage(String message) {
+        this.message = message;
     }
 
-    public Space(int locationId, String locationName, String locationAddress, String owner, double latitude, double longitude, double baseFare, double length, double width, double height, String status, String[] security, boolean autoApproval, String[] images, double rating, String securityMeasured) {
-        this.locationId = locationId;
-        this.locationName = locationName;
-        this.locationAddress = locationAddress;
-        this.owner = owner;
-        this.latitude = latitude;
-        this.longitude = longitude;
-        this.baseFare = baseFare;
-        this.length = length;
-        this.width = width;
-        this.height = height;
-        this.status = status;
-        this.security = security;
-        this.autoApproval = autoApproval;
-        this.images = images;
-        this.rating = rating;
-        this.securityMeasured = securityMeasured;
-    }
 
     public int getLocationId() {
         return locationId;
@@ -201,11 +162,24 @@ public class Space {
         this.status = status;
     }
 
+    public String getSecurityMeasures() {
+        return securityMeasures;
+    }
+
+    public void setSecurityMeasures(String securityMeasures) {
+        this.securityMeasures = securityMeasures;
+    }
+
     public String[] getSecurity() {
         return security;
     }
 
     public void setSecurity(String[] security) {
+        StringBuilder sb = new StringBuilder();
+        for(int i=0; i<security.length; i++){
+            sb.append(security[i]+"/");
+        }
+        setSecurityMeasures(sb.toString());
         this.security = security;
     }
 
@@ -225,6 +199,46 @@ public class Space {
         this.images = images;
     }
 
+    public double getRating() {
+        return rating;
+    }
+
+    public void setRating(double rating) {
+        this.rating = rating;
+    }
+
+    public String getAvailabilityMask() {
+        return availabilityMask;
+    }
+
+    public void setAvailabilityMask(String availabilityMask) {
+        this.availabilityMask = availabilityMask;
+    }
+
+    public boolean[] getTimeSlots() {
+        return timeSlots;
+    }
+
+    public void setTimeSlots(boolean[] timeSlots) {
+        this.timeSlots = timeSlots;
+    }
+
+    public int getTotalBooks() {
+        return totalBooks;
+    }
+
+    public void setTotalBooks(int totalBooks) {
+        this.totalBooks = totalBooks;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
+    }
+
     @NonNull
     @Override
     public String toString() {
@@ -235,46 +249,21 @@ public class Space {
                 ", owner='" + owner + '\'' +
                 ", latitude=" + latitude +
                 ", longitude=" + longitude +
-                ", baseFare='" + baseFare + '\'' +
+                ", baseFare=" + baseFare +
                 ", length=" + length +
                 ", width=" + width +
                 ", height=" + height +
                 ", status='" + status + '\'' +
+                ", securityMeasures='" + securityMeasures + '\'' +
                 ", security=" + Arrays.toString(security) +
                 ", autoApproval=" + autoApproval +
                 ", images=" + Arrays.toString(images) +
                 ", rating=" + rating +
-                ", securityMeasured='" + securityMeasured + '\'' +
+                ", availabilityMask='" + availabilityMask + '\'' +
+                ", timeSlots=" + Arrays.toString(timeSlots) +
+                ", totalBooks=" + totalBooks +
+                ", city='" + city + '\'' +
+                ", message='" + message + '\'' +
                 '}';
-
-    }
-
-    @Override
-    public boolean equals(Object obj) {
-        if (obj == this)
-            return true;
-
-        Space space = (Space) obj;
-        return space.locationId == this.locationId;
-    }
-
-    public static DiffUtil.ItemCallback<Space> DIFF_CALLBACK = new DiffUtil.ItemCallback<Space>() {
-        @Override
-        public boolean areItemsTheSame(Space oldItem, Space newItem) {
-            return oldItem.locationId == newItem.locationId;
-        }
-
-        @Override
-        public boolean areContentsTheSame(Space oldItem, Space newItem) {
-            return oldItem.equals(newItem);
-        }
-    };
-
-    public void setAvailabilityMask() {
-        availabilityMask = "maskmask";
-    }
-
-    public void setTimeSlots(){
-        timeSlots = new boolean[]{true, false, true, false, true, false, true, false, true, false, true, false, true, false, true, false};
     }
 }

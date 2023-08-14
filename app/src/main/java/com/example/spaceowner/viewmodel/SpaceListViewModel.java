@@ -9,22 +9,48 @@ import com.example.spaceowner.model.repositories.SpaceRepository;
 import java.util.List;
 
 public class SpaceListViewModel extends ViewModel {
-    private MutableLiveData<List<Space>> spaceList;
+    private MutableLiveData<List<Space>> activeSpaceList, disabledSpaceList, requestedSpaceList;
     private SpaceRepository spaceRepository;
     public SpaceListViewModel(SpaceRepository spaceRepository){
         this.spaceRepository = spaceRepository;
-        spaceList = new MutableLiveData<>();
+        activeSpaceList = new MutableLiveData<>();
+        disabledSpaceList = new MutableLiveData<>();
+        requestedSpaceList = new MutableLiveData<>();
     }
 
-    public MutableLiveData<List<Space>> getSpaces(){
-        return spaceList;
+    public MutableLiveData<List<Space>> getActiveSpaces(){
+        return activeSpaceList;
     }
 
-    public void setSpaceList(List<Space> spaceList){
-        this.spaceList.setValue(spaceList);
+    public void setActiveSpaceList(List<Space> activeSpaceList){
+        this.activeSpaceList.setValue(activeSpaceList);
     }
 
-    public void fetchSpaces(){
-        spaceRepository.fetchSpaces(spaceList);
+    public MutableLiveData<List<Space>> getDisabledSpaceList() {
+        return disabledSpaceList;
+    }
+
+    public void setDisabledSpaceList(List<Space> disabledSpaceList) {
+        this.disabledSpaceList.setValue(disabledSpaceList);
+    }
+
+    public MutableLiveData<List<Space>> getRequestedSpaceList() {
+        return requestedSpaceList;
+    }
+
+    public void setRequestedSpaceList(List<Space> requestedSpaceList) {
+        this.requestedSpaceList.setValue(requestedSpaceList);
+    }
+
+    public void fetchActiveSpaces(){
+        spaceRepository.fetchActiveSpaces(activeSpaceList);
+    }
+
+    public void fetchDisabledSpaces(){
+        spaceRepository.fetchDisabledSpaces(disabledSpaceList);
+    }
+
+    public void fetchRequestedSpaces(){
+        spaceRepository.fetchRequestedSpaces(requestedSpaceList);
     }
 }
