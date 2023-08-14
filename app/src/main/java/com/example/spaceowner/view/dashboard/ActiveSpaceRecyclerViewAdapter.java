@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.spaceowner.R;
 import com.example.spaceowner.model.data.Space;
 import com.example.spaceowner.view.dashboard.fragments.SpaceType;
+import com.example.spaceowner.viewmodel.SpaceListViewModel;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -22,6 +23,7 @@ class ActiveSpaceViewHolder extends RecyclerView.ViewHolder{
     TextView address, basefare, rating;
     Button requestButton, disableButton;
     Space space;
+    SpaceListViewModel viewModel;
     public ActiveSpaceViewHolder(@NonNull View itemView) {
         super(itemView);
         address = itemView.findViewById(R.id.active_address);
@@ -47,6 +49,7 @@ class ActiveSpaceViewHolder extends RecyclerView.ViewHolder{
             @Override
             public void onClick(View v) {
                 Toast.makeText(itemView.getContext(), "Disable "+space.getLocationId(), Toast.LENGTH_SHORT).show();
+                viewModel.updateStatus(space.getLocationId(), "disabled");
             }
         });
     }
@@ -55,14 +58,11 @@ class ActiveSpaceViewHolder extends RecyclerView.ViewHolder{
 public class ActiveSpaceRecyclerViewAdapter extends RecyclerView.Adapter<ActiveSpaceViewHolder>{
     private List<Space> ACTIVE_SPACES = new LinkedList<>();
     private SpaceType spaceType;
-    public ActiveSpaceRecyclerViewAdapter(SpaceType spaceType){
+    private SpaceListViewModel viewModel;
+    public ActiveSpaceRecyclerViewAdapter(SpaceListViewModel viewModel){
         ACTIVE_SPACES.add(new Space());
         ACTIVE_SPACES.add(new Space());
-        ACTIVE_SPACES.add(new Space());
-        ACTIVE_SPACES.add(new Space());
-        ACTIVE_SPACES.add(new Space());
-        ACTIVE_SPACES.add(new Space());
-        this.spaceType = spaceType;
+        this.viewModel = viewModel;
     }
     @NonNull
     @Override
@@ -82,6 +82,7 @@ public class ActiveSpaceRecyclerViewAdapter extends RecyclerView.Adapter<ActiveS
         holder.rating.setText(Double.toString(space.getRating()));
 
         holder.space = space;
+        holder.viewModel = this.viewModel;
     }
 
     @Override
@@ -89,7 +90,7 @@ public class ActiveSpaceRecyclerViewAdapter extends RecyclerView.Adapter<ActiveS
         return ACTIVE_SPACES.size();
     }
 
-    public void setACTIVE_SPACES(List<Space> spaces) {
+    public void setActiveSpaces(List<Space> spaces) {
         ACTIVE_SPACES.clear();
         ACTIVE_SPACES.addAll(spaces);
     }

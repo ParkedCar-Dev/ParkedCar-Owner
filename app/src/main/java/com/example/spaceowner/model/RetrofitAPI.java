@@ -7,6 +7,7 @@ import com.example.spaceowner.model.data.SignupRequest;
 import com.example.spaceowner.model.data.SignupResponse;
 import com.example.spaceowner.model.data.Space;
 import com.example.spaceowner.model.data.SpaceListResponse;
+import com.example.spaceowner.model.data.SpaceStatusUpdateRequest;
 
 import retrofit2.Call;
 import retrofit2.http.Body;
@@ -32,10 +33,9 @@ public interface RetrofitAPI {
     @GET("/space/getRequestedSpaces/")
     Call<SpaceListResponse> getRequestedSpaces();
 
-
-    @POST("/space/add2/")
-    Call<Space> addNewSpaceOld(@Body Space space);
-
     @POST("/space/add/")
     Call<GenericResponse> addNewSpace(@Body Space space);
+
+    @POST("/space/changeSpaceStatus")
+    Call<GenericResponse> updateStatus(@Body SpaceStatusUpdateRequest request);
 }

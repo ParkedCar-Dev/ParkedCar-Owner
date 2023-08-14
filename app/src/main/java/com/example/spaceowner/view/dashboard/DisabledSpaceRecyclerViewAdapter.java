@@ -14,11 +14,13 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.spaceowner.R;
 import com.example.spaceowner.model.data.Space;
 import com.example.spaceowner.view.dashboard.fragments.SpaceType;
+import com.example.spaceowner.viewmodel.SpaceListViewModel;
 
 import java.util.LinkedList;
 import java.util.List;
 
 class DisabledSpaceViewHolder extends RecyclerView.ViewHolder{
+    SpaceListViewModel viewModel;
     TextView address, basefare, rating;
     Button activateButton;
     Space space;
@@ -41,6 +43,7 @@ class DisabledSpaceViewHolder extends RecyclerView.ViewHolder{
             @Override
             public void onClick(View v) {
                 Toast.makeText(itemView.getContext(), "Activate "+space.getLocationId(), Toast.LENGTH_SHORT).show();
+                viewModel.updateStatus(space.getLocationId(), "active");
             }
         });
     }
@@ -48,15 +51,15 @@ class DisabledSpaceViewHolder extends RecyclerView.ViewHolder{
 
 public class DisabledSpaceRecyclerViewAdapter extends RecyclerView.Adapter<DisabledSpaceViewHolder>{
     private List<Space> ACTIVE_SPACES = new LinkedList<>();
-    private SpaceType spaceType;
-    public DisabledSpaceRecyclerViewAdapter(SpaceType spaceType){
+    private SpaceListViewModel viewModel;
+    public DisabledSpaceRecyclerViewAdapter(SpaceListViewModel spaceType){
         ACTIVE_SPACES.add(new Space());
         ACTIVE_SPACES.add(new Space());
         ACTIVE_SPACES.add(new Space());
         ACTIVE_SPACES.add(new Space());
         ACTIVE_SPACES.add(new Space());
         ACTIVE_SPACES.add(new Space());
-        this.spaceType = spaceType;
+        this.viewModel = spaceType;
     }
     @NonNull
     @Override
@@ -74,6 +77,7 @@ public class DisabledSpaceRecyclerViewAdapter extends RecyclerView.Adapter<Disab
         holder.rating.setText(Double.toString(space.getRating()));
 
         holder.space = space;
+        holder.viewModel = this.viewModel;
     }
 
     @Override

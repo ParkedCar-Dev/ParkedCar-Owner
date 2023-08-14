@@ -9,6 +9,7 @@ import com.example.spaceowner.model.RetrofitClient;
 import com.example.spaceowner.model.data.GenericResponse;
 import com.example.spaceowner.model.data.Space;
 import com.example.spaceowner.model.data.SpaceListResponse;
+import com.example.spaceowner.model.data.SpaceStatusUpdateRequest;
 
 import java.util.List;
 
@@ -70,32 +71,6 @@ public class SpaceRepository {
         fetchGenericSpaces(call, requestedSpaceList);
     }
 
-    public void addNewSpaceOld(Space space, MutableLiveData<Space> result){
-        RetrofitAPI api = RetrofitClient.getInstance().create(RetrofitAPI.class);
-        Call<Space> call = api.addNewSpaceOld(space);
-        call.enqueue(new Callback<Space>() {
-            @Override
-            public void onResponse(Call<Space> call, Response<Space> response) {
-                if(response.isSuccessful()){
-                    Log.d("SPACE_REPOSITORY", "on successful response: " + response);
-                    if(response.body() != null){
-                        Log.d("SPACE_REPOSITORY", "on successful response: " + response.body());
-//                        result.setValue(response.body());
-                        result.setValue(space);
-                    }
-                }else{
-                    Log.d("SPACE_REPOSITORY", "on failed response: " + response);
-                    result.setValue(null);
-                }
-            }
-
-            @Override
-            public void onFailure(Call<Space> call, Throwable t) {
-                Log.d("SPACE_REPOSITORY", "on failure: " + t.getMessage());
-            }
-        });
-    }
-
     public void addNewSpace(Space space, MutableLiveData<GenericResponse> result){
         Log.d("SPACE_REPOSITORY", "addNewSpace: " + space);
         RetrofitAPI api = RetrofitClient.getInstance().create(RetrofitAPI.class);
@@ -128,4 +103,28 @@ public class SpaceRepository {
     }
 
 
+    public void updateStatus(int spaceId, String status, MutableLiveData<GenericResponse> result) {
+        RetrofitAPI api = RetrofitClient.getInstance().create(RetrofitAPI.class);
+        Call<GenericResponse> call = api.updateStatus(new SpaceStatusUpdateRequest(spaceId, status));
+        call.enqueue(new Callback<GenericResponse>() {
+            @Override
+            public void onResponse(Call<GenericResponse> call, Response<GenericResponse> response) {
+                Log.d("SPACE_REPOSITORY", "onResponse: " + response.body());
+                if(response.isSuccessful()) {
+                    Log.d("SPACE_REPOSITORY", "on successful response: " + response);
+                    if (response.body() != null) {
+                        Log.d("SPACE_REPOSITORY", "on successful response: " + response.body());
+                        result.setValue(response.body());
+                    } else {
+                        Log.d("SPACE_REPOSITORY", "on successful response: " + response);
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<GenericResponse> call, Throwable t) {
+                Log.d("SPACE_REPOSITORY", "onFailure: " + t.getMessage());
+            }
+        });
+    }
 }

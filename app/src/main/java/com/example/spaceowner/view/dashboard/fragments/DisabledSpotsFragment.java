@@ -29,21 +29,39 @@ public class DisabledSpotsFragment extends Fragment {
                              Bundle savedInstanceState) {
         return inflater.inflate(R.layout.fragment_disabled_spots, container, false);
     }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        viewModel.fetchDisabledSpaces();
+    }
+
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        viewModel = new ViewModelProvider(this, new ViewModelFactory()).get(SpaceListViewModel.class);
 
         RecyclerView recyclerView = getView().findViewById(R.id.disabled_spots_recycler_view);
-        DisabledSpaceRecyclerViewAdapter adapter = new DisabledSpaceRecyclerViewAdapter(SpaceType.DISABLED);
+        DisabledSpaceRecyclerViewAdapter adapter = new DisabledSpaceRecyclerViewAdapter(viewModel);
         recyclerView.setAdapter(adapter);
         LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
         recyclerView.setLayoutManager(layoutManager);
 
-        viewModel = new ViewModelProvider(this, new ViewModelFactory()).get(SpaceListViewModel.class);
         viewModel.getDisabledSpaceList().observe(getViewLifecycleOwner(), (spaces) -> {
             if(spaces != null){
                 adapter.setDisabledSpaces(spaces);
                 adapter.notifyDataSetChanged();
+            }
+        });
+        viewModel.getUpdateStatusResponse().observe(getViewLifecycleOwner(), (response) -> {
+            if(response != null){
+                if(response.isSuccessful()){
+                    Toast.makeText(getContext(), "Refreshing Disabled", Toast.LENGTH_SHORT).show();
+                    viewModel.refreshAllData();
+                    adapter.notifyDataSetChanged();
+                }else{
+                    Toast.makeText(getContext(), "Failed to update", Toast.LENGTH_SHORT).show();
+                }
             }
         });
         viewModel.fetchDisabledSpaces();

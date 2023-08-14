@@ -60,6 +60,13 @@ public class DashboardActivity extends AppCompatActivity {
             this.finish();
         });
 
+        viewPager.registerOnPageChangeCallback(new ViewPager2.OnPageChangeCallback() {
+            @Override
+            public void onPageSelected(int position){
+                tabLayout.selectTab(tabLayout.getTabAt(position));
+            }
+        });
+
     }
 
     public SpaceListViewModel getViewModel(){

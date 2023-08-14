@@ -29,20 +29,28 @@ public class ActiveSpotsFragment extends Fragment {
                              Bundle savedInstanceState) {
         return inflater.inflate(R.layout.fragment_active_spots, container, false);
     }
+
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        viewModel.fetchActiveSpaces();
+    }
+
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        viewModel = new ViewModelProvider(this, new ViewModelFactory()).get(SpaceListViewModel.class);
 
         RecyclerView recyclerView = getView().findViewById(R.id.active_spots_recycler_view);
-        ActiveSpaceRecyclerViewAdapter adapter = new ActiveSpaceRecyclerViewAdapter(SpaceType.ACTIVE);
+        ActiveSpaceRecyclerViewAdapter adapter = new ActiveSpaceRecyclerViewAdapter(viewModel);
         recyclerView.setAdapter(adapter);
         LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
         recyclerView.setLayoutManager(layoutManager);
 
-        viewModel = new ViewModelProvider(this, new ViewModelFactory()).get(SpaceListViewModel.class);
         viewModel.getActiveSpaces().observe(getViewLifecycleOwner(), (spaces) -> {
             if(spaces != null){
-                adapter.setACTIVE_SPACES(spaces);
+                adapter.setActiveSpaces(spaces);
                 adapter.notifyDataSetChanged();
             }else{
                 Toast.makeText(getContext(), "Session expired", Toast.LENGTH_SHORT).show();
@@ -51,7 +59,19 @@ public class ActiveSpotsFragment extends Fragment {
                 getActivity().finish();
             }
         });
+
+        viewModel.getUpdateStatusResponse().observe(getViewLifecycleOwner(), (response) -> {
+            if(response != null){
+                if(response.isSuccessful()){
+                    Toast.makeText(getContext(), "Refreshing Active", Toast.LENGTH_SHORT).show();
+                    viewModel.refreshAllData();
+                    adapter.notifyDataSetChanged();
+                }else{
+                    Toast.makeText(getContext(), "Failed to update", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+
         viewModel.fetchActiveSpaces();
     }
-
 }
