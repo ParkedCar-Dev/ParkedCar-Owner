@@ -1,65 +1,81 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+<androidx.drawerlayout.widget.DrawerLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    tools:context=".view.dashboard.DashboardActivity">
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/drawer_layout"
+    android:fitsSystemWindows="true"
+    android:layout_gravity="start">
 
-    <LinearLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        android:orientation="vertical">
 
-        <com.google.android.material.tabs.TabLayout
-            android:id="@+id/tab_layout_dashboard"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
 
-            <com.google.android.material.tabs.TabItem
-                android:id="@+id/tab_item_active_spaces"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/active_spaces" />
+            <com.google.android.material.tabs.TabLayout
+                android:id="@+id/tab_layout_dashboard"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
 
-            <com.google.android.material.tabs.TabItem
-                android:id="@+id/tab_item_booked_spaces"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/disabled" />
+                <com.google.android.material.tabs.TabItem
+                    android:id="@+id/tab_item_active_spaces"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/active_spaces" />
 
-            <com.google.android.material.tabs.TabItem
-                android:id="@+id/tab_item_disabled_spaces"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/requested" />
-        </com.google.android.material.tabs.TabLayout>
+                <com.google.android.material.tabs.TabItem
+                    android:id="@+id/tab_item_booked_spaces"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/disabled" />
 
-        <androidx.viewpager2.widget.ViewPager2
-            android:id="@+id/dashboard_viewpager"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
+                <com.google.android.material.tabs.TabItem
+                    android:id="@+id/tab_item_disabled_spaces"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/requested" />
+            </com.google.android.material.tabs.TabLayout>
 
-        </androidx.viewpager2.widget.ViewPager2>
+            <androidx.viewpager2.widget.ViewPager2
+                android:id="@+id/dashboard_viewpager"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
 
-    </LinearLayout>
+            </androidx.viewpager2.widget.ViewPager2>
 
-<!--    an icon button with add icon -->
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/fab_add_space"
+        </LinearLayout>
+
+        <!--    an icon button with add icon -->
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/fab_add_space"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|end"
+            android:layout_margin="8dp"
+            android:src="@drawable/add"
+            app:fabSize="normal"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <com.google.android.material.navigation.NavigationView
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom|end"
-        android:layout_margin="8dp"
-        android:src="@drawable/add"
-        app:fabSize="normal"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        android:layout_height="match_parent"
+        android:layout_gravity="start"
+        app:menu="@menu/navigation_menu">
+    </com.google.android.material.navigation.NavigationView>
 
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.drawerlayout.widget.DrawerLayout>

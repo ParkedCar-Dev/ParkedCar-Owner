@@ -1,6 +1,8 @@
 package com.example.spaceowner.view.dashboard;
 
+import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
@@ -8,8 +10,10 @@ import androidx.viewpager2.widget.ViewPager2;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.MenuItem;
 
 import com.example.spaceowner.R;
+import com.example.spaceowner.utils.TokenManager;
 import com.example.spaceowner.view.addspace.AddSpaceActivity;
 import com.example.spaceowner.viewmodel.SpaceListViewModel;
 import com.example.spaceowner.viewmodel.ViewModelFactory;
@@ -21,7 +25,8 @@ public class DashboardActivity extends AppCompatActivity {
     ViewPager2 viewPager;
     DashboardViewpagerAdapter adapter;
     FloatingActionButton addSpaceButton;
-
+    DrawerLayout drawerLayout;
+    ActionBarDrawerToggle drawerToggle;
     SpaceListViewModel viewModel;
 
     @Override
@@ -29,8 +34,18 @@ public class DashboardActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
 
         viewModel = new ViewModelFactory().create(SpaceListViewModel.class);
-
         setContentView(R.layout.activity_dashboard);
+
+
+        drawerLayout = findViewById(R.id.drawer_layout);
+        drawerToggle = new ActionBarDrawerToggle(this, drawerLayout, R.string.nav_open, R.string.nav_close);
+
+        drawerLayout.addDrawerListener(drawerToggle);
+        drawerToggle.syncState();
+
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+
         tabLayout = findViewById(R.id.tab_layout_dashboard);
         viewPager = findViewById(R.id.dashboard_viewpager);
         addSpaceButton = findViewById(R.id.fab_add_space);
@@ -67,6 +82,15 @@ public class DashboardActivity extends AppCompatActivity {
             }
         });
 
+
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item){
+        if(drawerToggle.onOptionsItemSelected(item)){
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     public SpaceListViewModel getViewModel(){
