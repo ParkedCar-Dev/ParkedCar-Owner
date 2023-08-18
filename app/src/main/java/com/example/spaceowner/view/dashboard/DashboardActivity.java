@@ -4,9 +4,6 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.drawerlayout.widget.DrawerLayout;
-import androidx.navigation.NavController;
-import androidx.navigation.Navigation;
-import androidx.navigation.ui.AppBarConfiguration;
 import androidx.viewpager2.widget.ViewPager2;
 
 import android.content.Intent;
@@ -41,14 +38,12 @@ public class DashboardActivity extends AppCompatActivity implements NavigationVi
         setContentView(R.layout.activity_dashboard);
 
 
-        drawerLayout = findViewById(R.id.drawer_layout);
+        drawerLayout = findViewById(R.id.dashboard_drawer_layout);
         drawerToggle = new ActionBarDrawerToggle(this, drawerLayout, R.string.nav_open, R.string.nav_close);
-
         drawerLayout.addDrawerListener(drawerToggle);
         drawerToggle.syncState();
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
         NavigationView navigationView = findViewById(R.id.navigation_view);
         navigationView.setNavigationItemSelectedListener(this);
 
@@ -64,16 +59,10 @@ public class DashboardActivity extends AppCompatActivity implements NavigationVi
             public void onTabSelected(TabLayout.Tab tab){
                 viewPager.setCurrentItem(tab.getPosition());
             }
-
             @Override
-            public void onTabUnselected(TabLayout.Tab tab){
-
-            }
-
+            public void onTabUnselected(TabLayout.Tab tab){}
             @Override
-            public void onTabReselected(TabLayout.Tab tab){
-
-            }
+            public void onTabReselected(TabLayout.Tab tab){}
         });
 
         addSpaceButton.setOnClickListener((v) -> {
@@ -92,6 +81,10 @@ public class DashboardActivity extends AppCompatActivity implements NavigationVi
 
     }
 
+    public SpaceListViewModel getViewModel(){
+        return viewModel;
+    }
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item){
         if(drawerToggle.onOptionsItemSelected(item)){
@@ -100,9 +93,6 @@ public class DashboardActivity extends AppCompatActivity implements NavigationVi
         return super.onOptionsItemSelected(item);
     }
 
-    public SpaceListViewModel getViewModel(){
-        return viewModel;
-    }
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {

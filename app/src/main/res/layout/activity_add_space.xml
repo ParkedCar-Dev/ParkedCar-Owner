@@ -249,28 +249,13 @@
             android:layout_marginRight="16dp"
             android:text="@string/add_photos" />
 
-        <LinearLayout
+        <Button
+            android:id="@+id/submit_button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:paddingLeft="16dp"
-            android:paddingRight="16dp">
-
-            <Button
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="4dp"
-                android:layout_weight="0.5"
-                android:text="@string/preview" />
-
-            <Button
-                android:id="@+id/submit_button"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="4dp"
-                android:layout_weight="0.5"
-                android:backgroundTint="#08550B"
-                android:text="@string/submit" />
-        </LinearLayout>
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:backgroundTint="#08550B"
+            android:text="@string/submit" />
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

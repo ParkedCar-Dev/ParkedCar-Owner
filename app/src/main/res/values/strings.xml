@@ -24,6 +24,8 @@
     <string name="date_and_time">Date and Time</string>
     <string name="latitude">Latitude</string>
     <string name="longitude">Longitude</string>
+    <string name="latitude_colon">Latitude:</string>
+    <string name="longitude_colon">Longitude:</string>
     <string name="request_auto_approval">Request Auto Approval</string>
     <string name="cc_camera">CC Camera</string>
     <string name="guards">Guards</string>
@@ -34,6 +36,9 @@
     <string name="length">Length</string>
     <string name="width">Width</string>
     <string name="height">Height</string>
+    <string name="length_col">Length:</string>
+    <string name="width_col">Width: </string>
+    <string name="height_col">Height: </string>
     <string name="disable">Disable</string>
     <string name="activate">Activate</string>
     <string name="delete">Delete</string>
@@ -47,4 +52,7 @@
     <string name="logout">Log Out</string>
     <string name="nav_open">Open</string>
     <string name="nav_close">Close</string>
+    <string name="space_name">Demo Address Name</string>
+    <string name="edit_space">Edit Space</string>
+    <string name="show_requests">Requests</string>
 </resources>
