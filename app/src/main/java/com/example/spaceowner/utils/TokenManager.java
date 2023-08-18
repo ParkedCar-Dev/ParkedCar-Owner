@@ -24,4 +24,8 @@ public class TokenManager {
         Log.d("TOKEN_MANAGER: ", "getToken: " + sp.getString("token", null));
         return sp.getString("token", null);
     }
+
+    public void clearToken() {
+        sp.edit().clear().apply();
+    }
 }

@@ -1,5 +1,6 @@
 package com.example.spaceowner.view.dashboard;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.drawerlayout.widget.DrawerLayout;
@@ -10,17 +11,20 @@ import androidx.viewpager2.widget.ViewPager2;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 
 import com.example.spaceowner.R;
 import com.example.spaceowner.utils.TokenManager;
 import com.example.spaceowner.view.addspace.AddSpaceActivity;
+import com.example.spaceowner.view.auth.AuthActivity;
 import com.example.spaceowner.viewmodel.SpaceListViewModel;
 import com.example.spaceowner.viewmodel.ViewModelFactory;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.navigation.NavigationView;
 import com.google.android.material.tabs.TabLayout;
 
-public class DashboardActivity extends AppCompatActivity {
+public class DashboardActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     TabLayout tabLayout;
     ViewPager2 viewPager;
     DashboardViewpagerAdapter adapter;
@@ -44,6 +48,9 @@ public class DashboardActivity extends AppCompatActivity {
         drawerToggle.syncState();
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+        NavigationView navigationView = findViewById(R.id.navigation_view);
+        navigationView.setNavigationItemSelectedListener(this);
 
 
         tabLayout = findViewById(R.id.tab_layout_dashboard);
@@ -95,5 +102,17 @@ public class DashboardActivity extends AppCompatActivity {
 
     public SpaceListViewModel getViewModel(){
         return viewModel;
+    }
+
+    @Override
+    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+        if(item.getItemId() == R.id.nav_logout){
+            Log.d("DASHBOARD_ACTIVITY: ", "onNavigationItemSelected: " + "LOGOUT");
+            TokenManager.getInstance().clearToken();
+            Intent intent = new Intent(this, AuthActivity.class);
+            startActivity(intent);
+            this.finish();
+        }
+        return true;
     }
 }
