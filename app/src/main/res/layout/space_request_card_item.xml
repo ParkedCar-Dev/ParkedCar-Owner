@@ -24,7 +24,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/request_card_name"
+            android:id="@+id/request_card_driver_name"
             android:layout_width="195dp"
             android:layout_height="36dp"
             android:layout_marginStart="16dp"
@@ -39,7 +39,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/request_card_time"
+            android:id="@+id/request_card_time_from"
             android:layout_width="219dp"
             android:layout_height="25dp"
             android:layout_marginStart="16dp"
@@ -52,6 +52,20 @@
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/request_card_time_to"
+            android:layout_width="219dp"
+            android:layout_height="25dp"
+            android:layout_marginStart="16dp"
+            android:ellipsize="end"
+            android:lines="2"
+            android:text="@string/date_and_time"
+            android:textColor="@color/black"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/request_card_time_from" />
 
         <TextView
             android:id="@+id/request_card_fare"
@@ -68,11 +82,11 @@
             android:textSize="16sp"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/request_card_time"
-            app:layout_constraintTop_toBottomOf="@+id/space_card_rating" />
+            app:layout_constraintStart_toEndOf="@+id/request_card_time_from"
+            app:layout_constraintTop_toBottomOf="@+id/request_card_rating" />
 
         <TextView
-            android:id="@+id/space_card_rating"
+            android:id="@+id/request_card_rating"
             android:layout_width="75dp"
             android:layout_height="31dp"
             android:layout_marginStart="16dp"
@@ -82,8 +96,8 @@
             android:textColor="@color/black"
             android:textSize="16sp"
             android:textStyle="bold"
-            app:layout_constraintStart_toEndOf="@+id/request_card_name"
-            app:layout_constraintTop_toTopOf="@+id/request_card_name" />
+            app:layout_constraintStart_toEndOf="@+id/request_card_driver_name"
+            app:layout_constraintTop_toTopOf="@+id/request_card_driver_name" />
 
         <ImageView
             android:layout_width="22dp"
@@ -94,7 +108,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="1.0"
-            app:layout_constraintStart_toEndOf="@+id/space_card_rating"
+            app:layout_constraintStart_toEndOf="@+id/request_card_rating"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.175" />
 

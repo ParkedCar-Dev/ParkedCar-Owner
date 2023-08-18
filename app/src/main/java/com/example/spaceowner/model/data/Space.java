@@ -5,10 +5,11 @@ import androidx.recyclerview.widget.DiffUtil;
 
 import com.google.gson.annotations.SerializedName;
 
+import java.io.Serializable;
 import java.util.Arrays;
 import java.util.Random;
 
-public class Space {
+public class Space implements Serializable {
     @SerializedName("space_id")
     private int locationId;
     @SerializedName("space_name")

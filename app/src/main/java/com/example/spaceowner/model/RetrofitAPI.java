@@ -1,10 +1,10 @@
 package com.example.spaceowner.model;
 
 import com.example.spaceowner.model.data.GenericResponse;
-import com.example.spaceowner.model.data.LoginRequest;
-import com.example.spaceowner.model.data.LoginResponse;
-import com.example.spaceowner.model.data.SignupRequest;
-import com.example.spaceowner.model.data.SignupResponse;
+import com.example.spaceowner.model.data.auth.LoginRequest;
+import com.example.spaceowner.model.data.auth.LoginResponse;
+import com.example.spaceowner.model.data.auth.SignupRequest;
+import com.example.spaceowner.model.data.auth.SignupResponse;
 import com.example.spaceowner.model.data.Space;
 import com.example.spaceowner.model.data.SpaceListResponse;
 import com.example.spaceowner.model.data.SpaceStatusUpdateRequest;

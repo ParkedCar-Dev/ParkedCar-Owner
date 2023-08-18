@@ -1,6 +1,6 @@
 package com.example.spaceowner.view.auth;
 
-import com.example.spaceowner.model.data.LoginResponse;
+import com.example.spaceowner.model.data.auth.LoginResponse;
 
 public class LoggedInUser {
     private String displayName;

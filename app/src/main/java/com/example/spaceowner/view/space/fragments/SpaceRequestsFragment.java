@@ -3,58 +3,33 @@ package com.example.spaceowner.view.space.fragments;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.example.spaceowner.R;
+import com.example.spaceowner.view.space.SpaceRequestsAdapter;
+import com.example.spaceowner.viewmodel.SpaceViewModel;
+import com.example.spaceowner.viewmodel.ViewModelFactory;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link SpaceRequestsFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
+import java.time.LocalDate;
+
 public class SpaceRequestsFragment extends Fragment {
+    RecyclerView recyclerView;
+    SpaceViewModel viewModel;
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
 
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
-
-    public SpaceRequestsFragment() {
-        // Required empty public constructor
-    }
-
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment RequestsFragment.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static SpaceRequestsFragment newInstance(String param1, String param2) {
-        SpaceRequestsFragment fragment = new SpaceRequestsFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
+    public SpaceRequestsFragment() {}
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
     }
 
     @Override
@@ -62,5 +37,24 @@ public class SpaceRequestsFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_space_requests, container, false);
+    }
+
+    @Override
+    public void onViewCreated(View view, Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        viewModel = new ViewModelFactory().create(SpaceViewModel.class);
+
+        if(viewModel.getCurrentSpaceDetails() != null && viewModel.getCurrentSpaceDetails().getLocationAddress() != null){
+            TextView locationAddress = getView().findViewById(R.id.space_name_textview);
+            locationAddress.setText(viewModel.getCurrentSpaceDetails().getLocationAddress());
+        }
+
+        recyclerView = getView().findViewById(R.id.space_requests_recyclerview);
+        SpaceRequestsAdapter adapter = new SpaceRequestsAdapter(viewModel);
+        recyclerView.setAdapter(adapter);
+        LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
+        recyclerView.setLayoutManager(layoutManager);
+
+        Log.d("SpaceRequestsFragment", "onViewCreated: ");
     }
 }

@@ -1,4 +1,4 @@
-package com.example.spaceowner.model.data;
+package com.example.spaceowner.model.data.auth;
 
 import com.google.gson.annotations.SerializedName;
 

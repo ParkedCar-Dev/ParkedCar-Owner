@@ -6,8 +6,8 @@ import androidx.lifecycle.MutableLiveData;
 
 import com.example.spaceowner.model.RetrofitAPI;
 import com.example.spaceowner.model.RetrofitClient;
-import com.example.spaceowner.model.data.SignupRequest;
-import com.example.spaceowner.model.data.SignupResponse;
+import com.example.spaceowner.model.data.auth.SignupRequest;
+import com.example.spaceowner.model.data.auth.SignupResponse;
 import com.example.spaceowner.view.auth.SignupResult;
 
 import retrofit2.Call;

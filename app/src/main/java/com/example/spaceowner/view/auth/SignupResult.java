@@ -1,6 +1,6 @@
 package com.example.spaceowner.view.auth;
 
-import com.example.spaceowner.model.data.SignupResponse;
+import com.example.spaceowner.model.data.auth.SignupResponse;
 
 public class SignupResult {
     String error_message;

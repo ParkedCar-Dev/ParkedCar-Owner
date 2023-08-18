@@ -39,7 +39,7 @@ public class RequestedSpotsFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         viewModel = new ViewModelProvider(this, new ViewModelFactory()).get(SpaceListViewModel.class);
         RecyclerView recyclerView = getView().findViewById(R.id.requested_spots_recycler_view);
-        RequestedSpaceRecyclerViewAdapter adapter = new RequestedSpaceRecyclerViewAdapter(SpaceType.REQUESTED);
+        RequestedSpaceRecyclerViewAdapter adapter = new RequestedSpaceRecyclerViewAdapter(viewModel);
         recyclerView.setAdapter(adapter);
         LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
         recyclerView.setLayoutManager(layoutManager);

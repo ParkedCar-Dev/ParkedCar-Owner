@@ -13,11 +13,13 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.spaceowner.R;
 import com.example.spaceowner.model.data.Space;
 import com.example.spaceowner.view.dashboard.fragments.SpaceType;
+import com.example.spaceowner.viewmodel.SpaceListViewModel;
 
 import java.util.LinkedList;
 import java.util.List;
 
 class RequestedSpaceViewHolder extends RecyclerView.ViewHolder{
+    SpaceListViewModel viewModel;
     TextView address, basefare, rating;
     Button updateButton, deleteButton;
     Space space;
@@ -46,6 +48,7 @@ class RequestedSpaceViewHolder extends RecyclerView.ViewHolder{
             @Override
             public void onClick(View v) {
                 Toast.makeText(itemView.getContext(), "Delete "+space.getLocationId(), Toast.LENGTH_SHORT).show();
+                viewModel.deleteRequestedSpace(space.getLocationId());
             }
         });
     }
@@ -53,15 +56,9 @@ class RequestedSpaceViewHolder extends RecyclerView.ViewHolder{
 
 public class RequestedSpaceRecyclerViewAdapter extends RecyclerView.Adapter<RequestedSpaceViewHolder>{
     private List<Space> ACTIVE_SPACES = new LinkedList<>();
-    private SpaceType spaceType;
-    public RequestedSpaceRecyclerViewAdapter(SpaceType spaceType){
-        ACTIVE_SPACES.add(new Space());
-        ACTIVE_SPACES.add(new Space());
-        ACTIVE_SPACES.add(new Space());
-        ACTIVE_SPACES.add(new Space());
-        ACTIVE_SPACES.add(new Space());
-        ACTIVE_SPACES.add(new Space());
-        this.spaceType = spaceType;
+    private SpaceListViewModel viewModel;
+    public RequestedSpaceRecyclerViewAdapter(SpaceListViewModel viewModel){
+        this.viewModel = viewModel;
     }
     @NonNull
     @Override
@@ -79,6 +76,7 @@ public class RequestedSpaceRecyclerViewAdapter extends RecyclerView.Adapter<Requ
         holder.rating.setText(Double.toString(space.getRating()));
 
         holder.space = space;
+        holder.viewModel = viewModel;
     }
 
     @Override

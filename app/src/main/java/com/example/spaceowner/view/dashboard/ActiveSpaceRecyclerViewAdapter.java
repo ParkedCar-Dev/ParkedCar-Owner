@@ -1,5 +1,6 @@
 package com.example.spaceowner.view.dashboard;
 
+import android.content.Intent;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,6 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.spaceowner.R;
 import com.example.spaceowner.model.data.Space;
 import com.example.spaceowner.view.dashboard.fragments.SpaceType;
+import com.example.spaceowner.view.space.SpaceActivity;
 import com.example.spaceowner.viewmodel.SpaceListViewModel;
 
 import java.util.LinkedList;
@@ -34,6 +36,10 @@ class ActiveSpaceViewHolder extends RecyclerView.ViewHolder{
             @Override
             public void onClick(View v) {
                 Toast.makeText(itemView.getContext(), "Show "+space.getLocationId()+" Details", Toast.LENGTH_SHORT).show();
+//            goto space details activity
+                Intent intent = new Intent(itemView.getContext(), SpaceActivity.class);
+                intent.putExtra("space", space);
+                itemView.getContext().startActivity(intent);
             }
         });
         requestButton = itemView.findViewById(R.id.requests);

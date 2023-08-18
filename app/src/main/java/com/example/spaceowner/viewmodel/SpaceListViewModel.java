@@ -78,4 +78,8 @@ public class SpaceListViewModel extends ViewModel {
         fetchRequestedSpaces();
         updateStatusResponse.setValue(null);
     }
+
+    public void deleteRequestedSpace(int locationId) {
+//        TODO: Delete Requested Space
+    }
 }

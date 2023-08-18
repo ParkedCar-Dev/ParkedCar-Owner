@@ -1,17 +1,14 @@
 package com.example.spaceowner.model.repositories;
 
-import android.content.Context;
 import android.util.Log;
 
 import androidx.lifecycle.MutableLiveData;
 
 import com.example.spaceowner.model.RetrofitAPI;
 import com.example.spaceowner.model.RetrofitClient;
-import com.example.spaceowner.model.data.LoginRequest;
-import com.example.spaceowner.model.data.LoginResponse;
+import com.example.spaceowner.model.data.auth.LoginRequest;
+import com.example.spaceowner.model.data.auth.LoginResponse;
 import com.example.spaceowner.view.auth.LoggedInUser;
-
-import org.json.JSONObject;
 
 import retrofit2.Call;
 import retrofit2.Callback;
