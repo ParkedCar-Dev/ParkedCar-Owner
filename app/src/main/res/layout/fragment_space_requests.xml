@@ -9,7 +9,27 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/space_name_textview"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"
+            android:text="@string/space_name"
+            android:textSize="24sp"
+            android:textStyle="bold" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:padding="16dp"
+            android:id="@+id/space_requests_recyclerview"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
 
     </LinearLayout>
 
