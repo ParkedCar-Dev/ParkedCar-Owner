@@ -6,11 +6,9 @@ import androidx.lifecycle.MutableLiveData;
 
 import com.example.spaceowner.model.RetrofitAPI;
 import com.example.spaceowner.model.RetrofitClient;
-import com.example.spaceowner.model.data.LoginRequest;
-import com.example.spaceowner.model.data.LoginResponse;
+import com.example.spaceowner.model.data.auth.LoginRequest;
+import com.example.spaceowner.model.data.auth.LoginResponse;
 import com.example.spaceowner.view.auth.LoggedInUser;
-
-import org.json.JSONObject;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -38,16 +36,17 @@ public class LoginRepository {
                 public void onResponse(Call<LoginResponse> call, Response<LoginResponse> response) {
                     if(response.isSuccessful()){
                         Log.d(TAG, "on successful response: " + response.body().toString());
+                        result.postValue(new LoggedInUser(response.body()));
                     }else{
                         Log.d(TAG, "on failed response: " + response.body().toString());
+                        result.postValue(new LoggedInUser(response.body().getMessage()));
                     }
-                    result.postValue(new LoggedInUser(response.body()));
                 }
 
                 @Override
                 public void onFailure(Call<LoginResponse> call, Throwable t) {
                     Log.d(TAG, "on failure: " + t.getMessage());
-                    result.postValue(new LoggedInUser());
+                    result.postValue(new LoggedInUser(t.getMessage()));
                 }
             });
         }catch (Exception e){

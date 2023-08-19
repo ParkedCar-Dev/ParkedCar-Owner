@@ -1,5 +1,7 @@
 package com.example.spaceowner.view.auth;
 
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -9,23 +11,27 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.spaceowner.R;
+import com.example.spaceowner.utils.TokenManager;
+import com.example.spaceowner.view.dashboard.DashboardActivity;
 import com.example.spaceowner.viewmodel.LoginViewModel;
-import com.example.spaceowner.viewmodel.LoginViewModelFactory;
+import com.example.spaceowner.viewmodel.ViewModelFactory;
 import com.google.android.material.textfield.TextInputLayout;
 
+import java.util.Objects;
+
 public class LoginFragment extends Fragment {
-    public LoginFragment() {}
     TextInputLayout email, password;
     Button loginButton, signupButton;
     LoginViewModel viewModel;
+    public LoginFragment() {}
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -33,22 +39,31 @@ public class LoginFragment extends Fragment {
         return inflater.inflate(R.layout.fragment_login, container, false);
     }
 
-    private void tryToLogin(){
-        String email = this.email.getEditText().getText().toString();
-        String password = this.password.getEditText().getText().toString();
-        Toast.makeText(getContext(), "Email: " + email + " Password: " + password, Toast.LENGTH_SHORT).show();
-    }
-
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         email = getView().findViewById(R.id.login_email);
         password = getView().findViewById(R.id.login_pass);
+
+        email.getEditText().setText("user1@test.com");
+        password.getEditText().setText("123456");
+
         loginButton = getView().findViewById(R.id.login_button);
         signupButton = getView().findViewById(R.id.login_to_signup);
-        viewModel = new ViewModelProvider(this, new LoginViewModelFactory()).get(LoginViewModel.class);
+        viewModel = new ViewModelProvider(this, new ViewModelFactory()).get(LoginViewModel.class);
         loginButton.setOnClickListener((v) -> {
-            viewModel.login(email.getEditText().getText().toString(), password.getEditText().getText().toString());
+            Log.d("LOGIN", "onViewCreated: " + email.getEditText().getText().toString() + " " + password.getEditText().getText().toString());
+            String emailString = email.getEditText().getText().toString();
+            String passwordString = password.getEditText().getText().toString();
+            if(emailString.isEmpty()){
+                email.setError("Email is required");
+                return;
+            }
+            if(passwordString.isEmpty()){
+                password.setError("Password is required");
+                return;
+            }
+            viewModel.login(emailString, passwordString);
         });
 
         viewModel.getLoginResult().observe(getViewLifecycleOwner(), (result) -> {
@@ -58,6 +73,15 @@ public class LoginFragment extends Fragment {
             }
             else{
                 Toast.makeText(getContext(), "Login Successful", Toast.LENGTH_SHORT).show();
+                //save token and refresh token to shared preferences
+//                SharedPreferences sharedPreferences = getActivity().getSharedPreferences("com.example.spaceowner", getContext().MODE_PRIVATE);
+//                sharedPreferences.edit().putString("token", result.getToken()).apply();
+//                sharedPreferences.edit().putString("refreshToken", result.getRefreshToken()).apply();
+//                go to dashboard activity
+                TokenManager.getInstance().setToken(result.getToken());
+                Intent intent = new Intent(getContext(), DashboardActivity.class);
+                startActivity(intent);
+                getActivity().finish();
             }
         });
 

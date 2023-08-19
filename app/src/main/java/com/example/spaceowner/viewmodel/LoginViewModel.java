@@ -1,5 +1,7 @@
 package com.example.spaceowner.viewmodel;
 
+import android.util.Log;
+
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
@@ -15,6 +17,7 @@ public class LoginViewModel extends ViewModel {
     }
 
     public void login(String email, String password){
+        Log.d("LOGIN_VIEW_MODEL", "login: " + email + " " + password);
         loginRepository.login(email, password, loginResult);
     }
 

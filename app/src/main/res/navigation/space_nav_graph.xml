@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/space_nav_graph"
+    app:startDestination="@id/spaceRequestsFragment">
+
+    <fragment
+        android:id="@+id/spaceRequestsFragment"
+        android:name="com.example.spaceowner.view.space.fragments.SpaceRequestsFragment"
+        android:label="fragment_space_requests"
+        tools:layout="@layout/fragment_space_requests" >
+        <action
+            android:id="@+id/action_spaceRequestsFragment_to_spaceDetailsFragment"
+            app:destination="@id/spaceDetailsFragment" />
+        <action
+            android:id="@+id/action_spaceRequestsFragment_to_spaceUpdateFragment"
+            app:destination="@id/spaceUpdateFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/spaceDetailsFragment"
+        android:name="com.example.spaceowner.view.space.fragments.SpaceDetailsFragment"
+        android:label="fragment_space_details"
+        tools:layout="@layout/fragment_space_details" >
+        <action
+            android:id="@+id/action_spaceDetailsFragment_to_spaceUpdateFragment"
+            app:destination="@id/spaceUpdateFragment" />
+        <action
+            android:id="@+id/action_spaceDetailsFragment_to_spaceRequestsFragment"
+            app:destination="@id/spaceRequestsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/spaceUpdateFragment"
+        android:name="com.example.spaceowner.view.space.fragments.SpaceUpdateFragment"
+        android:label="fragment_space_update"
+        tools:layout="@layout/fragment_space_update" >
+        <action
+            android:id="@+id/action_spaceUpdateFragment_to_spaceDetailsFragment"
+            app:destination="@id/spaceDetailsFragment" />
+        <action
+            android:id="@+id/action_spaceUpdateFragment_to_spaceRequestsFragment"
+            app:destination="@id/spaceRequestsFragment" />
+    </fragment>
+</navigation>
