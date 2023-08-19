@@ -13,7 +13,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.spaceowner.R;
 import com.example.spaceowner.model.data.Space;
-import com.example.spaceowner.view.dashboard.fragments.SpaceType;
 import com.example.spaceowner.viewmodel.SpaceListViewModel;
 
 import java.util.LinkedList;

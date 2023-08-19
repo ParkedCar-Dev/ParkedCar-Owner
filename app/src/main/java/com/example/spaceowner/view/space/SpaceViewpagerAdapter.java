@@ -10,6 +10,18 @@ import com.example.spaceowner.view.space.fragments.SpaceRequestsFragment;
 import com.example.spaceowner.view.space.fragments.SpaceUpdateFragment;
 
 public class SpaceViewpagerAdapter extends FragmentStateAdapter {
+    public static enum SpaceFragmentType{
+        REQUESTS(0),
+        DETAILS(1),
+        UPDATE(2);
+
+        private final int value;
+        private SpaceFragmentType(int value){
+            this.value = value;
+        }
+    }
+
+
     public SpaceViewpagerAdapter(@NonNull FragmentActivity activity) {
         super(activity);
     }

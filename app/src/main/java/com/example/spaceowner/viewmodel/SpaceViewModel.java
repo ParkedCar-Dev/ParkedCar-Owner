@@ -56,4 +56,9 @@ public class SpaceViewModel extends ViewModel {
     public void setSpace(Space activitySpace) {
         this.currentSpace.setValue(activitySpace);
     }
+
+    public void fetchCurrentSpaceDetails() {
+//        TODO: spaceRepository.fetchCurrentSpaceDetails(currentSpace);
+        currentSpace.setValue(new Space());
+    }
 }

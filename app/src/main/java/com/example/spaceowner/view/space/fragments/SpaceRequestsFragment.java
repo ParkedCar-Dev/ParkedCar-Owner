@@ -14,7 +14,9 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.example.spaceowner.R;
+import com.example.spaceowner.view.space.SpaceActivity;
 import com.example.spaceowner.view.space.SpaceRequestsAdapter;
+import com.example.spaceowner.view.space.SpaceViewpagerAdapter;
 import com.example.spaceowner.viewmodel.SpaceViewModel;
 import com.example.spaceowner.viewmodel.ViewModelFactory;
 
@@ -30,6 +32,7 @@ public class SpaceRequestsFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        viewModel = new ViewModelFactory().create(SpaceViewModel.class);
     }
 
     @Override
@@ -42,7 +45,7 @@ public class SpaceRequestsFragment extends Fragment {
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        viewModel = new ViewModelFactory().create(SpaceViewModel.class);
+
 
         if(viewModel.getCurrentSpaceDetails() != null && viewModel.getCurrentSpaceDetails().getLocationAddress() != null){
             TextView locationAddress = getView().findViewById(R.id.space_name_textview);
@@ -54,6 +57,8 @@ public class SpaceRequestsFragment extends Fragment {
         recyclerView.setAdapter(adapter);
         LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
         recyclerView.setLayoutManager(layoutManager);
+
+        view.findViewById(R.id.fab_edit_space).setOnClickListener(v -> ((SpaceActivity)getActivity()).changeFragment(SpaceViewpagerAdapter.SpaceFragmentType.UPDATE));
 
         Log.d("SpaceRequestsFragment", "onViewCreated: ");
     }

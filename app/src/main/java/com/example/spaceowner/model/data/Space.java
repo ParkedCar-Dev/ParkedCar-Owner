@@ -267,4 +267,18 @@ public class Space implements Serializable {
                 ", message='" + message + '\'' +
                 '}';
     }
+
+    public boolean isCctv() {
+        return securityMeasures.contains("CC") || securityMeasures.contains("cc");
+    }
+    public boolean isIndoor() {
+        return securityMeasures.contains("IN") || securityMeasures.contains("in");
+    }
+    public boolean isGuard() {
+        return securityMeasures.contains("GUARD") || securityMeasures.contains("guard") || securityMeasures.contains("SECU") || securityMeasures.contains("secu");
+    }
+
+    public boolean isActivated() {
+        return status.equals("active");
+    }
 }

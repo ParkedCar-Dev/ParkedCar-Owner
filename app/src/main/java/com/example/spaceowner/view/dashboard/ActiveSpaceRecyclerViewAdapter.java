@@ -14,8 +14,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.spaceowner.R;
 import com.example.spaceowner.model.data.Space;
-import com.example.spaceowner.view.dashboard.fragments.SpaceType;
 import com.example.spaceowner.view.space.SpaceActivity;
+import com.example.spaceowner.view.space.SpaceViewpagerAdapter;
 import com.example.spaceowner.viewmodel.SpaceListViewModel;
 
 import java.util.LinkedList;
@@ -36,10 +36,7 @@ class ActiveSpaceViewHolder extends RecyclerView.ViewHolder{
             @Override
             public void onClick(View v) {
                 Toast.makeText(itemView.getContext(), "Show "+space.getLocationId()+" Details", Toast.LENGTH_SHORT).show();
-//            goto space details activity
-                Intent intent = new Intent(itemView.getContext(), SpaceActivity.class);
-                intent.putExtra("space", space);
-                itemView.getContext().startActivity(intent);
+                changeFragment(SpaceViewpagerAdapter.SpaceFragmentType.DETAILS);
             }
         });
         requestButton = itemView.findViewById(R.id.requests);
@@ -49,6 +46,7 @@ class ActiveSpaceViewHolder extends RecyclerView.ViewHolder{
             @Override
             public void onClick(View v) {
                 Toast.makeText(itemView.getContext(), "Show "+space.getLocationId()+" Requests", Toast.LENGTH_SHORT).show();
+                changeFragment(SpaceViewpagerAdapter.SpaceFragmentType.REQUESTS);
             }
         });
         disableButton.setOnClickListener(new View.OnClickListener() {
@@ -59,11 +57,16 @@ class ActiveSpaceViewHolder extends RecyclerView.ViewHolder{
             }
         });
     }
+    public void changeFragment(SpaceViewpagerAdapter.SpaceFragmentType fragmentType){
+        Intent intent = new Intent(itemView.getContext(), SpaceActivity.class);
+        intent.putExtra("space", space);
+        intent.putExtra("fragment", fragmentType);
+        itemView.getContext().startActivity(intent);
+    }
 }
 
 public class ActiveSpaceRecyclerViewAdapter extends RecyclerView.Adapter<ActiveSpaceViewHolder>{
     private List<Space> ACTIVE_SPACES = new LinkedList<>();
-    private SpaceType spaceType;
     private SpaceListViewModel viewModel;
     public ActiveSpaceRecyclerViewAdapter(SpaceListViewModel viewModel){
         ACTIVE_SPACES.add(new Space());
