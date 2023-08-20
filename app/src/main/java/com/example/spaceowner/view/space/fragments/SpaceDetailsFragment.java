@@ -115,19 +115,26 @@ public class SpaceDetailsFragment extends Fragment {
         auto_approval.setChecked(currentSpace.isAutoApprove());
 
         activated.setChecked(currentSpace.isActivated());
-        checkActivated();
+        changeStatusText(currentSpace);
         activated.setOnClickListener((v) -> {
-            checkActivated();
+            if(activated.isChecked()) currentSpace.setStatus("active");
+            else currentSpace.setStatus("disabled");
+            changeStatusText(currentSpace);
+            viewModel.updateStatus(currentSpace.getLocationId(), currentSpace.getStatus());
         });
     }
 
-    private void checkActivated() {
+    private void changeStatusText(Space space) {
         if(activated.isChecked()) {
             activated.setText("Activated");
             activated.setTextColor(getResources().getColor(R.color.tilt));
-        }else{
+        }else if(space.getStatus().equals("disabled")){
             activated.setText("Disabled");
             activated.setTextColor(getResources().getColor(R.color.red));
+        }else if(space.getStatus().equals("requested")){
+            activated.setText("Requested");
+            activated.setTextColor(getResources().getColor(R.color.yellow));
+            activated.setEnabled(false);
         }
     }
 }

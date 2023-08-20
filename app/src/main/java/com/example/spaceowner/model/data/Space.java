@@ -55,7 +55,7 @@ public class Space implements Serializable {
         length = width = height = 1;
         latitude = longitude = 1;
         baseFare = 1;
-        status = "requested";
+        status = "active";
         security = new String[]{"", "", ""};
         autoApproval = false;
         images = new String[]{};
@@ -64,6 +64,8 @@ public class Space implements Serializable {
         timeSlots = new boolean[]{true, true, true, false, false, false, false};
         totalBooks = 1;
         city = "DHAKA";
+        securityMeasures = "";
+        message = "";
     }
 
     public Space(Space currentSpace) {

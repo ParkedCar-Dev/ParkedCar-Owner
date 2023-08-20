@@ -66,4 +66,8 @@ public class SpaceViewModel extends ViewModel {
     public MutableLiveData<Boolean> getSpaceUpdateResult(){
         return spaceUpdateResult;
     }
+
+    public void updateStatus(int locationId, String status) {
+        spaceRepository.updateStatus(locationId, status, new MutableLiveData<>());
+    }
 }

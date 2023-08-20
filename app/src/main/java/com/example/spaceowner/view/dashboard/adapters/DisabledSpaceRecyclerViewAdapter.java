@@ -1,4 +1,4 @@
-package com.example.spaceowner.view.dashboard;
+package com.example.spaceowner.view.dashboard.adapters;
 
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -13,6 +13,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.spaceowner.R;
 import com.example.spaceowner.model.data.Space;
+import com.example.spaceowner.view.dashboard.DashboardActivity;
+import com.example.spaceowner.view.space.SpaceViewpagerAdapter;
 import com.example.spaceowner.viewmodel.SpaceListViewModel;
 
 import java.util.LinkedList;
@@ -31,20 +33,9 @@ class DisabledSpaceViewHolder extends RecyclerView.ViewHolder{
         rating = itemView.findViewById(R.id.disabled_rating);
 
         activateButton = itemView.findViewById(R.id.activate);
-        itemView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(itemView.getContext(), "Show "+space.getLocationId()+" Details", Toast.LENGTH_SHORT).show();
-            }
-        });
 
-        activateButton.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(itemView.getContext(), "Activate "+space.getLocationId(), Toast.LENGTH_SHORT).show();
-                viewModel.updateStatus(space.getLocationId(), "active");
-            }
-        });
+        activateButton.setOnClickListener(v -> viewModel.updateStatus(space.getLocationId(), "active"));
+        itemView.setOnClickListener(v -> ((DashboardActivity)itemView.getContext()).changeFragment(space, SpaceViewpagerAdapter.SpaceFragmentType.DETAILS));
     }
 }
 

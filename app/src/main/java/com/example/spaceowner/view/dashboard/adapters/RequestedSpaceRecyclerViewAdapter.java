@@ -1,4 +1,4 @@
-package com.example.spaceowner.view.dashboard;
+package com.example.spaceowner.view.dashboard.adapters;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,6 +12,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.spaceowner.R;
 import com.example.spaceowner.model.data.Space;
+import com.example.spaceowner.view.dashboard.DashboardActivity;
+import com.example.spaceowner.view.space.SpaceViewpagerAdapter;
 import com.example.spaceowner.viewmodel.SpaceListViewModel;
 
 import java.util.LinkedList;
@@ -28,21 +30,11 @@ class RequestedSpaceViewHolder extends RecyclerView.ViewHolder{
         basefare = itemView.findViewById(R.id.requested_base_fare);
         rating = itemView.findViewById(R.id.requested_rating);
 
-        itemView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(itemView.getContext(), "Show "+space.getLocationId()+" Details", Toast.LENGTH_SHORT).show();
-            }
-        });
+        itemView.setOnClickListener(v -> ((DashboardActivity)itemView.getContext()).changeFragment(space, SpaceViewpagerAdapter.SpaceFragmentType.DETAILS));
         updateButton = itemView.findViewById(R.id.update);
         deleteButton = itemView.findViewById(R.id.delete);
 
-        updateButton.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(itemView.getContext(), "Update "+space.getLocationId(), Toast.LENGTH_SHORT).show();
-            }
-        });
+        updateButton.setOnClickListener(v -> ((DashboardActivity)itemView.getContext()).changeFragment(space, SpaceViewpagerAdapter.SpaceFragmentType.UPDATE));
         deleteButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

@@ -15,7 +15,7 @@ import android.widget.Toast;
 
 import com.example.spaceowner.R;
 import com.example.spaceowner.view.auth.AuthActivity;
-import com.example.spaceowner.view.dashboard.ActiveSpaceRecyclerViewAdapter;
+import com.example.spaceowner.view.dashboard.adapters.ActiveSpaceRecyclerViewAdapter;
 import com.example.spaceowner.viewmodel.SpaceListViewModel;
 import com.example.spaceowner.viewmodel.ViewModelFactory;
 
