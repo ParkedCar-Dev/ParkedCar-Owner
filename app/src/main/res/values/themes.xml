@@ -13,4 +13,28 @@
         <item name="android:statusBarColor">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
     </style>
+
+    <style name="SpiderManTheme" parent="Theme.MaterialComponents.Light">
+        <!-- Primary colors -->
+        <item name="colorPrimaryVariant">#FF0000</item>               <!-- Spider-Man Red -->
+        <item name="colorPrimary">#B30000</item>        <!-- Darker Red -->
+        <item name="colorOnPrimary">#FFFFFF</item>             <!-- White for contrast -->
+
+        <!-- Secondary colors -->
+        <item name="colorSecondary">#0055FF</item>             <!-- Spider-Man Blue -->
+        <item name="colorSecondaryVariant">#003366</item>      <!-- Darker Blue -->
+        <item name="colorOnSecondary">#FFFFFF</item>           <!-- White for contrast -->
+
+        <!-- Background colors -->
+        <item name="android:colorBackground">#FFFFFF</item>    <!-- White background -->
+        <item name="colorOnBackground">#000000</item>          <!-- Black for contrast -->
+
+        <!-- Surface colors -->
+        <item name="colorSurface">#FFFFFF</item>               <!-- White surface -->
+        <item name="colorOnSurface">#000000</item>             <!-- Black for contrast -->
+
+        <!-- Error colors -->
+        <item name="colorError">#FF0000</item>                 <!-- Spider-Man Red for errors -->
+        <item name="colorOnError">#FFFFFF</item>               <!-- White for contrast -->
+    </style>
 </resources>

@@ -10,4 +10,9 @@
     <color name="tilt">#009688</color>
     <color name="red">#F44336</color>
     <color name="yellow">#FFEB3B</color>
+    <color name="spidermanred">#FF0000</color>
+    <color name="spiderdarkerred">#B30000</color>
+    <color name="spiderblue">#0055FF</color>
+    <color name="activateButtonColor">#CC0000</color>
+    <color name="spidermanGreen">#00802B</color>
 </resources>
