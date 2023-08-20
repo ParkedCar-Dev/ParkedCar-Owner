@@ -1,7 +1,7 @@
 package com.example.spaceowner.model.data;
 
 import androidx.annotation.NonNull;
-import androidx.recyclerview.widget.DiffUtil;
+import androidx.annotation.Nullable;
 
 import com.google.gson.annotations.SerializedName;
 
@@ -64,6 +64,30 @@ public class Space implements Serializable {
         timeSlots = new boolean[]{true, true, true, false, false, false, false};
         totalBooks = 1;
         city = "DHAKA";
+    }
+
+    public Space(Space currentSpace) {
+        this.locationId = currentSpace.locationId;
+        this.locationName = currentSpace.locationName;
+        this.locationAddress = currentSpace.locationAddress;
+        this.owner = currentSpace.owner;
+        this.latitude = currentSpace.latitude;
+        this.longitude = currentSpace.longitude;
+        this.baseFare = currentSpace.baseFare;
+        this.length = currentSpace.length;
+        this.width = currentSpace.width;
+        this.height = currentSpace.height;
+        this.status = currentSpace.status;
+        this.securityMeasures = currentSpace.securityMeasures;
+        this.security = currentSpace.security;
+        this.autoApproval = currentSpace.autoApproval;
+        this.images = currentSpace.images;
+        this.rating = currentSpace.rating;
+        this.availabilityMask = currentSpace.availabilityMask;
+        this.timeSlots = currentSpace.timeSlots;
+        this.totalBooks = currentSpace.totalBooks;
+        this.city = currentSpace.city;
+        this.message = currentSpace.message;
     }
 
     public String getMessage() {
@@ -184,11 +208,11 @@ public class Space implements Serializable {
         this.security = security;
     }
 
-    public boolean isAutoApproval() {
+    public boolean isAutoApprove() {
         return autoApproval;
     }
 
-    public void setAutoApproval(boolean autoApproval) {
+    public void setAutoApprove(boolean autoApproval) {
         this.autoApproval = autoApproval;
     }
 
@@ -280,5 +304,25 @@ public class Space implements Serializable {
 
     public boolean isActivated() {
         return status.equals("active");
+    }
+
+    public void setSecurity(boolean cc, boolean guard, boolean indoor) {
+        String[] security = new String[]{"", "", ""};
+        if(cc) security[0] = "cctv";
+        if(guard) security[1] = "guard";
+        if(indoor) security[2] = "indoor";
+        setSecurity(security);
+    }
+
+    public boolean equals(@Nullable Space sp) {
+        return this.locationAddress.equals(sp.locationAddress) &&
+                this.latitude == sp.latitude &&
+                this.longitude == sp.longitude &&
+                this.baseFare == sp.baseFare &&
+                this.length == sp.length &&
+                this.width == sp.width &&
+                this.height == sp.height &&
+                this.autoApproval == sp.autoApproval &&
+                this.securityMeasures.equals(sp.securityMeasures);
     }
 }

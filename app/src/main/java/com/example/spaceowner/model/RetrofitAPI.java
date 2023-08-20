@@ -38,4 +38,7 @@ public interface RetrofitAPI {
 
     @POST("/space/changeSpaceStatus")
     Call<GenericResponse> updateStatus(@Body SpaceStatusUpdateRequest request);
+
+    @POST("/space/update")
+    Call<GenericResponse> updateSpace(@Body Space space);
 }

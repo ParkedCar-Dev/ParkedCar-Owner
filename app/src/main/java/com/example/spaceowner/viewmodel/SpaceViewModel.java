@@ -12,21 +12,18 @@ import java.util.List;
 
 public class SpaceViewModel extends ViewModel {
     private SpaceRepository spaceRepository;
-    private MutableLiveData<Space> space, currentSpace;
+    private MutableLiveData<Space> currentSpace;
+    private MutableLiveData<Boolean> spaceUpdateResult;
     private static SpaceViewModel instance;
     private SpaceViewModel(SpaceRepository spaceRepository){
         this.spaceRepository = spaceRepository;
-        space = new MutableLiveData<>();
         currentSpace = new MutableLiveData<>();
+        spaceUpdateResult = new MutableLiveData<>(false);
     }
 
     public static SpaceViewModel getInstance(SpaceRepository spaceRepository){
         if(instance == null) instance = new SpaceViewModel(spaceRepository);
         return instance;
-    }
-
-    public MutableLiveData<Space> getSpace() {
-        return space;
     }
 
     public MutableLiveData<Space> getCurrentSpace(){
@@ -60,5 +57,13 @@ public class SpaceViewModel extends ViewModel {
     public void fetchCurrentSpaceDetails() {
 //        TODO: spaceRepository.fetchCurrentSpaceDetails(currentSpace);
         currentSpace.setValue(new Space());
+    }
+
+    public void updateSpace(Space space) {
+        spaceRepository.updateSpace(space, spaceUpdateResult, currentSpace);
+    }
+
+    public MutableLiveData<Boolean> getSpaceUpdateResult(){
+        return spaceUpdateResult;
     }
 }
