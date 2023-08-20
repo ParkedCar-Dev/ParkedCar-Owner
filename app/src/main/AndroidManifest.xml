@@ -22,10 +22,17 @@
         android:theme="@style/Theme.SpaceOwner"
         tools:targetApi="31">
         <activity
-            android:name=".view.space.SpaceActivity"
-            android:exported="false" />
+            android:name=".view.splashscreen.SplashScreenActivity"
+            android:exported="true" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+
+        </activity>
         <activity
-            android:name=".view.WrapperActivity"
+            android:name=".view.space.SpaceActivity"
             android:exported="false" />
         <activity
             android:name=".view.addspace.AddSpaceActivity"
@@ -33,11 +40,7 @@
         <activity
             android:name=".view.dashboard.DashboardActivity"
             android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity
             android:name=".view.auth.AuthActivity"
