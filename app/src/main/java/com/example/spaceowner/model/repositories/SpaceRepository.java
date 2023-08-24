@@ -11,6 +11,7 @@ import com.example.spaceowner.model.data.Space;
 import com.example.spaceowner.model.data.SpaceListResponse;
 import com.example.spaceowner.model.data.SpaceStatusUpdateRequest;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import retrofit2.Call;
@@ -46,26 +47,30 @@ public class SpaceRepository {
             @Override
             public void onFailure(Call<SpaceListResponse> call, Throwable t) {
                 Log.d("SPACE_REPOSITORY", "on failure: " + t.getMessage());
+                if(t.getMessage().contains("timeout")){
+                    Log.d("SPACE_REPOSITORY", "on failure - timeout: " + t.getMessage());
+                    spaceList.setValue(Space.getTimedOutSpace());
+                }
             }
         });
     }
 
     public void fetchActiveSpaces(MutableLiveData<List<Space>> spaceList){
-        Log.d("SPACE_REPOSITORY", "fetchSpaces: ");
+        Log.d("SPACE_REPOSITORY", "fetchSpaces: active");
         RetrofitAPI api = RetrofitClient.getInstance().create(RetrofitAPI.class);
         Call<SpaceListResponse> call = api.getActiveSpaces();
         fetchGenericSpaces(call, spaceList);
     }
 
     public void fetchDisabledSpaces(MutableLiveData<List<Space>> disabledSpaceList) {
-        Log.d("SPACE_REPOSITORY", "fetchSpaces: ");
+        Log.d("SPACE_REPOSITORY", "fetchSpaces: disabled");
         RetrofitAPI api = RetrofitClient.getInstance().create(RetrofitAPI.class);
         Call<SpaceListResponse> call = api.getDisabledSpaces();
         fetchGenericSpaces(call, disabledSpaceList);
     }
 
     public void fetchRequestedSpaces(MutableLiveData<List<Space>> requestedSpaceList) {
-        Log.d("SPACE_REPOSITORY", "fetchSpaces: ");
+        Log.d("SPACE_REPOSITORY", "fetchSpaces: requested");
         RetrofitAPI api = RetrofitClient.getInstance().create(RetrofitAPI.class);
         Call<SpaceListResponse> call = api.getRequestedSpaces();
         fetchGenericSpaces(call, requestedSpaceList);

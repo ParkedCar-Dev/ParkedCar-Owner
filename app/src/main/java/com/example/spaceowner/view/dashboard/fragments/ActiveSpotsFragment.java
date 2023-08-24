@@ -8,6 +8,7 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -49,7 +50,20 @@ public class ActiveSpotsFragment extends Fragment {
         recyclerView.setLayoutManager(layoutManager);
 
         viewModel.getActiveSpaces().observe(getViewLifecycleOwner(), (spaces) -> {
+
             if(spaces != null){
+                if(spaces.size() == 1 && spaces.get(0).isTimedOut()){
+                    Toast.makeText(getContext(), "Timeout: Retrying", Toast.LENGTH_SHORT).show();
+                    new Thread(() -> {
+                        try {
+                            Thread.sleep(5000);
+                            viewModel.fetchActiveSpaces();
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
+                    }).start();
+                    return;
+                }
                 adapter.setActiveSpaces(spaces);
                 adapter.notifyDataSetChanged();
             }else{

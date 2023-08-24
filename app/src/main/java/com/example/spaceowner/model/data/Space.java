@@ -6,7 +6,9 @@ import androidx.annotation.Nullable;
 import com.google.gson.annotations.SerializedName;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import java.util.Random;
 
 public class Space implements Serializable {
@@ -326,5 +328,17 @@ public class Space implements Serializable {
                 this.height == sp.height &&
                 this.autoApproval == sp.autoApproval &&
                 this.securityMeasures.equals(sp.securityMeasures);
+    }
+
+    public static List<Space> getTimedOutSpace() {
+        List<Space> spaces = new ArrayList<>();
+        Space space = new Space();
+        space.setStatus("timeout");
+        spaces.add(space);
+        return spaces;
+    }
+
+    public boolean isTimedOut() {
+        return status.equals("timeout");
     }
 }
