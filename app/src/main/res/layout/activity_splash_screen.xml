@@ -7,9 +7,24 @@
     tools:context=".view.splashscreen.SplashScreenActivity">
 
     <ImageView
+        android:id="@+id/imageView3"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:scaleType="centerCrop"
         android:src="@drawable/parkedcar"
-        android:scaleType="centerCrop"/>
+        tools:layout_editor_absoluteX="16dp"
+        tools:layout_editor_absoluteY="337dp" />
+
+    <com.google.android.material.progressindicator.LinearProgressIndicator
+        android:id="@+id/progress_bar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="64dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:indeterminate="true"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

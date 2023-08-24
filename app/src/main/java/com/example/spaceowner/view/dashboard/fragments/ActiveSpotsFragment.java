@@ -54,14 +54,7 @@ public class ActiveSpotsFragment extends Fragment {
             if(spaces != null){
                 if(spaces.size() == 1 && spaces.get(0).isTimedOut()){
                     Toast.makeText(getContext(), "Timeout: Retrying", Toast.LENGTH_SHORT).show();
-                    new Thread(() -> {
-                        try {
-                            Thread.sleep(5000);
-                            viewModel.fetchActiveSpaces();
-                        } catch (InterruptedException e) {
-                            e.printStackTrace();
-                        }
-                    }).start();
+                    viewModel.retryFetchActiveSpaces();
                     return;
                 }
                 adapter.setActiveSpaces(spaces);

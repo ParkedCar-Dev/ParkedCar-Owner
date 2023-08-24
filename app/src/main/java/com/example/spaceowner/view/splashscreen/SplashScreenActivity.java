@@ -8,12 +8,15 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
 import android.view.WindowManager;
+import android.widget.ProgressBar;
 
 import com.example.spaceowner.R;
 import com.example.spaceowner.view.dashboard.DashboardActivity;
+import com.google.android.material.progressindicator.LinearProgressIndicator;
 
 public class SplashScreenActivity extends AppCompatActivity {
 
+    private static final int SPLASH_SCREEN_TIMEOUT = 2000;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -25,10 +28,11 @@ public class SplashScreenActivity extends AppCompatActivity {
                 WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN
         );
+
         new Handler(Looper.myLooper()).postDelayed(() -> {
             Intent intent = new Intent(this, DashboardActivity.class);
             startActivity(intent);
             this.finish();
-        }, 2000);
+        }, SPLASH_SCREEN_TIMEOUT);
     }
 }
