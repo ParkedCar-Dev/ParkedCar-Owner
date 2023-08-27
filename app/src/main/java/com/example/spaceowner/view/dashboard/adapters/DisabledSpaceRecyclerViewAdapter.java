@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -25,14 +26,17 @@ class DisabledSpaceViewHolder extends RecyclerView.ViewHolder{
     TextView address, basefare, rating;
     Button activateButton;
     Space space;
+    ImageView imageView;
     public DisabledSpaceViewHolder(@NonNull View itemView) {
         super(itemView);
         Log.d("SpaceViewHolder", itemView.toString()+" is created");
         address = itemView.findViewById(R.id.disabled_address);
         basefare = itemView.findViewById(R.id.disabled_base_fare);
         rating = itemView.findViewById(R.id.disabled_rating);
+        imageView = itemView.findViewById(R.id.space_card_house_icon);
 
         activateButton = itemView.findViewById(R.id.activate);
+
 
         activateButton.setOnClickListener(v -> viewModel.updateStatus(space.getLocationId(), "active"));
         itemView.setOnClickListener(v -> ((DashboardActivity)itemView.getContext()).changeFragment(space, SpaceViewpagerAdapter.SpaceFragmentType.DETAILS));
@@ -68,6 +72,7 @@ public class DisabledSpaceRecyclerViewAdapter extends RecyclerView.Adapter<Disab
 
         holder.space = space;
         holder.viewModel = this.viewModel;
+        holder.imageView.setImageResource(Space.getNoParkingId());
     }
 
     @Override

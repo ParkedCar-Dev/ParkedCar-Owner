@@ -3,6 +3,7 @@ package com.example.spaceowner.model.data;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import com.example.spaceowner.R;
 import com.google.gson.annotations.SerializedName;
 
 import java.io.Serializable;
@@ -51,6 +52,8 @@ public class Space implements Serializable {
     private String city;
     @SerializedName("message")
     private String message;
+    @SerializedName("request_count")
+    private int requestCount;
 
     public Space() {
         locationId = new Random().nextInt(1000);
@@ -68,6 +71,7 @@ public class Space implements Serializable {
         city = "DHAKA";
         securityMeasures = "";
         message = "";
+        requestCount = 0;
     }
 
     public Space(Space currentSpace) {
@@ -92,6 +96,7 @@ public class Space implements Serializable {
         this.totalBooks = currentSpace.totalBooks;
         this.city = currentSpace.city;
         this.message = currentSpace.message;
+        this.requestCount = currentSpace.requestCount;
     }
 
     public String getMessage() {
@@ -340,5 +345,21 @@ public class Space implements Serializable {
 
     public boolean isTimedOut() {
         return status.equals("timeout");
+    }
+
+    public int getRequestCount() {
+        return requestCount;
+    }
+
+    public void setRequestCount(int requestCount) {
+        this.requestCount = requestCount;
+    }
+    private static int[] imageList = {R.drawable.parking_icon_0, R.drawable.parking_icon_1, R.drawable.parking_icon_2, R.drawable.parking_icon_3, R.drawable.parking_icon_4, R.drawable.parking_icon_5, R.drawable.parking_icon_6, R.drawable.parking_icon_7, R.drawable.parking_icon_8, R.drawable.parking_icon_9};
+    public static int getImageId(){
+        return imageList[new Random().nextInt(imageList.length)];
+    }
+    private static int[] noParkingImageId = {R.drawable.no_parking_icon_0, R.drawable.no_parking_icon_1, R.drawable.no_parking_icon_2, R.drawable.no_parking_icon_3, R.drawable.no_parking_icon_4, R.drawable.no_parking_icon_5};
+    public static int getNoParkingId(){
+        return noParkingImageId[new Random().nextInt(noParkingImageId.length)];
     }
 }

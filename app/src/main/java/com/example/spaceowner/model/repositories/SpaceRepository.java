@@ -6,10 +6,12 @@ import androidx.lifecycle.MutableLiveData;
 
 import com.example.spaceowner.model.RetrofitAPI;
 import com.example.spaceowner.model.RetrofitClient;
+import com.example.spaceowner.model.data.BookingRequest;
 import com.example.spaceowner.model.data.GenericResponse;
 import com.example.spaceowner.model.data.Space;
 import com.example.spaceowner.model.data.SpaceListResponse;
 import com.example.spaceowner.model.data.SpaceStatusUpdateRequest;
+import com.example.spaceowner.model.data.requests.SpaceRequest;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -157,6 +159,28 @@ public class SpaceRepository {
             @Override
             public void onFailure(Call<GenericResponse> call, Throwable t) {
                 Log.d("SPACE_REPOSITORY", "onFailure: " + t.getMessage());
+            }
+        });
+    }
+
+    public void fetchSpaceRequests(MutableLiveData<List<SpaceRequest>> spaceRequests, int spaceId, String status) {
+        RetrofitClient.getInstance().create(RetrofitAPI.class).getSpaceBookingRequests(new BookingRequest(spaceId, status)).enqueue(new Callback<List<SpaceRequest>>() {
+            @Override
+            public void onResponse(Call<List<SpaceRequest>> call, Response<List<SpaceRequest>> response) {
+                if(response.isSuccessful()){
+                    Log.d("SPACE_REPOSITORY", "on successful response: " + response);
+                    if(response.body() != null){
+                        Log.d("SPACE_REPOSITORY", "on successful response: " + response.body());
+                        spaceRequests.setValue(response.body());
+                    }
+                }else{
+                    Log.d("SPACE_REPOSITORY", "on failed response: " + response);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<SpaceRequest>> call, Throwable t) {
+                Log.d("SPACE_REPOSITORY", "on failure: " + t.getMessage());
             }
         });
     }

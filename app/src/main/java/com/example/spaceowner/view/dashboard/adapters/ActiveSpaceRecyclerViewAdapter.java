@@ -1,11 +1,13 @@
 package com.example.spaceowner.view.dashboard.adapters;
 
 import android.content.Intent;
+import android.media.Image;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -21,14 +23,17 @@ import com.example.spaceowner.viewmodel.SpaceListViewModel;
 
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Random;
 
 class ActiveSpaceViewHolder extends RecyclerView.ViewHolder{
     TextView address, basefare, rating;
     Button requestButton, disableButton;
     Space space;
     SpaceListViewModel viewModel;
+    ImageView imageView;
     public ActiveSpaceViewHolder(@NonNull View itemView) {
         super(itemView);
+        imageView = itemView.findViewById(R.id.space_card_house_icon);
         address = itemView.findViewById(R.id.active_address);
         basefare = itemView.findViewById(R.id.active_base_fare);
         rating = itemView.findViewById(R.id.active_rating);
@@ -69,6 +74,9 @@ public class ActiveSpaceRecyclerViewAdapter extends RecyclerView.Adapter<ActiveS
 
         holder.space = space;
         holder.viewModel = this.viewModel;
+        if(space.getRequestCount() > 0)
+            holder.requestButton.setText("Requests (" + space.getRequestCount() + ")");
+        holder.imageView.setImageResource(Space.getImageId());
     }
 
     @Override

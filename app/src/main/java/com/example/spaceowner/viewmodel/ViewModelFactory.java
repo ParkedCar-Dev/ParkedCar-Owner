@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.lifecycle.ViewModel;
 import androidx.lifecycle.ViewModelProvider;
 
+import com.example.spaceowner.model.repositories.BookingRepository;
 import com.example.spaceowner.model.repositories.LoginRepository;
 import com.example.spaceowner.model.repositories.SignupRepository;
 import com.example.spaceowner.model.repositories.SpaceRepository;
@@ -22,7 +23,9 @@ public class ViewModelFactory implements ViewModelProvider.Factory {
             return (T) new AddSpaceViewModel(SpaceRepository.getInstance());
         }else if(modelClass.isAssignableFrom(SpaceViewModel.class)) {
             return (T) SpaceViewModel.getInstance(SpaceRepository.getInstance());
-        }else{
+        } else if (modelClass.isAssignableFrom(BookingViewModel.class)) {
+            return (T) new BookingViewModel(BookingRepository.getInstance());
+        } else {
             throw new IllegalArgumentException("Unknown ViewModel Class");
         }
     }

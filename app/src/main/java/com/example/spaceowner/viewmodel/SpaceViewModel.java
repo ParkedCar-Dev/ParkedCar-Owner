@@ -14,10 +14,12 @@ public class SpaceViewModel extends ViewModel {
     private SpaceRepository spaceRepository;
     private MutableLiveData<Space> currentSpace;
     private MutableLiveData<Boolean> spaceUpdateResult;
+    private MutableLiveData<List<SpaceRequest>> spaceRequests;
     private static SpaceViewModel instance;
     private SpaceViewModel(SpaceRepository spaceRepository){
         this.spaceRepository = spaceRepository;
         currentSpace = new MutableLiveData<>();
+        spaceRequests = new MutableLiveData<>();
         spaceUpdateResult = new MutableLiveData<>(false);
     }
 
@@ -69,5 +71,13 @@ public class SpaceViewModel extends ViewModel {
 
     public void updateStatus(int locationId, String status) {
         spaceRepository.updateStatus(locationId, status, new MutableLiveData<>());
+    }
+
+    public MutableLiveData<List<SpaceRequest>> getSpaceRequests() {
+        return spaceRequests;
+    }
+
+    public void fetchSpaceRequests() {
+        spaceRepository.fetchSpaceRequests(spaceRequests, currentSpace.getValue().getLocationId(), "active");
     }
 }

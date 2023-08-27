@@ -3,7 +3,6 @@ package com.example.spaceowner.view.space.fragments;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -12,6 +11,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.spaceowner.R;
 import com.example.spaceowner.view.space.SpaceActivity;
@@ -19,8 +19,6 @@ import com.example.spaceowner.view.space.SpaceRequestsAdapter;
 import com.example.spaceowner.view.space.SpaceViewpagerAdapter;
 import com.example.spaceowner.viewmodel.SpaceViewModel;
 import com.example.spaceowner.viewmodel.ViewModelFactory;
-
-import java.time.LocalDate;
 
 public class SpaceRequestsFragment extends Fragment {
     RecyclerView recyclerView;
@@ -57,6 +55,16 @@ public class SpaceRequestsFragment extends Fragment {
         recyclerView.setAdapter(adapter);
         LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
         recyclerView.setLayoutManager(layoutManager);
+
+        viewModel.getSpaceRequests().observe(getViewLifecycleOwner(), (requests) -> {
+            if(requests != null){
+                adapter.setRequests(requests);
+                adapter.notifyDataSetChanged();
+            }else Log.d("SPACE REQUESTS FRAGMENT", "null requests");
+        });
+
+        viewModel.fetchSpaceRequests();
+
 
         view.findViewById(R.id.fab_edit_space).setOnClickListener(v -> ((SpaceActivity)getActivity()).changeFragment(SpaceViewpagerAdapter.SpaceFragmentType.UPDATE));
 
