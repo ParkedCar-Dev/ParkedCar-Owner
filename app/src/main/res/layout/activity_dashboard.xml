@@ -63,6 +63,7 @@
             android:layout_gravity="bottom|end"
             android:layout_margin="8dp"
             android:src="@drawable/add"
+            android:backgroundTint="@color/spidermanGreen"
             app:fabSize="normal"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent" />

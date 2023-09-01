@@ -1,6 +1,5 @@
 package com.example.spaceowner.view.dashboard.fragments;
 
-import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -14,8 +13,7 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.example.spaceowner.R;
-import com.example.spaceowner.view.auth.AuthActivity;
-import com.example.spaceowner.view.dashboard.DisabledSpaceRecyclerViewAdapter;
+import com.example.spaceowner.view.dashboard.adapters.DisabledSpaceRecyclerViewAdapter;
 import com.example.spaceowner.viewmodel.SpaceListViewModel;
 import com.example.spaceowner.viewmodel.ViewModelFactory;
 

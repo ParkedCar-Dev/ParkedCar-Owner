@@ -35,6 +35,12 @@ public class SpaceDetailsFragment extends Fragment {
     }
 
     @Override
+    public void onResume() {
+        updateSpace();
+        super.onResume();
+    }
+
+    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         return inflater.inflate(R.layout.fragment_space_details, container, false);
@@ -43,6 +49,8 @@ public class SpaceDetailsFragment extends Fragment {
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
+        Log.d("SpaceDetailsFragment", "onViewCreated: "+viewModel.getCurrentSpaceDetails());
 
         if(viewModel.getCurrentSpaceDetails() == null){
             viewModel.fetchCurrentSpaceDetails();
@@ -93,8 +101,8 @@ public class SpaceDetailsFragment extends Fragment {
             return;
         }
         Log.d("SpaceDetailsFragment", "updateSpace: "+currentSpace.toString());
-        latitude.setText("Latitude: "+String.valueOf(currentSpace.getLatitude()));
-        longitude.setText("Longitude: "+String.valueOf(currentSpace.getLongitude()));
+        latitude.setText("Lat: "+String.valueOf(currentSpace.getLatitude()));
+        longitude.setText("Long: "+String.valueOf(currentSpace.getLongitude()));
         address.setText(currentSpace.getLocationAddress());
         length.setText("Length: "+String.valueOf(currentSpace.getLength()));
         width.setText("Width: "+String.valueOf(currentSpace.getWidth()));
@@ -104,22 +112,29 @@ public class SpaceDetailsFragment extends Fragment {
         cctv.setChecked(currentSpace.isCctv());
         indoor.setChecked(currentSpace.isIndoor());
         guard.setChecked(currentSpace.isGuard());
-        auto_approval.setChecked(currentSpace.isAutoApproval());
+        auto_approval.setChecked(currentSpace.isAutoApprove());
 
         activated.setChecked(currentSpace.isActivated());
-        checkActivated();
+        changeStatusText(currentSpace);
         activated.setOnClickListener((v) -> {
-            checkActivated();
+            if(activated.isChecked()) currentSpace.setStatus("active");
+            else currentSpace.setStatus("disabled");
+            changeStatusText(currentSpace);
+            viewModel.updateStatus(currentSpace.getLocationId(), currentSpace.getStatus());
         });
     }
 
-    private void checkActivated() {
+    private void changeStatusText(Space space) {
         if(activated.isChecked()) {
             activated.setText("Activated");
             activated.setTextColor(getResources().getColor(R.color.tilt));
-        }else{
+        }else if(space.getStatus().equals("disabled")){
             activated.setText("Disabled");
             activated.setTextColor(getResources().getColor(R.color.red));
+        }else if(space.getStatus().equals("requested")){
+            activated.setText("Requested");
+            activated.setTextColor(getResources().getColor(R.color.yellow));
+            activated.setEnabled(false);
         }
     }
 }

@@ -16,11 +16,10 @@
             android:id="@+id/space_card_house_icon"
             android:layout_width="44dp"
             android:layout_height="44dp"
+            android:layout_marginStart="8dp"
             android:scaleType="centerCrop"
             android:src="@drawable/home"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.044"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.489" />
@@ -28,50 +27,47 @@
         <TextView
             android:id="@+id/active_address"
             android:layout_width="202dp"
-            android:layout_height="44dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
             android:layout_marginTop="12dp"
             android:ellipsize="end"
+            android:gravity="center_vertical"
             android:lines="2"
             android:text="@string/address"
             android:textColor="@color/black"
             android:textSize="16sp"
             android:textStyle="bold"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.076"
             app:layout_constraintStart_toEndOf="@+id/space_card_house_icon"
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/active_base_fare"
-            android:layout_width="75dp"
-            android:layout_height="31dp"
-            android:layout_marginTop="4dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:ellipsize="end"
+            android:gravity="center_vertical"
             android:lines="2"
             android:text="@string/base_fare"
             android:textColor="@color/black"
             android:textSize="16sp"
             android:textStyle="bold"
-            app:layout_constraintEnd_toStartOf="@+id/requests"
-            app:layout_constraintHorizontal_bias="0.336"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/active_address"
             app:layout_constraintTop_toBottomOf="@+id/active_address" />
 
         <TextView
             android:id="@+id/active_rating"
-            android:layout_width="75dp"
-            android:layout_height="31dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
             android:ellipsize="end"
+            android:gravity="center"
             android:lines="2"
             android:text="@string/rating"
             android:textColor="@color/black"
             android:textSize="16sp"
             android:textStyle="bold"
-            app:layout_constraintBottom_toTopOf="@+id/requests"
             app:layout_constraintEnd_toStartOf="@+id/imageView"
-            app:layout_constraintHorizontal_bias="0.625"
-            app:layout_constraintStart_toEndOf="@+id/active_address"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="@+id/active_address" />
 
         <ImageView
             android:id="@+id/imageView"
@@ -80,35 +76,32 @@
             android:layout_marginEnd="8dp"
             android:scaleType="centerCrop"
             android:src="@drawable/star"
-            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintBottom_toBottomOf="@+id/active_address"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.138" />
+            app:layout_constraintTop_toTopOf="@+id/active_address" />
 
         <Button
             android:id="@+id/requests"
-            android:layout_width="101dp"
+            android:layout_width="wrap_content"
             android:layout_height="37dp"
-            android:layout_marginTop="12dp"
             android:layout_marginEnd="8dp"
-            android:backgroundTint="#0A510D"
+            android:backgroundTint="@color/spiderblue"
             android:text="@string/requests"
-            android:textSize="12dp"
+            android:textSize="12sp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/imageView" />
+            app:layout_constraintTop_toTopOf="@+id/disable" />
 
         <Button
             android:id="@+id/disable"
             android:layout_width="88dp"
             android:layout_height="38dp"
-            android:layout_marginTop="12dp"
-            android:layout_marginEnd="120dp"
-            android:backgroundTint="#750707"
+            android:layout_marginEnd="8dp"
+            android:backgroundTint="@color/spiderdarkerred"
             android:text="@string/disable"
-            android:textSize="12dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/imageView" />
-
+            android:textSize="12sp"
+            app:layout_constraintBottom_toBottomOf="@+id/active_base_fare"
+            app:layout_constraintEnd_toStartOf="@+id/requests"
+            app:layout_constraintTop_toTopOf="@+id/active_base_fare" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

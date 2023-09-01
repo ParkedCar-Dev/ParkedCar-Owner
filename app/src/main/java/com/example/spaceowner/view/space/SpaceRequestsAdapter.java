@@ -8,11 +8,14 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.lifecycle.MutableLiveData;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.spaceowner.R;
 import com.example.spaceowner.model.data.requests.SpaceRequest;
+import com.example.spaceowner.viewmodel.BookingViewModel;
 import com.example.spaceowner.viewmodel.SpaceViewModel;
+import com.example.spaceowner.viewmodel.ViewModelFactory;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -34,13 +37,11 @@ class SpaceRequestViewHolder extends RecyclerView.ViewHolder {
 }
 
 public class SpaceRequestsAdapter extends RecyclerView.Adapter<SpaceRequestViewHolder> {
-    private List<SpaceRequest> requestList = new ArrayList<>();
     private SpaceViewModel viewModel;
+    private List<SpaceRequest> bookingRequests = new ArrayList<>();
     public SpaceRequestsAdapter(SpaceViewModel viewModel) {
-        requestList.add(new SpaceRequest());
-        requestList.add(new SpaceRequest());
-        requestList.add(new SpaceRequest());
         this.viewModel = viewModel;
+        bookingRequests.add(new SpaceRequest());
     }
 
     @NonNull
@@ -53,7 +54,7 @@ public class SpaceRequestsAdapter extends RecyclerView.Adapter<SpaceRequestViewH
 
     @Override
     public void onBindViewHolder(@NonNull SpaceRequestViewHolder holder, int position) {
-        SpaceRequest request = requestList.get(position);
+        SpaceRequest request = bookingRequests.get(position);
 
         Log.d("SpaceRequestsAdapter", request.toString());
         holder.driverName.setText(request.getDriverName());
@@ -65,6 +66,10 @@ public class SpaceRequestsAdapter extends RecyclerView.Adapter<SpaceRequestViewH
 
     @Override
     public int getItemCount() {
-        return requestList.size();
+        return bookingRequests.size();
+    }
+
+    public void setRequests(List<SpaceRequest> requests) {
+        this.bookingRequests = requests;
     }
 }

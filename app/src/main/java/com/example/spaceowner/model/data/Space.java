@@ -1,12 +1,15 @@
 package com.example.spaceowner.model.data;
 
 import androidx.annotation.NonNull;
-import androidx.recyclerview.widget.DiffUtil;
+import androidx.annotation.Nullable;
 
+import com.example.spaceowner.R;
 import com.google.gson.annotations.SerializedName;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import java.util.Random;
 
 public class Space implements Serializable {
@@ -49,13 +52,15 @@ public class Space implements Serializable {
     private String city;
     @SerializedName("message")
     private String message;
+    @SerializedName("request_count")
+    private int requestCount;
 
     public Space() {
         locationId = new Random().nextInt(1000);
         length = width = height = 1;
         latitude = longitude = 1;
         baseFare = 1;
-        status = "requested";
+        status = "active";
         security = new String[]{"", "", ""};
         autoApproval = false;
         images = new String[]{};
@@ -64,6 +69,34 @@ public class Space implements Serializable {
         timeSlots = new boolean[]{true, true, true, false, false, false, false};
         totalBooks = 1;
         city = "DHAKA";
+        securityMeasures = "";
+        message = "";
+        requestCount = 0;
+    }
+
+    public Space(Space currentSpace) {
+        this.locationId = currentSpace.locationId;
+        this.locationName = currentSpace.locationName;
+        this.locationAddress = currentSpace.locationAddress;
+        this.owner = currentSpace.owner;
+        this.latitude = currentSpace.latitude;
+        this.longitude = currentSpace.longitude;
+        this.baseFare = currentSpace.baseFare;
+        this.length = currentSpace.length;
+        this.width = currentSpace.width;
+        this.height = currentSpace.height;
+        this.status = currentSpace.status;
+        this.securityMeasures = currentSpace.securityMeasures;
+        this.security = currentSpace.security;
+        this.autoApproval = currentSpace.autoApproval;
+        this.images = currentSpace.images;
+        this.rating = currentSpace.rating;
+        this.availabilityMask = currentSpace.availabilityMask;
+        this.timeSlots = currentSpace.timeSlots;
+        this.totalBooks = currentSpace.totalBooks;
+        this.city = currentSpace.city;
+        this.message = currentSpace.message;
+        this.requestCount = currentSpace.requestCount;
     }
 
     public String getMessage() {
@@ -184,11 +217,11 @@ public class Space implements Serializable {
         this.security = security;
     }
 
-    public boolean isAutoApproval() {
+    public boolean isAutoApprove() {
         return autoApproval;
     }
 
-    public void setAutoApproval(boolean autoApproval) {
+    public void setAutoApprove(boolean autoApproval) {
         this.autoApproval = autoApproval;
     }
 
@@ -280,5 +313,53 @@ public class Space implements Serializable {
 
     public boolean isActivated() {
         return status.equals("active");
+    }
+
+    public void setSecurity(boolean cc, boolean guard, boolean indoor) {
+        String[] security = new String[]{"", "", ""};
+        if(cc) security[0] = "cctv";
+        if(guard) security[1] = "guard";
+        if(indoor) security[2] = "indoor";
+        setSecurity(security);
+    }
+
+    public boolean equals(@Nullable Space sp) {
+        return this.locationAddress.equals(sp.locationAddress) &&
+                this.latitude == sp.latitude &&
+                this.longitude == sp.longitude &&
+                this.baseFare == sp.baseFare &&
+                this.length == sp.length &&
+                this.width == sp.width &&
+                this.height == sp.height &&
+                this.autoApproval == sp.autoApproval &&
+                this.securityMeasures.equals(sp.securityMeasures);
+    }
+
+    public static List<Space> getTimedOutSpace() {
+        List<Space> spaces = new ArrayList<>();
+        Space space = new Space();
+        space.setStatus("timeout");
+        spaces.add(space);
+        return spaces;
+    }
+
+    public boolean isTimedOut() {
+        return status.equals("timeout");
+    }
+
+    public int getRequestCount() {
+        return requestCount;
+    }
+
+    public void setRequestCount(int requestCount) {
+        this.requestCount = requestCount;
+    }
+    private static int[] imageList = {R.drawable.parking_icon_0, R.drawable.parking_icon_1, R.drawable.parking_icon_2, R.drawable.parking_icon_3, R.drawable.parking_icon_4, R.drawable.parking_icon_5, R.drawable.parking_icon_6, R.drawable.parking_icon_7, R.drawable.parking_icon_8, R.drawable.parking_icon_9};
+    public static int getImageId(){
+        return imageList[new Random().nextInt(imageList.length)];
+    }
+    private static int[] noParkingImageId = {R.drawable.no_parking_icon_0, R.drawable.no_parking_icon_1, R.drawable.no_parking_icon_2, R.drawable.no_parking_icon_3, R.drawable.no_parking_icon_4, R.drawable.no_parking_icon_5};
+    public static int getNoParkingId(){
+        return noParkingImageId[new Random().nextInt(noParkingImageId.length)];
     }
 }

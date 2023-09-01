@@ -1,10 +1,11 @@
-package com.example.spaceowner.view.dashboard;
+package com.example.spaceowner.view.dashboard.adapters;
 
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -13,6 +14,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.spaceowner.R;
 import com.example.spaceowner.model.data.Space;
+import com.example.spaceowner.view.dashboard.DashboardActivity;
+import com.example.spaceowner.view.space.SpaceViewpagerAdapter;
 import com.example.spaceowner.viewmodel.SpaceListViewModel;
 
 import java.util.LinkedList;
@@ -23,28 +26,20 @@ class DisabledSpaceViewHolder extends RecyclerView.ViewHolder{
     TextView address, basefare, rating;
     Button activateButton;
     Space space;
+    ImageView imageView;
     public DisabledSpaceViewHolder(@NonNull View itemView) {
         super(itemView);
         Log.d("SpaceViewHolder", itemView.toString()+" is created");
         address = itemView.findViewById(R.id.disabled_address);
         basefare = itemView.findViewById(R.id.disabled_base_fare);
         rating = itemView.findViewById(R.id.disabled_rating);
+        imageView = itemView.findViewById(R.id.space_card_house_icon);
 
         activateButton = itemView.findViewById(R.id.activate);
-        itemView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(itemView.getContext(), "Show "+space.getLocationId()+" Details", Toast.LENGTH_SHORT).show();
-            }
-        });
 
-        activateButton.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(itemView.getContext(), "Activate "+space.getLocationId(), Toast.LENGTH_SHORT).show();
-                viewModel.updateStatus(space.getLocationId(), "active");
-            }
-        });
+
+        activateButton.setOnClickListener(v -> viewModel.updateStatus(space.getLocationId(), "active"));
+        itemView.setOnClickListener(v -> ((DashboardActivity)itemView.getContext()).changeFragment(space, SpaceViewpagerAdapter.SpaceFragmentType.DETAILS));
     }
 }
 
@@ -77,6 +72,7 @@ public class DisabledSpaceRecyclerViewAdapter extends RecyclerView.Adapter<Disab
 
         holder.space = space;
         holder.viewModel = this.viewModel;
+        holder.imageView.setImageResource(Space.getNoParkingId());
     }
 
     @Override

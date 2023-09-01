@@ -55,4 +55,5 @@
     <string name="space_name">Demo Address Name</string>
     <string name="edit_space">Edit Space</string>
     <string name="show_requests">Requests</string>
+    <string name="earning">Earning</string>
 </resources>

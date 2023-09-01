@@ -3,6 +3,7 @@ package com.example.spaceowner.view.dashboard;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.viewpager2.widget.ViewPager2;
 
@@ -12,9 +13,12 @@ import android.util.Log;
 import android.view.MenuItem;
 
 import com.example.spaceowner.R;
+import com.example.spaceowner.model.data.Space;
 import com.example.spaceowner.utils.TokenManager;
 import com.example.spaceowner.view.addspace.AddSpaceActivity;
 import com.example.spaceowner.view.auth.AuthActivity;
+import com.example.spaceowner.view.space.SpaceActivity;
+import com.example.spaceowner.view.space.SpaceViewpagerAdapter;
 import com.example.spaceowner.viewmodel.SpaceListViewModel;
 import com.example.spaceowner.viewmodel.ViewModelFactory;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -33,6 +37,9 @@ public class DashboardActivity extends AppCompatActivity implements NavigationVi
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM);
+
 
         viewModel = new ViewModelFactory().create(SpaceListViewModel.class);
         setContentView(R.layout.activity_dashboard);
@@ -104,5 +111,13 @@ public class DashboardActivity extends AppCompatActivity implements NavigationVi
             this.finish();
         }
         return true;
+    }
+
+    public void changeFragment(Space space, SpaceViewpagerAdapter.SpaceFragmentType fragmentType){
+//        Intent intent = new Intent(itemView.getContext(), SpaceActivity.class);
+        Intent intent = new Intent(this, SpaceActivity.class);
+        intent.putExtra("space", space);
+        intent.putExtra("fragment", fragmentType);
+        startActivity(intent);
     }
 }

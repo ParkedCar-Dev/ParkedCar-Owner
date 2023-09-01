@@ -1,5 +1,6 @@
 package com.example.spaceowner.model;
 
+import com.example.spaceowner.model.data.BookingRequest;
 import com.example.spaceowner.model.data.GenericResponse;
 import com.example.spaceowner.model.data.auth.LoginRequest;
 import com.example.spaceowner.model.data.auth.LoginResponse;
@@ -8,11 +9,16 @@ import com.example.spaceowner.model.data.auth.SignupResponse;
 import com.example.spaceowner.model.data.Space;
 import com.example.spaceowner.model.data.SpaceListResponse;
 import com.example.spaceowner.model.data.SpaceStatusUpdateRequest;
+import com.example.spaceowner.model.data.requests.SpaceRequest;
+
+import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
+import retrofit2.http.Path;
+import retrofit2.http.Query;
 
 public interface RetrofitAPI {
     @POST("/auth/login/")
@@ -38,4 +44,10 @@ public interface RetrofitAPI {
 
     @POST("/space/changeSpaceStatus")
     Call<GenericResponse> updateStatus(@Body SpaceStatusUpdateRequest request);
+
+    @POST("/space/update")
+    Call<GenericResponse> updateSpace(@Body Space space);
+
+    @POST("/booking")
+    Call<List<SpaceRequest>> getSpaceBookingRequests(@Body BookingRequest request);
 }

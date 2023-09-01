@@ -29,7 +29,7 @@ public class AddSpaceViewModel extends ViewModel {
         space.setHeight(height);
         space.setStatus("requested");
 
-        space.setAutoApproval(autoApprove);
+        space.setAutoApprove(autoApprove);
         space.setSecurity(new String[]{cctv ? "cctv" : "", guard ? "guard" : "", indoor ? "indoor" : ""});
 
 

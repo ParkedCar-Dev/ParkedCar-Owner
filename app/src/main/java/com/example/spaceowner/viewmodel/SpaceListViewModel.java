@@ -82,4 +82,15 @@ public class SpaceListViewModel extends ViewModel {
     public void deleteRequestedSpace(int locationId) {
 //        TODO: Delete Requested Space
     }
+
+    public void retryFetchActiveSpaces() {
+        new Thread(() -> {
+            try {
+                Thread.sleep(5000);
+                fetchActiveSpaces();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }).start();
+    }
 }

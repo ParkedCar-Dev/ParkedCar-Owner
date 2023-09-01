@@ -8,6 +8,7 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,7 +16,7 @@ import android.widget.Toast;
 
 import com.example.spaceowner.R;
 import com.example.spaceowner.view.auth.AuthActivity;
-import com.example.spaceowner.view.dashboard.ActiveSpaceRecyclerViewAdapter;
+import com.example.spaceowner.view.dashboard.adapters.ActiveSpaceRecyclerViewAdapter;
 import com.example.spaceowner.viewmodel.SpaceListViewModel;
 import com.example.spaceowner.viewmodel.ViewModelFactory;
 
@@ -49,7 +50,13 @@ public class ActiveSpotsFragment extends Fragment {
         recyclerView.setLayoutManager(layoutManager);
 
         viewModel.getActiveSpaces().observe(getViewLifecycleOwner(), (spaces) -> {
+
             if(spaces != null){
+                if(spaces.size() == 1 && spaces.get(0).isTimedOut()){
+                    Toast.makeText(getContext(), "Timeout: Retrying", Toast.LENGTH_SHORT).show();
+                    viewModel.retryFetchActiveSpaces();
+                    return;
+                }
                 adapter.setActiveSpaces(spaces);
                 adapter.notifyDataSetChanged();
             }else{

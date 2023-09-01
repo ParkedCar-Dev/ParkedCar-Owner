@@ -1,11 +1,13 @@
-package com.example.spaceowner.view.dashboard;
+package com.example.spaceowner.view.dashboard.adapters;
 
 import android.content.Intent;
+import android.media.Image;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -14,54 +16,34 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.spaceowner.R;
 import com.example.spaceowner.model.data.Space;
+import com.example.spaceowner.view.dashboard.DashboardActivity;
 import com.example.spaceowner.view.space.SpaceActivity;
 import com.example.spaceowner.view.space.SpaceViewpagerAdapter;
 import com.example.spaceowner.viewmodel.SpaceListViewModel;
 
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Random;
 
 class ActiveSpaceViewHolder extends RecyclerView.ViewHolder{
     TextView address, basefare, rating;
     Button requestButton, disableButton;
     Space space;
     SpaceListViewModel viewModel;
+    ImageView imageView;
     public ActiveSpaceViewHolder(@NonNull View itemView) {
         super(itemView);
+        imageView = itemView.findViewById(R.id.space_card_house_icon);
         address = itemView.findViewById(R.id.active_address);
         basefare = itemView.findViewById(R.id.active_base_fare);
         rating = itemView.findViewById(R.id.active_rating);
 
-        itemView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(itemView.getContext(), "Show "+space.getLocationId()+" Details", Toast.LENGTH_SHORT).show();
-                changeFragment(SpaceViewpagerAdapter.SpaceFragmentType.DETAILS);
-            }
-        });
         requestButton = itemView.findViewById(R.id.requests);
         disableButton = itemView.findViewById(R.id.disable);
 
-        requestButton.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(itemView.getContext(), "Show "+space.getLocationId()+" Requests", Toast.LENGTH_SHORT).show();
-                changeFragment(SpaceViewpagerAdapter.SpaceFragmentType.REQUESTS);
-            }
-        });
-        disableButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(itemView.getContext(), "Disable "+space.getLocationId(), Toast.LENGTH_SHORT).show();
-                viewModel.updateStatus(space.getLocationId(), "disabled");
-            }
-        });
-    }
-    public void changeFragment(SpaceViewpagerAdapter.SpaceFragmentType fragmentType){
-        Intent intent = new Intent(itemView.getContext(), SpaceActivity.class);
-        intent.putExtra("space", space);
-        intent.putExtra("fragment", fragmentType);
-        itemView.getContext().startActivity(intent);
+        itemView.setOnClickListener(v -> ((DashboardActivity)itemView.getContext()).changeFragment(space, SpaceViewpagerAdapter.SpaceFragmentType.DETAILS));
+        requestButton.setOnClickListener(v -> ((DashboardActivity)itemView.getContext()).changeFragment(space, SpaceViewpagerAdapter.SpaceFragmentType.REQUESTS));
+        disableButton.setOnClickListener(v -> viewModel.updateStatus(space.getLocationId(), "disabled"));
     }
 }
 
@@ -92,6 +74,9 @@ public class ActiveSpaceRecyclerViewAdapter extends RecyclerView.Adapter<ActiveS
 
         holder.space = space;
         holder.viewModel = this.viewModel;
+        if(space.getRequestCount() > 0)
+            holder.requestButton.setText("Requests (" + space.getRequestCount() + ")");
+        holder.imageView.setImageResource(Space.getImageId());
     }
 
     @Override
