@@ -12,6 +12,7 @@ import androidx.lifecycle.MutableLiveData;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.spaceowner.R;
+import com.example.spaceowner.model.data.Booking;
 import com.example.spaceowner.model.data.requests.SpaceRequest;
 import com.example.spaceowner.viewmodel.BookingViewModel;
 import com.example.spaceowner.viewmodel.SpaceViewModel;
@@ -27,7 +28,7 @@ class SpaceRequestViewHolder extends RecyclerView.ViewHolder {
         super(itemView);
         driverName = itemView.findViewById(R.id.request_card_driver_name);
         rating = itemView.findViewById(R.id.request_card_rating);
-        fare = itemView.findViewById(R.id.request_card_fare);
+        fare = itemView.findViewById(R.id.request_card_total_fare);
         timeFrom = itemView.findViewById(R.id.request_card_time_from);
         timeTo = itemView.findViewById(R.id.request_card_time_to);
 
@@ -38,10 +39,10 @@ class SpaceRequestViewHolder extends RecyclerView.ViewHolder {
 
 public class SpaceRequestsAdapter extends RecyclerView.Adapter<SpaceRequestViewHolder> {
     private SpaceViewModel viewModel;
-    private List<SpaceRequest> bookingRequests = new ArrayList<>();
+    private List<Booking> bookingRequests = new ArrayList<>();
     public SpaceRequestsAdapter(SpaceViewModel viewModel) {
         this.viewModel = viewModel;
-        bookingRequests.add(new SpaceRequest());
+        bookingRequests.add(new Booking());
     }
 
     @NonNull
@@ -54,14 +55,14 @@ public class SpaceRequestsAdapter extends RecyclerView.Adapter<SpaceRequestViewH
 
     @Override
     public void onBindViewHolder(@NonNull SpaceRequestViewHolder holder, int position) {
-        SpaceRequest request = bookingRequests.get(position);
+        Booking request = bookingRequests.get(position);
 
         Log.d("SpaceRequestsAdapter", request.toString());
         holder.driverName.setText(request.getDriverName());
         holder.rating.setText(request.getDriverRating());
-        holder.fare.setText(request.getFare());
-        holder.timeFrom.setText(request.getTimeFrom());
-        holder.timeTo.setText(request.getTimeTo());
+        holder.fare.setText(request.getTotalPrice());
+        holder.timeFrom.setText(request.getFromTime());
+        holder.timeTo.setText(request.getToTime());
     }
 
     @Override
@@ -69,7 +70,7 @@ public class SpaceRequestsAdapter extends RecyclerView.Adapter<SpaceRequestViewH
         return bookingRequests.size();
     }
 
-    public void setRequests(List<SpaceRequest> requests) {
+    public void setRequests(List<Booking> requests) {
         this.bookingRequests = requests;
     }
 }

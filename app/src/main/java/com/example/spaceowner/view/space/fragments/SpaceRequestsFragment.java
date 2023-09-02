@@ -58,7 +58,7 @@ public class SpaceRequestsFragment extends Fragment {
 
         viewModel.getSpaceRequests().observe(getViewLifecycleOwner(), (requests) -> {
             if(requests != null){
-                adapter.setRequests(requests);
+                adapter.setRequests(requests.getBookings());
                 adapter.notifyDataSetChanged();
             }else Log.d("SPACE REQUESTS FRAGMENT", "null requests");
         });
