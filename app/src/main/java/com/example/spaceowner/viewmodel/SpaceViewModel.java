@@ -4,6 +4,7 @@ import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 import com.example.spaceowner.model.data.Space;
+import com.example.spaceowner.model.data.SpaceBookings;
 import com.example.spaceowner.model.data.requests.SpaceRequest;
 import com.example.spaceowner.model.repositories.SpaceRepository;
 
@@ -14,7 +15,7 @@ public class SpaceViewModel extends ViewModel {
     private SpaceRepository spaceRepository;
     private MutableLiveData<Space> currentSpace;
     private MutableLiveData<Boolean> spaceUpdateResult;
-    private MutableLiveData<List<SpaceRequest>> spaceRequests;
+    private MutableLiveData<SpaceBookings> spaceRequests;
     private static SpaceViewModel instance;
     private SpaceViewModel(SpaceRepository spaceRepository){
         this.spaceRepository = spaceRepository;
@@ -73,11 +74,11 @@ public class SpaceViewModel extends ViewModel {
         spaceRepository.updateStatus(locationId, status, new MutableLiveData<>());
     }
 
-    public MutableLiveData<List<SpaceRequest>> getSpaceRequests() {
+    public MutableLiveData<SpaceBookings> getSpaceRequests() {
         return spaceRequests;
     }
 
     public void fetchSpaceRequests() {
-        spaceRepository.fetchSpaceRequests(spaceRequests, currentSpace.getValue().getLocationId(), "active");
+        spaceRepository.fetchSpaceRequests(spaceRequests, currentSpace.getValue().getLocationId(), "requested");
     }
 }

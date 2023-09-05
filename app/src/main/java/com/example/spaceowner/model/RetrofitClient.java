@@ -5,6 +5,8 @@ import android.content.Context;
 import androidx.annotation.NonNull;
 
 import com.example.spaceowner.utils.TokenManager;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 
 import java.io.IOException;
 
@@ -31,10 +33,11 @@ public class RetrofitClient{
                     return chain.proceed(newRequest);
                 }
             }).build();
+            Gson gson = new GsonBuilder().setLenient().create();
             retrofit = new Retrofit.Builder()
                     .client(client)
                     .baseUrl(BASE_URL)
-                    .addConverterFactory(GsonConverterFactory.create())
+                    .addConverterFactory(GsonConverterFactory.create(gson))
                     .build();
         }
         return retrofit;
