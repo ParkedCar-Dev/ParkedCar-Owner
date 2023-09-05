@@ -6,6 +6,8 @@ import androidx.core.app.ActivityCompat;
 import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.location.Address;
+import android.location.Geocoder;
 import android.location.Location;
 import android.os.Bundle;
 import android.util.Log;
@@ -22,6 +24,10 @@ import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.textfield.TextInputEditText;
 
+import java.io.IOException;
+import java.util.List;
+import java.util.Locale;
+
 public class AddSpaceActivity extends AppCompatActivity {
 
     private FusedLocationProviderClient fusedLocationProviderClient;
@@ -29,6 +35,8 @@ public class AddSpaceActivity extends AppCompatActivity {
     TextInputEditText locationAddress;
     TextInputEditText latitudeEditText;
     TextInputEditText longitudeEditText;
+    TextInputEditText cityEditText;
+    TextInputEditText baseFareEditText;
     TextInputEditText length, width, height;
     CheckBox autoApprove, cctv, guard, indoor;
 
@@ -44,6 +52,8 @@ public class AddSpaceActivity extends AppCompatActivity {
 
         locationIcon = findViewById(R.id.location_icon);
         locationAddress = findViewById(R.id.location_address);
+        cityEditText = findViewById(R.id.location_city);
+        baseFareEditText = findViewById(R.id.base_fare);
         latitudeEditText = findViewById(R.id.location_latitude);
         longitudeEditText = findViewById(R.id.location_longitude);
         length = findViewById(R.id.length);
@@ -109,7 +119,9 @@ public class AddSpaceActivity extends AppCompatActivity {
                         autoApprove.isChecked(),
                         cctv.isChecked(),
                         guard.isChecked(),
-                        indoor.isChecked()
+                        indoor.isChecked(),
+                        cityEditText.getText().toString(),
+                        Double.parseDouble(baseFareEditText.getText().toString())
                 );
             }
         });
@@ -130,6 +142,18 @@ public class AddSpaceActivity extends AppCompatActivity {
                     Log.d("ADD_SPACE", "onSuccess: " + location.getLatitude() + " " + location.getLongitude());
                     latitudeEditText.setText(String.valueOf(location.getLatitude()));
                     longitudeEditText.setText(String.valueOf(location.getLongitude()));
+
+                    Geocoder geocoder = new Geocoder(getApplicationContext(), Locale.getDefault());
+                    try {
+                        List<Address> addresses = geocoder.getFromLocation(location.getLatitude(), location.getLongitude(), 1);
+                        if(addresses != null && addresses.size() > 0){
+                            String city = addresses.get(0).getLocality();
+                            cityEditText.setText(city);
+                        }
+                    } catch (IOException e) {
+                        throw new RuntimeException(e);
+                    }
+
                 }
             }
         });

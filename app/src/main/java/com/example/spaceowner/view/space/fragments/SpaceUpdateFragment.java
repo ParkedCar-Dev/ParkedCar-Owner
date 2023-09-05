@@ -28,6 +28,7 @@ import com.google.android.material.textfield.TextInputEditText;
 public class SpaceUpdateFragment extends Fragment {
     ImageView locationIcon;
     TextInputEditText locationAddress;
+    TextInputEditText cityName;
     TextInputEditText latitudeEditText;
     TextInputEditText longitudeEditText;
     TextInputEditText baseFareEditText;
@@ -55,6 +56,7 @@ public class SpaceUpdateFragment extends Fragment {
 
         locationIcon = view.findViewById(R.id.location_icon);
         locationAddress = view.findViewById(R.id.location_address);
+        cityName = view.findViewById(R.id.location_city);
         latitudeEditText = view.findViewById(R.id.location_latitude);
         longitudeEditText = view.findViewById(R.id.location_longitude);
 
@@ -85,6 +87,7 @@ public class SpaceUpdateFragment extends Fragment {
             guard.setChecked(currentSpace.isGuard());
             indoor.setChecked(currentSpace.isIndoor());
             baseFareEditText.setText(String.valueOf(currentSpace.getBaseFare()));
+            cityName.setText(currentSpace.getCity());
         }
 
         view.findViewById(R.id.submit_button).setOnClickListener((v) -> {

@@ -266,7 +266,7 @@ public class Space implements Serializable {
     }
 
     public String getCity() {
-        return city;
+        return city.toUpperCase();
     }
 
     public void setCity(String city) {

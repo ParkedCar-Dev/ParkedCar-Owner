@@ -19,7 +19,7 @@ public class AddSpaceViewModel extends ViewModel {
     }
 
 
-    public void addSpace(String address, double latitude, double longitude, double length, double width, double height, boolean autoApprove, boolean cctv, boolean guard, boolean indoor){
+    public void addSpace(String address, double latitude, double longitude, double length, double width, double height, boolean autoApprove, boolean cctv, boolean guard, boolean indoor, String city, double baseFare){
         Space space = new Space();
         space.setLocationAddress(address);
         space.setLatitude(latitude);
@@ -28,6 +28,8 @@ public class AddSpaceViewModel extends ViewModel {
         space.setWidth(width);
         space.setHeight(height);
         space.setStatus("requested");
+        space.setCity(city.toLowerCase());
+        space.setBaseFare(baseFare);
 
         space.setAutoApprove(autoApprove);
         space.setSecurity(new String[]{cctv ? "cctv" : "", guard ? "guard" : "", indoor ? "indoor" : ""});
