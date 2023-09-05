@@ -19,7 +19,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class RetrofitClient{
     private static Retrofit retrofit;
-    private static final String BASE_URL = "https://parked-car-owner-dev-api.onrender.com/";
+    private static final String BASE_URL = "https://owner-moba.onrender.com/";
 
     public static Retrofit getInstance(){
         if(retrofit == null){

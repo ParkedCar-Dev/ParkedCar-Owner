@@ -54,6 +54,8 @@ public class Space implements Serializable {
     private String message;
     @SerializedName("request_count")
     private int requestCount;
+    @SerializedName("area90")
+    private double area90;
 
     public Space() {
         locationId = new Random().nextInt(1000);
@@ -68,10 +70,11 @@ public class Space implements Serializable {
         availabilityMask = "AVAILABILITY_MASK";
         timeSlots = new boolean[]{true, true, true, false, false, false, false};
         totalBooks = 1;
-        city = "DHAKA";
+        city = "dhaka";
         securityMeasures = "";
         message = "";
         requestCount = 0;
+        area90 = 90;
     }
 
     public Space(Space currentSpace) {
@@ -97,6 +100,16 @@ public class Space implements Serializable {
         this.city = currentSpace.city;
         this.message = currentSpace.message;
         this.requestCount = currentSpace.requestCount;
+        this.area90 = currentSpace.area90;
+    }
+
+
+    public double getArea90() {
+        return area90;
+    }
+
+    public void setArea90(double area90) {
+        this.area90 = area90;
     }
 
     public String getMessage() {
@@ -298,6 +311,7 @@ public class Space implements Serializable {
                 ", totalBooks=" + totalBooks +
                 ", city='" + city + '\'' +
                 ", message='" + message + '\'' +
+                ", area90=" + area90 +
                 '}';
     }
 

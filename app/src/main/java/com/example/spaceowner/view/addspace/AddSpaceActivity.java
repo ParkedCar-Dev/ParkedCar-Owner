@@ -30,6 +30,7 @@ public class AddSpaceActivity extends AppCompatActivity {
     TextInputEditText latitudeEditText;
     TextInputEditText longitudeEditText;
     TextInputEditText length, width, height;
+    TextInputEditText areaArea;
     CheckBox autoApprove, cctv, guard, indoor;
 
     AddSpaceViewModel addSpaceViewModel;
@@ -49,6 +50,7 @@ public class AddSpaceActivity extends AppCompatActivity {
         length = findViewById(R.id.length);
         width = findViewById(R.id.width);
         height = findViewById(R.id.height);
+        areaArea = findViewById(R.id.area_area);
 
         autoApprove = findViewById(R.id.auto_approval);
         cctv = findViewById(R.id.cc_camera);
@@ -109,7 +111,8 @@ public class AddSpaceActivity extends AppCompatActivity {
                         autoApprove.isChecked(),
                         cctv.isChecked(),
                         guard.isChecked(),
-                        indoor.isChecked()
+                        indoor.isChecked(),
+                        Double.parseDouble(areaArea.getText().toString())
                 );
             }
         });

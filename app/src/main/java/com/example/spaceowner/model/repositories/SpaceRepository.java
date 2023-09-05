@@ -80,26 +80,26 @@ public class SpaceRepository {
     }
 
     public void addNewSpace(Space space, MutableLiveData<GenericResponse> result){
-        Log.d("SPACE_REPOSITORY", "addNewSpace: " + space);
+        Log.d("SPACE_REPOSITORY_ADD_SPACE", "addNewSpace: " + space);
         RetrofitAPI api = RetrofitClient.getInstance().create(RetrofitAPI.class);
         Call<GenericResponse> call = api.addNewSpace(space);
         call.enqueue(new Callback<GenericResponse>() {
             @Override
             public void onResponse(Call<GenericResponse> call, Response<GenericResponse> response) {
                 if (response.isSuccessful()) {
-                    Log.d("SPACE_REPOSITORY", "on successful response: " + response);
+                    Log.d("SPACE_REPOSITORY_ADD_SPACE", "on successful response: " + response);
                     if (response.body() != null) {
-                        Log.d("SPACE_REPOSITORY", "on successful response: " + response.body());
+                        Log.d("SPACE_REPOSITORY_ADD_SPACE", "on successful response: " + response.body());
                         if(response.body().isSuccess()) {
                             result.setValue(response.body());
                         } else {
                             result.setValue(null);
                         }
                     } else {
-                        Log.d("SPACE_REPOSITORY", "on successful response: " + response);
+                        Log.d("SPACE_REPOSITORY_ADD_SPACE", "on successful response: " + response);
                     }
                 } else {
-                    Log.d("SPACE_REPOSITORY", "on failed response: " + response);
+                    Log.d("SPACE_REPOSITORY_ADD_SPACE", "on failed response: " + response);
                 }
             }
 
