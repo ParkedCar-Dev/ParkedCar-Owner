@@ -57,4 +57,13 @@
     <string name="show_requests">Requests</string>
     <string name="earning">Earning</string>
     <string name="city">City</string>
+    <string name="booking_id">Booking ID</string>
+    <string name="booking_info">Booking Info</string>
+    <string name="from_date">From Date</string>
+    <string name="to_date">To Date</string>
+    <string name="location_address">Location Address</string>
+    <string name="rate_now">Rate Now</string>
+    <string name="demo_booking_id"># 123456789</string>
+    <string name="request_again">Request Again</string>
+    <string name="receipt">Receipt</string>
 </resources>

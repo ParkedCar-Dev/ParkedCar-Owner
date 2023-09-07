@@ -49,8 +49,6 @@ public interface RetrofitAPI {
     @POST("/space/update")
     Call<GenericResponse> updateSpace(@Body Space space);
 
-//    @POST("/booking/space_bookings")
-//    Call<List<SpaceRequest>> getSpaceBookingRequests(@Body BookingRequest request);
     @POST("/booking/space_bookings")
     Call<SpaceBookings> getSpaceBookings(@Body BookingRequest request);
 }
