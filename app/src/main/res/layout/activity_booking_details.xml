@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -8,12 +8,16 @@
     tools:context=".view.bookingDetails.BookingDetailsActivity">
 
     <androidx.cardview.widget.CardView
+        android:id="@+id/booking_id_card"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_margin="12dp">
+            android:layout_margin="6dp">
 
             <TextView
                 android:id="@+id/textView3"
@@ -41,7 +45,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="8dp"
-                android:text="Cancelled"
+                android:text="@string/status"
                 android:textSize="22sp"
                 android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="@+id/booking_id"
@@ -53,25 +57,25 @@
     </androidx.cardview.widget.CardView>
 
     <androidx.cardview.widget.CardView
-        android:layout_marginTop="8dp"
+        android:id="@+id/booking_info_card"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        >
+        android:layout_marginTop="8dp"
+        app:layout_constraintStart_toStartOf="@+id/booking_id_card"
+        app:layout_constraintTop_toBottomOf="@id/booking_id_card">
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginBottom="16dp"
-            android:layout_marginTop="16dp"
-            >
+            android:layout_margin="6dp">
 
             <TextView
                 android:id="@+id/textView4"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
+                android:layout_marginStart="8dp"
                 android:layout_marginTop="8dp"
                 android:text="@string/booking_info"
-                android:textSize="18sp"
+                android:textSize="16sp"
                 android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -83,7 +87,7 @@
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="8dp"
                 android:text="@string/from_date"
-                android:textSize="24sp"
+                android:textSize="20sp"
                 android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="@+id/textView4"
                 app:layout_constraintTop_toBottomOf="@+id/textView4" />
@@ -94,7 +98,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:text="@string/to_date"
-                android:textSize="24sp"
+                android:textSize="20sp"
                 android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="@+id/from_date"
                 app:layout_constraintTop_toBottomOf="@+id/from_date" />
@@ -105,7 +109,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:text="@string/location_address"
-                android:textSize="22sp"
+                android:textSize="18sp"
                 android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="@+id/to_date"
                 app:layout_constraintTop_toBottomOf="@+id/to_date" />
@@ -116,7 +120,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:text="@string/city"
-                android:textSize="22sp"
+                android:textSize="18sp"
                 android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="@+id/location_address"
                 app:layout_constraintTop_toBottomOf="@+id/location_address" />
@@ -125,16 +129,17 @@
     </androidx.cardview.widget.CardView>
 
     <androidx.cardview.widget.CardView
+        android:id="@+id/driver_info_card"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="2dp"
-        >
+        app:layout_constraintStart_toStartOf="@+id/booking_info_card"
+        app:layout_constraintTop_toBottomOf="@id/booking_info_card">
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            android:layout_marginBottom="8dp"
-            >
+            android:layout_marginBottom="8dp">
 
             <ImageView
                 android:id="@+id/imageView5"
@@ -145,31 +150,32 @@
                 android:src="@drawable/profile"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                />
 
             <TextView
-                android:id="@+id/textView5"
+                android:id="@+id/driver_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Md Anwar Hossen"
-                android:textSize="28sp"
+                android:layout_marginStart="8dp"
+                android:text="@string/placeholder_name"
+                android:textSize="24sp"
                 android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="@+id/imageView5"
-                app:layout_constraintEnd_toStartOf="@+id/textView6"
                 app:layout_constraintStart_toEndOf="@+id/imageView5"
                 app:layout_constraintTop_toTopOf="@+id/imageView5" />
 
             <TextView
-                android:id="@+id/textView6"
+                android:id="@+id/rate_now_tv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="8dp"
                 android:text="@string/rate_now"
                 android:textColor="@color/red"
-                android:textSize="22sp"
-                app:layout_constraintBottom_toBottomOf="@+id/textView5"
+                android:textSize="12sp"
+                app:layout_constraintBottom_toBottomOf="@+id/driver_name"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/textView5" />
+                app:layout_constraintTop_toTopOf="@+id/driver_name" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>
@@ -179,12 +185,12 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="12dp"
-        >
+        app:layout_constraintStart_toStartOf="@+id/driver_info_card"
+        app:layout_constraintTop_toBottomOf="@id/driver_info_card">
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_margin="8dp"
-            >
+            android:layout_margin="8dp">
 
             <TextView
                 android:id="@+id/textView7"
@@ -192,9 +198,9 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
                 android:text="@string/request_again"
-                android:textSize="22sp"
-                android:textStyle="bold"
                 android:textColor="@color/red"
+                android:textSize="20sp"
+                android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -203,8 +209,8 @@
                 android:id="@+id/imageView6"
                 android:layout_width="26dp"
                 android:layout_height="26dp"
-                android:layout_marginEnd="8dp"
                 android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
                 android:scaleType="centerCrop"
                 android:src="@drawable/right_chevron"
                 app:layout_constraintBottom_toBottomOf="@+id/textView7"
@@ -215,14 +221,15 @@
     </androidx.cardview.widget.CardView>
 
     <androidx.cardview.widget.CardView
+        android:id="@+id/receipt_card"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginTop="12dp"
-        >
-<!--        a bold and larger text view on left with text: Receipt-->
+        android:layout_height="wrap_content"
+        android:layout_marginTop="6dp"
+        app:layout_constraintStart_toStartOf="@+id/request_again_card"
+        app:layout_constraintTop_toBottomOf="@id/request_again_card">
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="wrap_content">
 
             <TextView
                 android:id="@+id/textView"
@@ -231,27 +238,180 @@
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="8dp"
                 android:text="@string/receipt"
-                android:textSize="26sp"
+                android:textSize="22sp"
                 android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
-            <!--        a bold and larger text view on right with text: $ 100.00-->
-
             <TextView
+                android:id="@+id/total_fare"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="16dp"
                 android:text="$ 100.00"
-                android:textSize="26sp"
+                android:textSize="18sp"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="@+id/textView" />
 
-<!--            a horizontal line below the text views-->
+            <TextView
+                android:id="@+id/textView2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="16dp"
+                android:text="@string/base_fare"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="@+id/textView"
+                app:layout_constraintTop_toBottomOf="@+id/textView" />
+
+            <TextView
+                android:id="@+id/booking_base_fare"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="$ 100.00"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="@+id/total_fare"
+                app:layout_constraintTop_toTopOf="@+id/textView2" />
+
+            <TextView
+                android:id="@+id/tvtime"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="@string/base_fare"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="@+id/textView2"
+                app:layout_constraintTop_toBottomOf="@+id/textView2" />
+
+            <TextView
+                android:id="@+id/booking_time_fare"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="$ 100.00"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="@+id/booking_base_fare"
+                app:layout_constraintTop_toTopOf="@+id/tvtime" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>
 
+    <androidx.cardview.widget.CardView
+        android:id="@+id/payment_card"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="6dp"
+        android:layout_marginBottom="6dp"
+        app:layout_constraintStart_toStartOf="@+id/receipt_card"
+        app:layout_constraintTop_toBottomOf="@+id/receipt_card">
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
-</LinearLayout>
+            <TextView
+                android:id="@+id/payment_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:text="@string/payment"
+                android:textSize="22sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/payment_status"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="16dp"
+                android:text="Paid"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/payment_tv" />
+
+            <TextView
+                android:id="@+id/payment_id_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="Payment Id"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="@+id/method_tv"
+                app:layout_constraintTop_toBottomOf="@+id/method_tv" />
+
+            <TextView
+                android:id="@+id/payment_method"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="BKash"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="@+id/payment_status"
+                app:layout_constraintTop_toTopOf="@+id/method_tv" />
+
+            <TextView
+                android:id="@+id/method_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="10dp"
+                android:text="Payment Method"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="@+id/payment_tv"
+                app:layout_constraintTop_toBottomOf="@+id/payment_tv" />
+
+            <TextView
+                android:id="@+id/payment_id"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="1211"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="@+id/payment_method"
+                app:layout_constraintTop_toTopOf="@+id/payment_id_tv" />
+
+            <TextView
+                android:id="@+id/payment_date_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="6dp"
+                android:text="Payment Date"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/payment_id_tv"
+                app:layout_constraintTop_toBottomOf="@+id/payment_id_tv" />
+
+            <TextView
+                android:id="@+id/payment_date"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="12/12/2020"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="@+id/payment_id"
+                app:layout_constraintTop_toTopOf="@+id/payment_date_tv" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.cardview.widget.CardView>
+
+    <Button
+        android:layout_margin="8dp"
+        android:id="@+id/btn_add_review"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/add_additional_review"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/receipt_card" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
