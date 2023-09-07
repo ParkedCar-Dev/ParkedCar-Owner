@@ -24,15 +24,15 @@
         <activity
             android:name=".view.bookingDetails.BookingDetailsActivity"
             android:exported="true" >
+        </activity>
+        <activity
+            android:name=".view.splashscreen.SplashScreenActivity"
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-        </activity>
-        <activity
-            android:name=".view.splashscreen.SplashScreenActivity"
-            android:exported="true">
         </activity>
         <activity
             android:name=".view.space.SpaceActivity"

@@ -70,4 +70,7 @@
     <string name="add_additional_review">Add additional Review</string>
     <string name="placeholder_name">Md Anwar Hossen</string>
     <string name="payment">Payment</string>
+    <string name="confirm_cash_payment">Confirm Cash Payment</string>
+    <string name="time_fare">Time Fare</string>
+    <string name="skip">skip</string>
 </resources>

@@ -1,6 +1,9 @@
 package com.example.spaceowner.model;
 
+import com.example.spaceowner.model.data.Booking;
+import com.example.spaceowner.model.data.BookingDetailsRequest;
 import com.example.spaceowner.model.data.BookingRequest;
+import com.example.spaceowner.model.data.BookingResponse;
 import com.example.spaceowner.model.data.GenericResponse;
 import com.example.spaceowner.model.data.SpaceBookings;
 import com.example.spaceowner.model.data.auth.LoginRequest;
@@ -51,4 +54,7 @@ public interface RetrofitAPI {
 
     @POST("/booking/space_bookings")
     Call<SpaceBookings> getSpaceBookings(@Body BookingRequest request);
+
+    @POST("/booking/details")
+    Call<BookingResponse> getBookingDetails(@Body BookingDetailsRequest request);
 }

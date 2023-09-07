@@ -9,11 +9,23 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class Booking implements Serializable {
+    @SerializedName("status")
+    private String status;
+
+    @SerializedName("message")
+    private String message;
+
     @SerializedName("booking_id")
     private int bookingId;
 
     @SerializedName("space_id")
     private int spaceId;
+
+    @SerializedName("address")
+    private String locationAddress;
+
+    @SerializedName("city")
+    private String city;
 
     @SerializedName("driver_id")
     private int driverId;
@@ -24,7 +36,8 @@ public class Booking implements Serializable {
     @SerializedName("to_time")
     private long toTime;
 
-    private String status;
+    @SerializedName("booking_status")
+    private String bookingStatus;
 
     @SerializedName("created_at")
     private String createdAt;
@@ -32,8 +45,17 @@ public class Booking implements Serializable {
     @SerializedName("updated_at")
     private String updatedAt;
 
-    @SerializedName("total_price")
+    @SerializedName("total_fare")
     private int totalPrice;
+
+    @SerializedName("base_fare")
+    private int baseFare;
+
+    @SerializedName("time_fare")
+    private int timeFare;
+
+    @SerializedName("payment_date")
+    private long paymentDate;
 
     @SerializedName("payment_id")
     private String paymentId;
@@ -50,6 +72,8 @@ public class Booking implements Serializable {
     @SerializedName("driver_name")
     private String driverName;
 
+
+
     public void setDriverRating(double driverRating) {
         this.driverRating = driverRating;
     }
@@ -59,20 +83,28 @@ public class Booking implements Serializable {
 
     // Constructors
     public Booking() {
-        this.bookingId = 0;
-        this.spaceId = 0;
-        this.driverId = 0;
-        this.fromTime = 1692551064093l;
-        this.toTime = 1692554711212l;
-        this.status = "requested";
-        this.createdAt = "1970-01-01T00:00:00.000Z";
-        this.updatedAt = "1970-01-01T00:00:00.000Z";
-        this.totalPrice = 0;
-        this.paymentId = "0";
-        this.paymentStatus = "null";
-        this.paymentMedium = "null";
-        this.mediumTransactionId = "0";
-        this.driverName = "John Doe";
+// populate all attributes with dummy data
+        this.bookingId = 1;
+        this.spaceId = 1;
+        this.locationAddress = "Dummy Address";
+        this.city = "Dummy City";
+        this.baseFare = 100;
+        this.timeFare = 10;
+        this.paymentDate = 123456789;
+        this.driverId = 1;
+        this.fromTime = 123456789;
+        this.toTime = 123456789;
+        this.bookingStatus = "Dummy Booking Status";
+        this.createdAt = "Dummy Created At";
+        this.updatedAt = "Dummy Updated At";
+        this.totalPrice = 100;
+        this.paymentId = "Dummy Payment Id";
+        this.paymentStatus = "Dummy Payment Status";
+        this.paymentMedium = "Dummy Payment Medium";
+        this.mediumTransactionId = "Dummy Medium Transaction Id";
+        this.driverName = "Dummy Driver Name";
+        this.driverRating = 4.5;
+        this.status = "success";
     }
 
     public Booking(int bookingId, int spaceId, int driverId, long fromTime, long toTime,
@@ -84,7 +116,7 @@ public class Booking implements Serializable {
         this.driverId = driverId;
         this.fromTime = fromTime;
         this.toTime = toTime;
-        this.status = status;
+        this.bookingStatus = status;
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
         this.totalPrice = totalPrice;
@@ -123,24 +155,62 @@ public class Booking implements Serializable {
 
     String unixToString(long time){
         Date date = new Date(time);
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        SimpleDateFormat sdf = new SimpleDateFormat("MMM dd, yy hh:mm a");
         return sdf.format(date);
+    }
+
+    public String getPaymentTime(){
+        return unixToString(paymentDate);
     }
 
     public String getFromTime() {
         return unixToString(fromTime);
     }
 
-    public void setFromTime(long fromTime) {
-        this.fromTime = fromTime;
-    }
-
     public String getToTime() {
         return unixToString(toTime);
     }
 
-    public void setToTime(long toTime) {
-        this.toTime = toTime;
+    public String getTotalPrice() {
+        return Integer.toString(totalPrice);
+    }
+
+    public String getDriverName() {
+        if(driverName == null) return "Place Holder";
+        return driverName;
+    }
+
+    @NonNull
+    @Override
+    public String toString() {
+        if(status == null || status.equals("failed")){
+            return "Booking{" +
+                    "status='" + status + '\'' +
+                    ", message='" + message + '\'' +
+                    '}';
+        }
+        return "Booking{" +
+                   "bookingId=" + bookingId +
+                    ", spaceId=" + spaceId +
+                    ", locationAddress='" + locationAddress + '\'' +
+                    ", city='" + city + '\'' +
+                    ", baseFare=" + baseFare +
+                    ", timeFare=" + timeFare +
+                    ", paymentDate=" + paymentDate +
+                    ", driverId=" + driverId +
+                    ", fromTime=" + fromTime +
+                    ", toTime=" + toTime +
+                    ", status='" + bookingStatus + '\'' +
+                    ", createdAt='" + createdAt + '\'' +
+                    ", updatedAt='" + updatedAt + '\'' +
+                    ", totalPrice=" + totalPrice +
+                    ", paymentId='" + paymentId + '\'' +
+                    ", paymentStatus='" + paymentStatus + '\'' +
+                    ", paymentMedium='" + paymentMedium + '\'' +
+                    ", mediumTransactionId='" + mediumTransactionId + '\'' +
+                    ", driverName='" + driverName + '\'' +
+                    ", driverRating=" + driverRating +
+                    '}';
     }
 
     public String getStatus() {
@@ -151,94 +221,59 @@ public class Booking implements Serializable {
         this.status = status;
     }
 
-    public String getCreatedAt() {
-        return createdAt;
+    public String getMessage() {
+        return message;
     }
 
-    public void setCreatedAt(String createdAt) {
-        this.createdAt = createdAt;
+    public String getDriverRating() {
+        return Double.toString(driverRating);
+    }
+
+    public String getAddress() {
+        return locationAddress;
+    }
+
+    public String getLocationAddress() {
+        return locationAddress;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public String getBookingStatus() {
+        return bookingStatus;
+    }
+
+    public String getCreatedAt() {
+        return createdAt;
     }
 
     public String getUpdatedAt() {
         return updatedAt;
     }
 
-    public void setUpdatedAt(String updatedAt) {
-        this.updatedAt = updatedAt;
+    public int getBaseFare() {
+        return baseFare;
     }
 
-    public String getTotalPrice() {
-        return Integer.toString(totalPrice);
-    }
-
-    public void setTotalPrice(int totalPrice) {
-        this.totalPrice = totalPrice;
+    public int getTimeFare() {
+        return timeFare;
     }
 
     public String getPaymentId() {
         return paymentId;
     }
 
-    public void setPaymentId(String paymentId) {
-        this.paymentId = paymentId;
-    }
-
     public String getPaymentStatus() {
         return paymentStatus;
-    }
-
-    public void setPaymentStatus(String paymentStatus) {
-        this.paymentStatus = paymentStatus;
     }
 
     public String getPaymentMedium() {
         return paymentMedium;
     }
 
-    public void setPaymentMedium(String paymentMedium) {
-        this.paymentMedium = paymentMedium;
-    }
-
     public String getMediumTransactionId() {
         return mediumTransactionId;
-    }
-
-    public void setMediumTransactionId(String mediumTransactionId) {
-        this.mediumTransactionId = mediumTransactionId;
-    }
-
-    public String getDriverName() {
-        if(driverName == null) return "Place Holder";
-        return driverName;
-    }
-
-    public void setDriverName(String driverName) {
-        this.driverName = driverName;
-    }
-
-    // toString method
-    @NonNull
-    @Override
-    public String toString() {
-        return "Booking{" +
-                "bookingId=" + bookingId +
-                ", spaceId=" + spaceId +
-                ", driverId=" + driverId +
-                ", fromTime='" + fromTime + '\'' +
-                ", toTime='" + toTime + '\'' +
-                ", status='" + status + '\'' +
-                ", createdAt='" + createdAt + '\'' +
-                ", updatedAt='" + updatedAt + '\'' +
-                ", totalPrice=" + totalPrice +
-                ", paymentId='" + paymentId + '\'' +
-                ", paymentStatus='" + paymentStatus + '\'' +
-                ", paymentMedium='" + paymentMedium + '\'' +
-                ", mediumTransactionId='" + mediumTransactionId + '\'' +
-                ", driverName='" + driverName + '\'' +
-                '}';
-    }
-
-    public String getDriverRating() {
-        return Double.toString(driverRating);
     }
 }

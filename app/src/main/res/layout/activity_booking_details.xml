@@ -30,6 +30,18 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
+                android:id="@+id/report_issue_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:text="Report Issue"
+                android:textColor="@color/red"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/textView3" />
+
+            <TextView
                 android:id="@+id/booking_id"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -60,7 +72,7 @@
         android:id="@+id/booking_info_card"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="6dp"
         app:layout_constraintStart_toStartOf="@+id/booking_id_card"
         app:layout_constraintTop_toBottomOf="@id/booking_id_card">
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -159,7 +171,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
                 android:text="@string/placeholder_name"
-                android:textSize="24sp"
+                android:textSize="22sp"
                 android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="@+id/imageView5"
                 app:layout_constraintStart_toEndOf="@+id/imageView5"
@@ -184,7 +196,7 @@
         android:id="@+id/request_again_card"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
+        android:layout_marginTop="6dp"
         app:layout_constraintStart_toStartOf="@+id/driver_info_card"
         app:layout_constraintTop_toBottomOf="@id/driver_info_card">
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -281,7 +293,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-                android:text="@string/base_fare"
+                android:text="@string/time_fare"
                 android:textSize="16sp"
                 android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="@+id/textView2"
@@ -405,13 +417,16 @@
     </androidx.cardview.widget.CardView>
 
     <Button
-        android:layout_margin="8dp"
         android:id="@+id/btn_add_review"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/add_additional_review"
+        android:layout_margin="8dp"
+        android:backgroundTint="@color/spidermanGreen"
+        android:text="@string/confirm_cash_payment"
+        android:textColor="@color/white"
+        android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/receipt_card" />
+        app:layout_constraintStart_toStartOf="@+id/payment_card" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
