@@ -66,4 +66,8 @@
     <string name="demo_booking_id"># 123456789</string>
     <string name="request_again">Request Again</string>
     <string name="receipt">Receipt</string>
+    <string name="status">Status</string>
+    <string name="add_additional_review">Add additional Review</string>
+    <string name="placeholder_name">Md Anwar Hossen</string>
+    <string name="payment">Payment</string>
 </resources>
