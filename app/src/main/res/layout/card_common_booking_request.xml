@@ -10,7 +10,7 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content">
 
         <ImageView
             android:id="@+id/imageView2"
@@ -66,6 +66,7 @@
             android:textColor="@color/black"
             android:textSize="16sp"
             android:textStyle="bold"
+            android:gravity="center_vertical"
             app:layout_constraintStart_toStartOf="@+id/request_card_time_from"
             app:layout_constraintTop_toBottomOf="@+id/request_card_time_from" />
 
@@ -123,6 +124,7 @@
             app:layout_constraintBottom_toBottomOf="@+id/request_card_time_to"
             app:layout_constraintEnd_toStartOf="@+id/reject_button"
             app:layout_constraintTop_toBottomOf="@+id/request_card_time_from"
+            app:layout_constraintVertical_bias="1.0"
             tools:ignore="SmallSp" />
 
         <Button
@@ -138,6 +140,18 @@
             app:layout_constraintTop_toTopOf="@+id/accept_button"
             tools:ignore="SmallSp" />
 
+        <TextView
+            android:id="@+id/request_card_status"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Accepted"
+            android:textColor="@color/spidermanGreen"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            android:gravity="center_vertical"
+            app:layout_constraintBottom_toBottomOf="@+id/request_card_time_to"
+            app:layout_constraintEnd_toEndOf="@+id/reject_button"
+            app:layout_constraintTop_toBottomOf="@+id/request_card_time_from" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

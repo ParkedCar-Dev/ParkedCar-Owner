@@ -13,9 +13,10 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.example.spaceowner.R;
+import com.example.spaceowner.view.bookings.fragments.adapters.BookingListAdapter;
 import com.example.spaceowner.view.space.SpaceActivity;
-import com.example.spaceowner.view.space.SpaceRequestsAdapter;
 import com.example.spaceowner.view.space.SpaceViewpagerAdapter;
+import com.example.spaceowner.viewmodel.BookingViewModel;
 import com.example.spaceowner.viewmodel.SpaceViewModel;
 import com.example.spaceowner.viewmodel.ViewModelFactory;
 
@@ -50,7 +51,8 @@ public class SpaceRequestsFragment extends Fragment {
         }
 
         recyclerView = getView().findViewById(R.id.space_requests_recyclerview);
-        SpaceRequestsAdapter adapter = new SpaceRequestsAdapter(viewModel);
+//        SpaceRequestsAdapter adapter = new SpaceRequestsAdapter(viewModel);
+        BookingListAdapter adapter = new BookingListAdapter(new ViewModelFactory().create(BookingViewModel.class));
         recyclerView.setAdapter(adapter);
         LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
         recyclerView.setLayoutManager(layoutManager);

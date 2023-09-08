@@ -77,4 +77,7 @@
     <string name="upcoming_bookings">Upcoming</string>
     <string name="previous_bookings">Previous</string>
     <string name="total_fare">Total Fare</string>
+    <string name="current_requests_and_bookings">Current Requests and Bookings</string>
+    <string name="upcoming_requests_and_bookings">Upcoming Bookings</string>
+    <string name="previous_bookings_and_requests">Previous Requests and Bookings</string>
 </resources>

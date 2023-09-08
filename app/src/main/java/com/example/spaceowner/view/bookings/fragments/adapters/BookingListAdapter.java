@@ -1,7 +1,6 @@
-package com.example.spaceowner.view.space;
+package com.example.spaceowner.view.bookings.fragments.adapters;
 
 import android.content.Intent;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,17 +13,18 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.spaceowner.R;
 import com.example.spaceowner.model.data.Booking;
 import com.example.spaceowner.view.bookingDetails.BookingDetailsActivity;
-import com.example.spaceowner.viewmodel.SpaceViewModel;
+import com.example.spaceowner.viewmodel.BookingViewModel;
 
 import java.util.ArrayList;
 import java.util.List;
 
-class SpaceRequestViewHolder extends RecyclerView.ViewHolder {
+class BookingListViewHolder extends RecyclerView.ViewHolder {
+    Booking booking;
+    BookingViewModel viewModel;
     TextView driverName, rating, fare, timeFrom, timeTo;
     Button accept, reject;
 
-    int bookingId;
-    public SpaceRequestViewHolder(@NonNull View itemView) {
+    public BookingListViewHolder(@NonNull View itemView) {
         super(itemView);
         driverName = itemView.findViewById(R.id.request_card_driver_name);
         rating = itemView.findViewById(R.id.request_card_rating);
@@ -35,45 +35,48 @@ class SpaceRequestViewHolder extends RecyclerView.ViewHolder {
         accept = itemView.findViewById(R.id.accept_button);
         reject = itemView.findViewById(R.id.reject_button);
 
+        itemView.findViewById(R.id.request_card_status).setVisibility(View.GONE);
+
         itemView.setOnClickListener(v -> {
             Intent intent = new Intent(itemView.getContext(), BookingDetailsActivity.class);
-            intent.putExtra("bookingId", bookingId);
+            intent.putExtra("bookingId", booking.getBookingId());
             itemView.getContext().startActivity(intent);
         });
     }
 
-    public void setBooking(Booking booking){
+    public void setBooking(Booking booking, BookingViewModel viewModel) {
+        this.booking = booking;
+        this.viewModel = viewModel;
+
         driverName.setText(booking.getDriverName());
         rating.setText(booking.getDriverRating());
         fare.setText(booking.getTotalPrice());
         timeFrom.setText(booking.getFromTime());
         timeTo.setText(booking.getToTime());
-        bookingId = booking.getBookingId();
     }
 }
 
-public class SpaceRequestsAdapter extends RecyclerView.Adapter<SpaceRequestViewHolder> {
-    private SpaceViewModel viewModel;
-    private List<Booking> bookings = new ArrayList<>();
-    public SpaceRequestsAdapter(SpaceViewModel viewModel) {
+public class BookingListAdapter extends RecyclerView.Adapter<BookingListViewHolder> {
+    BookingViewModel viewModel;
+    List<Booking> bookings;
+
+    public BookingListAdapter(BookingViewModel viewModel) {
         this.viewModel = viewModel;
-        bookings.add(new Booking());
+        bookings = new ArrayList<>();
     }
 
     @NonNull
     @Override
-    public SpaceRequestViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public BookingListViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
-        View view = inflater.inflate(R.layout.space_request_card_item, parent, false);
-        return new SpaceRequestViewHolder(view);
+        View view = inflater.inflate(R.layout.card_common_booking_request, parent, false);
+        return new BookingListViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull SpaceRequestViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull BookingListViewHolder holder, int position) {
         Booking booking = bookings.get(position);
-
-        Log.d("SpaceRequestsAdapter", booking.toString());
-        holder.setBooking(booking);
+        holder.setBooking(booking, viewModel);
     }
 
     @Override
@@ -81,7 +84,7 @@ public class SpaceRequestsAdapter extends RecyclerView.Adapter<SpaceRequestViewH
         return bookings.size();
     }
 
-    public void setBookings(List<Booking> requests) {
-        this.bookings = requests;
+    public void setBookings(List<Booking> bookings){
+        this.bookings = bookings;
     }
 }
