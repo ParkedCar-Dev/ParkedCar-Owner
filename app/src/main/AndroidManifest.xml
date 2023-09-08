@@ -42,9 +42,12 @@
             android:exported="false" />
         <activity
             android:name=".view.dashboard.DashboardActivity"
-            android:exported="true"></activity>
+            android:exported="true" />
         <activity
             android:name=".view.auth.AuthActivity"
+            android:exported="true" />
+        <activity
+            android:name=".view.bookings.BookingActivity"
             android:exported="true" />
     </application>
 

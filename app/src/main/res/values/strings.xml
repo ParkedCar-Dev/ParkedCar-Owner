@@ -73,4 +73,7 @@
     <string name="confirm_cash_payment">Confirm Cash Payment</string>
     <string name="time_fare">Time Fare</string>
     <string name="skip">skip</string>
+    <string name="current_bookings">Current</string>
+    <string name="upcoming_bookings">Upcoming</string>
+    <string name="previous_bookings">Previous</string>
 </resources>
