@@ -9,6 +9,8 @@ package com.example.spaceowner.model.data.booking;
 
 import com.google.gson.annotations.SerializedName;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import kotlin.collections.ArrayDeque;
@@ -51,7 +53,7 @@ public class BookingListResponse {
         return "SpaceBookings{" +
                 "status='" + status + '\'' +
                 ", message='" + message + '\'' +
-                ", bookings=" + bookings.size() +
+                ", bookings=" + Arrays.toString(bookings.toArray()) +
                 '}';
     }
 }

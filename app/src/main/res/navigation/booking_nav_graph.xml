@@ -31,9 +31,9 @@
     </fragment>
     <fragment
         android:id="@+id/upcomingBookingsFragment"
-        android:name="com.example.spaceowner.view.bookings.fragments.UpcomingBookingsFragment"
+        android:name="com.example.spaceowner.view.bookings.fragments.RequestedBookingFragment"
         android:label="fragment_upcoming_bookings"
-        tools:layout="@layout/fragment_upcoming_bookings" >
+        tools:layout="@layout/fragment_requested_bookings" >
         <action
             android:id="@+id/action_upcomingBookingsFragment_to_previousBookingsFragment"
             app:destination="@id/previousBookingsFragment" />

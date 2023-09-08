@@ -2,6 +2,8 @@ package com.example.spaceowner.view.bookings.fragments;
 
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -15,40 +17,40 @@ import com.example.spaceowner.view.bookings.fragments.adapters.BookingListAdapte
 import com.example.spaceowner.viewmodel.BookingViewModel;
 import com.example.spaceowner.viewmodel.ViewModelFactory;
 
-public class PreviousBookingsFragment extends Fragment {
+public class RequestedBookingFragment extends Fragment {
     BookingViewModel viewModel;
-    public PreviousBookingsFragment() {
+    public RequestedBookingFragment() {
         viewModel = new ViewModelFactory().create(BookingViewModel.class);
     }
 
     @Override
     public void onResume() {
         super.onResume();
-        viewModel.fetchPastBookings();
+        viewModel.fetchRequestedBookings();
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_previous_bookings, container, false);
+        return inflater.inflate(R.layout.fragment_requested_bookings, container, false);
     }
 
     @Override
-    public void onViewCreated(View view, Bundle savedInstanceState) {
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        RecyclerView recyclerView = getView().findViewById(R.id.previous_bookings_recyclerview);
+        RecyclerView recyclerView = getView().findViewById(R.id.requested_bookings_recyclerview);
         BookingListAdapter adapter = new BookingListAdapter(viewModel);
         recyclerView.setAdapter(adapter);
         LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
         recyclerView.setLayoutManager(layoutManager);
 
-        viewModel.getPastBookings().observe(getViewLifecycleOwner(), (bookings) -> {
+        viewModel.getRequestedBookings().observe(getViewLifecycleOwner(), (bookings) -> {
             if(bookings != null){
                 adapter.setBookings(bookings);
                 adapter.notifyDataSetChanged();
             }
         });
 
-        viewModel.fetchPastBookings();
+        viewModel.fetchRequestedBookings();
     }
 }

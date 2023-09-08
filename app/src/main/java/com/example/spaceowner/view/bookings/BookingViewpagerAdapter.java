@@ -7,7 +7,7 @@ import androidx.viewpager2.adapter.FragmentStateAdapter;
 
 import com.example.spaceowner.view.bookings.fragments.CurrentBookingsFragment;
 import com.example.spaceowner.view.bookings.fragments.PreviousBookingsFragment;
-import com.example.spaceowner.view.bookings.fragments.UpcomingBookingsFragment;
+import com.example.spaceowner.view.bookings.fragments.RequestedBookingFragment;
 
 public class BookingViewpagerAdapter extends FragmentStateAdapter {
     public BookingViewpagerAdapter(@NonNull FragmentActivity fragmentActivity) {
@@ -18,9 +18,9 @@ public class BookingViewpagerAdapter extends FragmentStateAdapter {
     @Override
     public Fragment createFragment(int position) {
         switch (position){
-            case 1: return new PreviousBookingsFragment();
-            case 2: return new UpcomingBookingsFragment();
-            default: return new CurrentBookingsFragment();
+            case 1: return new CurrentBookingsFragment();
+            case 2: return new PreviousBookingsFragment();
+            default: return new RequestedBookingFragment();
         }
     }
 

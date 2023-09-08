@@ -1,6 +1,7 @@
 package com.example.spaceowner.view.bookings.fragments.adapters;
 
 import android.content.Intent;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,7 +22,7 @@ import java.util.List;
 class BookingListViewHolder extends RecyclerView.ViewHolder {
     Booking booking;
     BookingViewModel viewModel;
-    TextView driverName, rating, fare, timeFrom, timeTo;
+    TextView driverName, rating, fare, timeFrom, timeTo, location;
     Button accept, reject;
 
     public BookingListViewHolder(@NonNull View itemView) {
@@ -31,6 +32,7 @@ class BookingListViewHolder extends RecyclerView.ViewHolder {
         fare = itemView.findViewById(R.id.request_card_total_fare);
         timeFrom = itemView.findViewById(R.id.request_card_time_from);
         timeTo = itemView.findViewById(R.id.request_card_time_to);
+        location = itemView.findViewById(R.id.request_card_location);
 
         accept = itemView.findViewById(R.id.accept_button);
         reject = itemView.findViewById(R.id.reject_button);
@@ -44,7 +46,7 @@ class BookingListViewHolder extends RecyclerView.ViewHolder {
         });
     }
 
-    public void setBooking(Booking booking, BookingViewModel viewModel) {
+    public void setBooking(Booking booking, BookingViewModel viewModel, boolean isSpaceBookings){
         this.booking = booking;
         this.viewModel = viewModel;
 
@@ -53,16 +55,33 @@ class BookingListViewHolder extends RecyclerView.ViewHolder {
         fare.setText(booking.getTotalPrice());
         timeFrom.setText(booking.getFromTime());
         timeTo.setText(booking.getToTime());
+
+        Log.d("BookingListAdapter", "isSpaceBookings: ");
+
+        if(isSpaceBookings){
+            location.setHeight(0);
+            location.setVisibility(View.GONE);
+        }else{
+            location.getLayoutParams().height = ViewGroup.LayoutParams.WRAP_CONTENT;
+            location.setVisibility(View.VISIBLE);
+            location.setText(String.format("%s, %s", booking.getLocationAddress(), booking.getCity()));
+        }
     }
 }
 
 public class BookingListAdapter extends RecyclerView.Adapter<BookingListViewHolder> {
     BookingViewModel viewModel;
     List<Booking> bookings;
+    boolean isSpaceBookings = false;
 
     public BookingListAdapter(BookingViewModel viewModel) {
         this.viewModel = viewModel;
         bookings = new ArrayList<>();
+    }
+
+    public BookingListAdapter(BookingViewModel viewModel, boolean isSpaceBookings) {
+        this(viewModel);
+        this.isSpaceBookings = isSpaceBookings;
     }
 
     @NonNull
@@ -76,7 +95,7 @@ public class BookingListAdapter extends RecyclerView.Adapter<BookingListViewHold
     @Override
     public void onBindViewHolder(@NonNull BookingListViewHolder holder, int position) {
         Booking booking = bookings.get(position);
-        holder.setBooking(booking, viewModel);
+        holder.setBooking(booking, viewModel, isSpaceBookings);
     }
 
     @Override

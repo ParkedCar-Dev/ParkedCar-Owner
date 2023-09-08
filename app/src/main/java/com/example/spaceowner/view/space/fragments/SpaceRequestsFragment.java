@@ -52,7 +52,7 @@ public class SpaceRequestsFragment extends Fragment {
 
         recyclerView = getView().findViewById(R.id.space_requests_recyclerview);
 //        SpaceRequestsAdapter adapter = new SpaceRequestsAdapter(viewModel);
-        BookingListAdapter adapter = new BookingListAdapter(new ViewModelFactory().create(BookingViewModel.class));
+        BookingListAdapter adapter = new BookingListAdapter(new ViewModelFactory().create(BookingViewModel.class), true);
         recyclerView.setAdapter(adapter);
         LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
         recyclerView.setLayoutManager(layoutManager);

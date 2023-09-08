@@ -11,14 +11,14 @@ import java.util.List;
 
 public class BookingViewModel extends ViewModel {
     private MutableLiveData<Booking> currentBooking;
-    private MutableLiveData<List<Booking>> activeBookings, pastBookings, upcomingBookings;
+    private MutableLiveData<List<Booking>> activeBookings, pastBookings, requestedBookings;
     private BookingRepository bookingRepository;
     public BookingViewModel(BookingRepository bookingRepository) {
         this.bookingRepository = bookingRepository;
         currentBooking = new MutableLiveData<>(new Booking());
         activeBookings = new MutableLiveData<>(new ArrayList<>());
         pastBookings = new MutableLiveData<>(new ArrayList<>());
-        upcomingBookings = new MutableLiveData<>(new ArrayList<>());
+        requestedBookings = new MutableLiveData<>(new ArrayList<>());
     }
 
     public void getBookingDetails(int bookingId){
@@ -26,18 +26,15 @@ public class BookingViewModel extends ViewModel {
     }
 
     public void fetchActiveBookings(){
-//        TODO: Add API call to get active bookings
-//        bookingRepository.getActiveBookings(spaceId, activeBookings);
+        bookingRepository.getActiveBookings(activeBookings);
     }
 
     public void fetchPastBookings(){
-//        TODO: Add API call to get past bookings
-//        bookingRepository.getPastBookings(spaceId, pastBookings);
+        bookingRepository.getPastBookings(pastBookings);
     }
 
-    public void fetchUpcomingBookings(){
-//        TODO: Add API call to get upcoming bookings
-//        bookingRepository.getUpcomingBookings(spaceId, upcomingBookings);
+    public void fetchRequestedBookings(){
+        bookingRepository.getRequestedBookings(requestedBookings);
     }
 
     public void rateDriver(int bookingId, double rating) {
@@ -53,5 +50,5 @@ public class BookingViewModel extends ViewModel {
     public MutableLiveData<Booking> getCurrentBooking() { return currentBooking; }
     public MutableLiveData<List<Booking>> getActiveBookings() { return activeBookings; }
     public MutableLiveData<List<Booking>> getPastBookings() { return pastBookings; }
-    public MutableLiveData<List<Booking>> getUpcomingBookings() { return upcomingBookings; }
+    public MutableLiveData<List<Booking>> getRequestedBookings() { return requestedBookings; }
 }

@@ -51,4 +51,7 @@ public interface RetrofitAPI {
 
     @POST("/booking/details")
     Call<BookingDetailsResponse> getBookingDetails(@Body BookingDetailsRequest request);
+
+    @POST("/booking/user")
+    Call<BookingListResponse> getUserBookings(@Body BookingListRequest request);
 }
