@@ -11,7 +11,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.spaceowner.R;
 import com.example.spaceowner.view.space.SpaceActivity;
@@ -58,7 +57,7 @@ public class SpaceRequestsFragment extends Fragment {
 
         viewModel.getSpaceRequests().observe(getViewLifecycleOwner(), (requests) -> {
             if(requests != null){
-                adapter.setRequests(requests.getBookings());
+                adapter.setBookings(requests.getBookings());
                 adapter.notifyDataSetChanged();
             }else Log.d("SPACE REQUESTS FRAGMENT", "null requests");
         });

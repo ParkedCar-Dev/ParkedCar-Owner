@@ -13,6 +13,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.DialogFragment;
 
 import com.example.spaceowner.R;
+import com.example.spaceowner.model.data.Booking;
 import com.example.spaceowner.viewmodel.BookingViewModel;
 
 public class CustomDialog extends DialogFragment {
@@ -38,9 +39,9 @@ public class CustomDialog extends DialogFragment {
         rateButton = view.findViewById(R.id.rate_button);
         skipButton.setOnClickListener(skipRating);
         rateButton.setOnClickListener(v -> {
-            double rating = (double) ratingBar.getRating();
+            double rating = ratingBar.getRating();
             Toast.makeText(getContext(), "Rating: " + rating, Toast.LENGTH_SHORT).show();
-            viewModel.rateDriver(rating);
+            viewModel.rateDriver(viewModel.getCurrentBooking().getValue().getBookingId(), rating);
             dismiss();
         });
         getDialog().setTitle("Rate the driver");

@@ -40,7 +40,7 @@ public class BookingRepository {
         });
     }
 
-    public void rateDriver(int driverId, double rating) {
+    public void rateDriver(int bookingId, double rating) {
 //        TODO: Add API call to rate driver
     }
 }

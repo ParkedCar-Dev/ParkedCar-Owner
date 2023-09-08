@@ -76,4 +76,5 @@
     <string name="current_bookings">Current</string>
     <string name="upcoming_bookings">Upcoming</string>
     <string name="previous_bookings">Previous</string>
+    <string name="total_fare">Total Fare</string>
 </resources>

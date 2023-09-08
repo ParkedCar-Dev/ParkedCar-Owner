@@ -9,16 +9,12 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.lifecycle.MutableLiveData;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.spaceowner.R;
 import com.example.spaceowner.model.data.Booking;
-import com.example.spaceowner.model.data.requests.SpaceRequest;
 import com.example.spaceowner.view.bookingDetails.BookingDetailsActivity;
-import com.example.spaceowner.viewmodel.BookingViewModel;
 import com.example.spaceowner.viewmodel.SpaceViewModel;
-import com.example.spaceowner.viewmodel.ViewModelFactory;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -45,14 +41,23 @@ class SpaceRequestViewHolder extends RecyclerView.ViewHolder {
             itemView.getContext().startActivity(intent);
         });
     }
+
+    public void setBooking(Booking booking){
+        driverName.setText(booking.getDriverName());
+        rating.setText(booking.getDriverRating());
+        fare.setText(booking.getTotalPrice());
+        timeFrom.setText(booking.getFromTime());
+        timeTo.setText(booking.getToTime());
+        bookingId = booking.getBookingId();
+    }
 }
 
 public class SpaceRequestsAdapter extends RecyclerView.Adapter<SpaceRequestViewHolder> {
     private SpaceViewModel viewModel;
-    private List<Booking> bookingRequests = new ArrayList<>();
+    private List<Booking> bookings = new ArrayList<>();
     public SpaceRequestsAdapter(SpaceViewModel viewModel) {
         this.viewModel = viewModel;
-        bookingRequests.add(new Booking());
+        bookings.add(new Booking());
     }
 
     @NonNull
@@ -65,24 +70,18 @@ public class SpaceRequestsAdapter extends RecyclerView.Adapter<SpaceRequestViewH
 
     @Override
     public void onBindViewHolder(@NonNull SpaceRequestViewHolder holder, int position) {
-        Booking request = bookingRequests.get(position);
+        Booking booking = bookings.get(position);
 
-        Log.d("SpaceRequestsAdapter", request.toString());
-        holder.driverName.setText(request.getDriverName());
-        holder.rating.setText(request.getDriverRating());
-        holder.fare.setText(request.getTotalPrice());
-        holder.timeFrom.setText(request.getFromTime());
-        holder.timeTo.setText(request.getToTime());
-
-        holder.bookingId = request.getBookingId();
+        Log.d("SpaceRequestsAdapter", booking.toString());
+        holder.setBooking(booking);
     }
 
     @Override
     public int getItemCount() {
-        return bookingRequests.size();
+        return bookings.size();
     }
 
-    public void setRequests(List<Booking> requests) {
-        this.bookingRequests = requests;
+    public void setBookings(List<Booking> requests) {
+        this.bookings = requests;
     }
 }

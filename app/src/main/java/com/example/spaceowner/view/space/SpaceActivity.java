@@ -18,6 +18,7 @@ import com.example.spaceowner.R;
 import com.example.spaceowner.model.data.Space;
 import com.example.spaceowner.utils.TokenManager;
 import com.example.spaceowner.view.auth.AuthActivity;
+import com.example.spaceowner.view.bookings.BookingActivity;
 import com.example.spaceowner.view.dashboard.DashboardActivity;
 import com.example.spaceowner.view.space.fragments.SpaceUpdateFragment;
 import com.example.spaceowner.viewmodel.SpaceViewModel;
@@ -87,6 +88,11 @@ public class SpaceActivity extends AppCompatActivity implements NavigationView.O
         }else if(item.getItemId() == R.id.nav_dashboard) {
             Log.d("DASHBOARD_ACTIVITY: ", "onNavigationItemSelected: " + "DASHBOARD");
             Intent intent = new Intent(this, DashboardActivity.class);
+            startActivity(intent);
+            this.finish();
+        }else if(item.getItemId() == R.id.nav_bookings){
+            Log.d("DASHBOARD_ACTIVITY: ", "onNavigationItemSelected: " + "SPACE");
+            Intent intent = new Intent(this, BookingActivity.class);
             startActivity(intent);
             this.finish();
         }
