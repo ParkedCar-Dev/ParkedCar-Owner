@@ -1,4 +1,4 @@
-package com.example.spaceowner.model.data;
+package com.example.spaceowner.model.data.booking;
 
 import androidx.annotation.NonNull;
 

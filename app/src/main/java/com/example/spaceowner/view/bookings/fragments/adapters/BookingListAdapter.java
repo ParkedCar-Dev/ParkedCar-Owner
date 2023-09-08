@@ -11,7 +11,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.spaceowner.R;
-import com.example.spaceowner.model.data.Booking;
+import com.example.spaceowner.model.data.booking.Booking;
 import com.example.spaceowner.view.bookingDetails.BookingDetailsActivity;
 import com.example.spaceowner.viewmodel.BookingViewModel;
 

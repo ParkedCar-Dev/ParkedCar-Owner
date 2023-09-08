@@ -6,9 +6,9 @@ import androidx.lifecycle.MutableLiveData;
 
 import com.example.spaceowner.model.RetrofitAPI;
 import com.example.spaceowner.model.RetrofitClient;
-import com.example.spaceowner.model.data.Booking;
-import com.example.spaceowner.model.data.BookingDetailsRequest;
-import com.example.spaceowner.model.data.BookingResponse;
+import com.example.spaceowner.model.data.booking.Booking;
+import com.example.spaceowner.model.data.booking.BookingDetailsRequest;
+import com.example.spaceowner.model.data.booking.BookingDetailsResponse;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -23,10 +23,10 @@ public class BookingRepository {
     }
 
     public void getBookingDetails(int bookingId, MutableLiveData<Booking> currentBooking) {
-        Call<BookingResponse> call = RetrofitClient.getInstance().create(RetrofitAPI.class).getBookingDetails(new BookingDetailsRequest(bookingId));
-        call.enqueue(new Callback<BookingResponse>() {
+        Call<BookingDetailsResponse> call = RetrofitClient.getInstance().create(RetrofitAPI.class).getBookingDetails(new BookingDetailsRequest(bookingId));
+        call.enqueue(new Callback<BookingDetailsResponse>() {
             @Override
-            public void onResponse(Call<BookingResponse> call, Response<BookingResponse> response) {
+            public void onResponse(Call<BookingDetailsResponse> call, Response<BookingDetailsResponse> response) {
                 Log.d("BookingRepositoryBookingDetails", "onResponse: " + response.body());
                 if(response.isSuccessful()){
                     currentBooking.setValue(response.body().getBooking());
@@ -34,7 +34,7 @@ public class BookingRepository {
             }
 
             @Override
-            public void onFailure(Call<BookingResponse> call, Throwable t) {
+            public void onFailure(Call<BookingDetailsResponse> call, Throwable t) {
                 Log.d("BookingRepositoryBookingDetails", "onFailure: " + t.getMessage());
             }
         });

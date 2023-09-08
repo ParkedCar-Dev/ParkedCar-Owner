@@ -1,4 +1,4 @@
-package com.example.spaceowner.model.data;
+package com.example.spaceowner.model.data.booking;
 
 
 //{
@@ -13,7 +13,7 @@ import java.util.List;
 
 import kotlin.collections.ArrayDeque;
 
-public class SpaceBookings {
+public class BookingListResponse {
 
     @SerializedName("status")
     private String status;
@@ -22,13 +22,13 @@ public class SpaceBookings {
     @SerializedName("bookings")
     private List<Booking> bookings;
 
-    public SpaceBookings(String status, String message, List<Booking> bookings) {
+    public BookingListResponse(String status, String message, List<Booking> bookings) {
         this.status = status;
         this.message = message;
         this.bookings = bookings;
     }
 
-    public SpaceBookings() {
+    public BookingListResponse() {
         this.status = "success";
         this.message = "get bookings successful";
         this.bookings = new ArrayDeque<>();

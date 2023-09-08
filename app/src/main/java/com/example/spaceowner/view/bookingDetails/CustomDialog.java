@@ -13,7 +13,6 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.DialogFragment;
 
 import com.example.spaceowner.R;
-import com.example.spaceowner.model.data.Booking;
 import com.example.spaceowner.viewmodel.BookingViewModel;
 
 public class CustomDialog extends DialogFragment {

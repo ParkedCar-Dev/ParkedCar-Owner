@@ -3,7 +3,7 @@ package com.example.spaceowner.viewmodel;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-import com.example.spaceowner.model.data.Booking;
+import com.example.spaceowner.model.data.booking.Booking;
 import com.example.spaceowner.model.repositories.BookingRepository;
 
 import java.util.ArrayList;

@@ -278,7 +278,6 @@ public class Space implements Serializable {
     public String toString() {
         return "{" +
                 "locationId=" + locationId +
-                ", locationName='" + locationName + '\'' +
                 ", locationAddress='" + locationAddress + '\'' +
                 ", owner='" + owner + '\'' +
                 ", latitude=" + latitude +
@@ -289,15 +288,12 @@ public class Space implements Serializable {
                 ", height=" + height +
                 ", status='" + status + '\'' +
                 ", securityMeasures='" + securityMeasures + '\'' +
-                ", security=" + Arrays.toString(security) +
                 ", autoApproval=" + autoApproval +
-                ", images=" + Arrays.toString(images) +
                 ", rating=" + rating +
-                ", availabilityMask='" + availabilityMask + '\'' +
-                ", timeSlots=" + Arrays.toString(timeSlots) +
                 ", totalBooks=" + totalBooks +
                 ", city='" + city + '\'' +
                 ", message='" + message + '\'' +
+                ", requestCount=" + requestCount +
                 '}';
     }
 

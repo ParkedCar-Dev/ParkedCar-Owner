@@ -12,7 +12,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.example.spaceowner.R;
-import com.example.spaceowner.model.data.Booking;
+import com.example.spaceowner.model.data.booking.Booking;
 import com.example.spaceowner.viewmodel.BookingViewModel;
 import com.example.spaceowner.viewmodel.ViewModelFactory;
 

@@ -1,11 +1,10 @@
 package com.example.spaceowner.model;
 
-import com.example.spaceowner.model.data.Booking;
-import com.example.spaceowner.model.data.BookingDetailsRequest;
-import com.example.spaceowner.model.data.BookingRequest;
-import com.example.spaceowner.model.data.BookingResponse;
+import com.example.spaceowner.model.data.booking.BookingDetailsRequest;
+import com.example.spaceowner.model.data.booking.BookingListRequest;
+import com.example.spaceowner.model.data.booking.BookingDetailsResponse;
 import com.example.spaceowner.model.data.GenericResponse;
-import com.example.spaceowner.model.data.SpaceBookings;
+import com.example.spaceowner.model.data.booking.BookingListResponse;
 import com.example.spaceowner.model.data.auth.LoginRequest;
 import com.example.spaceowner.model.data.auth.LoginResponse;
 import com.example.spaceowner.model.data.auth.SignupRequest;
@@ -13,16 +12,11 @@ import com.example.spaceowner.model.data.auth.SignupResponse;
 import com.example.spaceowner.model.data.Space;
 import com.example.spaceowner.model.data.SpaceListResponse;
 import com.example.spaceowner.model.data.SpaceStatusUpdateRequest;
-import com.example.spaceowner.model.data.requests.SpaceRequest;
-
-import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
-import retrofit2.http.Path;
-import retrofit2.http.Query;
 
 public interface RetrofitAPI {
     @POST("/auth/login/")
@@ -53,8 +47,8 @@ public interface RetrofitAPI {
     Call<GenericResponse> updateSpace(@Body Space space);
 
     @POST("/booking/space_bookings")
-    Call<SpaceBookings> getSpaceBookings(@Body BookingRequest request);
+    Call<BookingListResponse> getSpaceBookings(@Body BookingListRequest request);
 
     @POST("/booking/details")
-    Call<BookingResponse> getBookingDetails(@Body BookingDetailsRequest request);
+    Call<BookingDetailsResponse> getBookingDetails(@Body BookingDetailsRequest request);
 }
