@@ -76,6 +76,7 @@ public class ActiveSpaceRecyclerViewAdapter extends RecyclerView.Adapter<ActiveS
         holder.viewModel = this.viewModel;
         if(space.getRequestCount() > 0)
             holder.requestButton.setText("Requests (" + space.getRequestCount() + ")");
+        else holder.requestButton.setText("Requests");
         holder.imageView.setImageResource(Space.getImageId());
     }
 

@@ -285,16 +285,6 @@
 
     </LinearLayout>
 
-    <ImageSwitcher
-        android:id="@+id/image_switcher"
-        android:layout_width="match_parent"
-        android:layout_height="200dp"
-        android:layout_margin="16dp"
-        app:layout_constraintBottom_toTopOf="@+id/linearLayout"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout2"
-        />
 
     <!--    bottom-->
     <LinearLayout
@@ -303,14 +293,6 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent">
-
-        <Button
-            android:id="@+id/add_photos_button"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="16dp"
-            android:layout_marginRight="16dp"
-            android:text="@string/add_photos" />
 
         <Button
             android:id="@+id/submit_button"

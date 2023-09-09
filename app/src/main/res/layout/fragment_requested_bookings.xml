@@ -5,10 +5,10 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".view.bookings.fragments.CurrentBookingsFragment">
+    tools:context=".view.bookings.fragments.RequestedBookingFragment">
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/current_bookings_recyclerview"
+        android:id="@+id/requested_bookings_recyclerview"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:layout_constraintTop_toBottomOf="@+id/textView5" />

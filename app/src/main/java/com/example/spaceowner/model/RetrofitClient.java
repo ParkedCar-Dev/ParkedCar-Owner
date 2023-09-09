@@ -1,7 +1,5 @@
 package com.example.spaceowner.model;
 
-import android.content.Context;
-
 import androidx.annotation.NonNull;
 
 import com.example.spaceowner.utils.TokenManager;
@@ -42,6 +40,4 @@ public class RetrofitClient{
         }
         return retrofit;
     }
-
-
 }

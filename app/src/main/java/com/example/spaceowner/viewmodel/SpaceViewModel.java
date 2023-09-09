@@ -4,18 +4,14 @@ import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 import com.example.spaceowner.model.data.Space;
-import com.example.spaceowner.model.data.SpaceBookings;
-import com.example.spaceowner.model.data.requests.SpaceRequest;
+import com.example.spaceowner.model.data.booking.BookingListResponse;
 import com.example.spaceowner.model.repositories.SpaceRepository;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class SpaceViewModel extends ViewModel {
     private SpaceRepository spaceRepository;
     private MutableLiveData<Space> currentSpace;
     private MutableLiveData<Boolean> spaceUpdateResult;
-    private MutableLiveData<SpaceBookings> spaceRequests;
+    private MutableLiveData<BookingListResponse> spaceRequests;
     private static SpaceViewModel instance;
     private SpaceViewModel(SpaceRepository spaceRepository){
         this.spaceRepository = spaceRepository;
@@ -42,16 +38,6 @@ public class SpaceViewModel extends ViewModel {
         return currentSpace.getValue();
     }
 
-    public List<SpaceRequest> getSpaceRequests(int spaceId){
-//        TODO: spaceRepository.fetchSpaceRequests(spaceRequests, spaceId);
-        List<SpaceRequest> requests = new ArrayList<>();
-        requests.add(new SpaceRequest());
-        requests.add(new SpaceRequest());
-        requests.add(new SpaceRequest());
-        requests.add(new SpaceRequest());
-        return requests;
-    }
-
 
     public void setSpace(Space activitySpace) {
         this.currentSpace.setValue(activitySpace);
@@ -74,7 +60,7 @@ public class SpaceViewModel extends ViewModel {
         spaceRepository.updateStatus(locationId, status, new MutableLiveData<>());
     }
 
-    public MutableLiveData<SpaceBookings> getSpaceRequests() {
+    public MutableLiveData<BookingListResponse> getSpaceRequests() {
         return spaceRequests;
     }
 

@@ -11,18 +11,20 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.spaceowner.R;
+import com.example.spaceowner.model.data.GenericResponse;
+import com.example.spaceowner.view.bookings.fragments.adapters.BookingListAdapter;
 import com.example.spaceowner.view.space.SpaceActivity;
-import com.example.spaceowner.view.space.SpaceRequestsAdapter;
 import com.example.spaceowner.view.space.SpaceViewpagerAdapter;
+import com.example.spaceowner.viewmodel.BookingViewModel;
 import com.example.spaceowner.viewmodel.SpaceViewModel;
 import com.example.spaceowner.viewmodel.ViewModelFactory;
 
 public class SpaceRequestsFragment extends Fragment {
     RecyclerView recyclerView;
     SpaceViewModel viewModel;
+    BookingViewModel bookingViewModel;
 
 
     public SpaceRequestsFragment() {}
@@ -31,6 +33,7 @@ public class SpaceRequestsFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         viewModel = new ViewModelFactory().create(SpaceViewModel.class);
+        bookingViewModel = new ViewModelFactory().create(BookingViewModel.class);
     }
 
     @Override
@@ -51,16 +54,27 @@ public class SpaceRequestsFragment extends Fragment {
         }
 
         recyclerView = getView().findViewById(R.id.space_requests_recyclerview);
-        SpaceRequestsAdapter adapter = new SpaceRequestsAdapter(viewModel);
+//        SpaceRequestsAdapter adapter = new SpaceRequestsAdapter(viewModel);
+        BookingListAdapter adapter = new BookingListAdapter(bookingViewModel, true);
         recyclerView.setAdapter(adapter);
         LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
         recyclerView.setLayoutManager(layoutManager);
 
         viewModel.getSpaceRequests().observe(getViewLifecycleOwner(), (requests) -> {
             if(requests != null){
-                adapter.setRequests(requests.getBookings());
+                adapter.setBookings(requests.getBookings());
                 adapter.notifyDataSetChanged();
             }else Log.d("SPACE REQUESTS FRAGMENT", "null requests");
+        });
+
+        bookingViewModel.getAcceptDeclineResponse().observe(getViewLifecycleOwner(), (response) -> {
+            if(response != null){
+                if(response.isSuccessful()){
+                    Log.d("SpaceRequestsFragment", "onViewCreated: " + response);
+                    bookingViewModel.getAcceptDeclineResponse().setValue(new GenericResponse("null", "null"));
+                    viewModel.fetchSpaceRequests();
+                }
+            }
         });
 
         viewModel.fetchSpaceRequests();

@@ -17,6 +17,7 @@ import com.example.spaceowner.model.data.Space;
 import com.example.spaceowner.utils.TokenManager;
 import com.example.spaceowner.view.addspace.AddSpaceActivity;
 import com.example.spaceowner.view.auth.AuthActivity;
+import com.example.spaceowner.view.bookings.BookingActivity;
 import com.example.spaceowner.view.space.SpaceActivity;
 import com.example.spaceowner.view.space.SpaceViewpagerAdapter;
 import com.example.spaceowner.viewmodel.SpaceListViewModel;
@@ -109,12 +110,16 @@ public class DashboardActivity extends AppCompatActivity implements NavigationVi
             Intent intent = new Intent(this, AuthActivity.class);
             startActivity(intent);
             this.finish();
+        }else if(item.getItemId() == R.id.nav_bookings) {
+            Log.d("DASHBOARD_ACTIVITY: ", "onNavigationItemSelected: " + "DASHBOARD");
+            Intent intent = new Intent(this, BookingActivity.class);
+            startActivity(intent);
+            this.finish();
         }
         return true;
     }
 
     public void changeFragment(Space space, SpaceViewpagerAdapter.SpaceFragmentType fragmentType){
-//        Intent intent = new Intent(itemView.getContext(), SpaceActivity.class);
         Intent intent = new Intent(this, SpaceActivity.class);
         intent.putExtra("space", space);
         intent.putExtra("fragment", fragmentType);

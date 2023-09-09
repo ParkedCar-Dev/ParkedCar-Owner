@@ -1,16 +1,14 @@
-package com.example.spaceowner.model.data;
+package com.example.spaceowner.model.data.booking;
 
 import com.google.gson.annotations.SerializedName;
 
-import java.util.Stack;
-
-public class BookingRequest {
+public class BookingListRequest {
     @SerializedName("space_id")
     private int spaceId;
     @SerializedName("status")
     private String status;
 
-    public BookingRequest(int spaceId, String status) {
+    public BookingListRequest(int spaceId, String status) {
         this.spaceId = spaceId;
         this.status = status;
     }
