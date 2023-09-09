@@ -36,4 +36,8 @@ public class GenericResponse {
     public boolean isSuccessful() {
         return status.equals("success");
     }
+
+    public String getMessage() {
+        return message;
+    }
 }

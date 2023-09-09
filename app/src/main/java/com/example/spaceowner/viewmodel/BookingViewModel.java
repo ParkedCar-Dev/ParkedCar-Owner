@@ -3,6 +3,7 @@ package com.example.spaceowner.viewmodel;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
+import com.example.spaceowner.model.data.GenericResponse;
 import com.example.spaceowner.model.data.booking.Booking;
 import com.example.spaceowner.model.repositories.BookingRepository;
 
@@ -13,12 +14,14 @@ public class BookingViewModel extends ViewModel {
     private MutableLiveData<Booking> currentBooking;
     private MutableLiveData<List<Booking>> activeBookings, pastBookings, requestedBookings;
     private BookingRepository bookingRepository;
+    private MutableLiveData<GenericResponse> acceptDeclineResponse;
     public BookingViewModel(BookingRepository bookingRepository) {
         this.bookingRepository = bookingRepository;
         currentBooking = new MutableLiveData<>(new Booking());
         activeBookings = new MutableLiveData<>(new ArrayList<>());
         pastBookings = new MutableLiveData<>(new ArrayList<>());
         requestedBookings = new MutableLiveData<>(new ArrayList<>());
+        acceptDeclineResponse = new MutableLiveData<>(new GenericResponse());
     }
 
     public void getBookingDetails(int bookingId){
@@ -38,15 +41,18 @@ public class BookingViewModel extends ViewModel {
     }
 
     public void rateDriver(int bookingId, double rating) {
-//        TODO: Add API call to rate driver
         bookingRepository.rateDriver(bookingId, rating);
     }
 
     public void acceptBooking(int bookingId) {
-//        TODO: Add API call to accept booking
-//        bookingRepository.acceptBooking(bookingId);
+        bookingRepository.acceptBooking(bookingId, acceptDeclineResponse);
     }
 
+    public void declineBooking(int bookingId) {
+        bookingRepository.declineBooking(bookingId, acceptDeclineResponse);
+    }
+
+    public MutableLiveData<GenericResponse> getAcceptDeclineResponse() { return acceptDeclineResponse; }
     public MutableLiveData<Booking> getCurrentBooking() { return currentBooking; }
     public MutableLiveData<List<Booking>> getActiveBookings() { return activeBookings; }
     public MutableLiveData<List<Booking>> getPastBookings() { return pastBookings; }

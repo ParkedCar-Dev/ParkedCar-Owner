@@ -11,8 +11,10 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.example.spaceowner.R;
+import com.example.spaceowner.model.data.GenericResponse;
 import com.example.spaceowner.view.bookings.fragments.adapters.BookingListAdapter;
 import com.example.spaceowner.viewmodel.BookingViewModel;
 import com.example.spaceowner.viewmodel.ViewModelFactory;
@@ -48,6 +50,17 @@ public class RequestedBookingFragment extends Fragment {
             if(bookings != null){
                 adapter.setBookings(bookings);
                 adapter.notifyDataSetChanged();
+            }
+        });
+
+        viewModel.getAcceptDeclineResponse().observe(getViewLifecycleOwner(), (response) -> {
+            if(response != null){
+                if(response.isSuccessful()){
+                    Toast.makeText(getContext(), response.getMessage(), Toast.LENGTH_SHORT).show();
+                    viewModel.getAcceptDeclineResponse().setValue(new GenericResponse("null", "null"));
+                    viewModel.fetchRequestedBookings();
+                    adapter.notifyDataSetChanged();
+                }
             }
         });
 

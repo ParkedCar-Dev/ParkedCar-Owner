@@ -6,6 +6,7 @@ import androidx.lifecycle.MutableLiveData;
 
 import com.example.spaceowner.model.RetrofitAPI;
 import com.example.spaceowner.model.RetrofitClient;
+import com.example.spaceowner.model.data.GenericResponse;
 import com.example.spaceowner.model.data.booking.Booking;
 import com.example.spaceowner.model.data.booking.BookingDetailsRequest;
 import com.example.spaceowner.model.data.booking.BookingDetailsResponse;
@@ -76,5 +77,41 @@ public class BookingRepository {
 
     public void getPastBookings(MutableLiveData<List<Booking>> bookingsList) {
         getGenericBookings("completed", bookingsList);
+    }
+
+    public void acceptBooking(int bookingId, MutableLiveData<GenericResponse> acceptResponse) {
+        Call<GenericResponse> call = RetrofitClient.getInstance().create(RetrofitAPI.class).acceptBooking(new BookingDetailsRequest(bookingId));
+        call.enqueue(new Callback<GenericResponse>() {
+            @Override
+            public void onResponse(Call<GenericResponse> call, Response<GenericResponse> response) {
+                Log.d("BookingRepositoryAccept", "onResponse: " + response.body());
+                if(response.isSuccessful()){
+                    acceptResponse.setValue(response.body());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<GenericResponse> call, Throwable t) {
+                Log.d("BookingRepositoryAccept", "onFailure: " + t.getMessage());
+            }
+        });
+    }
+
+    public void declineBooking(int bookingId, MutableLiveData<GenericResponse> denialResponse) {
+        Call<GenericResponse> call = RetrofitClient.getInstance().create(RetrofitAPI.class).declineBooking(new BookingDetailsRequest(bookingId));
+        call.enqueue(new Callback<GenericResponse>() {
+            @Override
+            public void onResponse(Call<GenericResponse> call, Response<GenericResponse> response) {
+                Log.d("BookingRepositoryDecline", "onResponse: " + response.body());
+                if(response.isSuccessful()){
+                    denialResponse.setValue(response.body());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<GenericResponse> call, Throwable t) {
+                Log.d("BookingRepositoryDecline", "onFailure: " + t.getMessage());
+            }
+        });
     }
 }

@@ -80,4 +80,5 @@
     <string name="current_requests_and_bookings">Current Requests and Bookings</string>
     <string name="upcoming_requests_and_bookings">Upcoming Bookings</string>
     <string name="previous_bookings_and_requests">Previous Requests and Bookings</string>
+    <string name="accepted">Accepted</string>
 </resources>

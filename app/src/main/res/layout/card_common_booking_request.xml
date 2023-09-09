@@ -85,15 +85,24 @@
             android:layout_height="31dp"
             android:layout_marginEnd="8dp"
             android:ellipsize="end"
+            android:gravity="end|center_vertical"
             android:lines="2"
             android:text="@string/total_fare"
-
-
             android:textColor="@color/black"
             android:textSize="16sp"
             android:textStyle="bold"
-            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/imageView7"
             app:layout_constraintTop_toTopOf="@+id/request_card_time_from" />
+
+        <ImageView
+            android:id="@+id/imageView7"
+            android:layout_width="22dp"
+            android:layout_height="22dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/taka"
+            app:layout_constraintBottom_toBottomOf="@+id/request_card_total_fare"
+            app:layout_constraintEnd_toEndOf="@+id/imageView4"
+            app:layout_constraintTop_toTopOf="@+id/request_card_total_fare" />
 
         <TextView
             android:id="@+id/request_card_rating"
@@ -154,7 +163,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center_vertical"
-            android:text="Accepted"
+            android:text="@string/accepted"
             android:textColor="@color/spidermanGreen"
             android:textSize="24sp"
             android:textStyle="bold"

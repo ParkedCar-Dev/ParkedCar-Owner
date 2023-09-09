@@ -22,7 +22,7 @@ import java.util.List;
 class BookingListViewHolder extends RecyclerView.ViewHolder {
     Booking booking;
     BookingViewModel viewModel;
-    TextView driverName, rating, fare, timeFrom, timeTo, location;
+    TextView driverName, rating, fare, timeFrom, timeTo, location, status;
     Button accept, reject;
 
     public BookingListViewHolder(@NonNull View itemView) {
@@ -36,9 +36,7 @@ class BookingListViewHolder extends RecyclerView.ViewHolder {
 
         accept = itemView.findViewById(R.id.accept_button);
         reject = itemView.findViewById(R.id.reject_button);
-
-        itemView.findViewById(R.id.request_card_status).setVisibility(View.GONE);
-
+        status = itemView.findViewById(R.id.request_card_status);
         itemView.setOnClickListener(v -> {
             Intent intent = new Intent(itemView.getContext(), BookingDetailsActivity.class);
             intent.putExtra("bookingId", booking.getBookingId());
@@ -53,8 +51,8 @@ class BookingListViewHolder extends RecyclerView.ViewHolder {
         driverName.setText(booking.getDriverName());
         rating.setText(booking.getDriverRating());
         fare.setText(booking.getTotalPrice());
-        timeFrom.setText(booking.getFromTime());
-        timeTo.setText(booking.getToTime());
+        timeFrom.setText(String.format("From: %s", booking.getFromTime()));
+        timeTo.setText(String.format("  To:%s", booking.getToTime()));
 
         Log.d("BookingListAdapter", "isSpaceBookings: ");
 
@@ -65,6 +63,23 @@ class BookingListViewHolder extends RecyclerView.ViewHolder {
             location.getLayoutParams().height = ViewGroup.LayoutParams.WRAP_CONTENT;
             location.setVisibility(View.VISIBLE);
             location.setText(String.format("%s, %s", booking.getLocationAddress(), booking.getCity()));
+        }
+
+        if(booking.getStatus().equalsIgnoreCase("requested")){
+            accept.setVisibility(View.VISIBLE);
+            reject.setVisibility(View.VISIBLE);
+            status.setVisibility(View.GONE);
+            accept.setOnClickListener(v -> {
+                viewModel.acceptBooking(booking.getBookingId());
+            });
+            reject.setOnClickListener(v -> {
+                viewModel.declineBooking(booking.getBookingId());
+            });
+        }else {
+            accept.setVisibility(View.GONE);
+            reject.setVisibility(View.GONE);
+            status.setVisibility(View.VISIBLE);
+            status.setText(booking.getStatus());
         }
     }
 }
