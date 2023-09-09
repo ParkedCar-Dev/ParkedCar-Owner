@@ -60,4 +60,10 @@ public interface RetrofitAPI {
 
     @POST("/booking/decline")
     Call<GenericResponse> declineBooking(@Body BookingDetailsRequest request);
+
+    @POST("booking/confirmPayment")
+    Call<GenericResponse> confirmPayment(@Body BookingDetailsRequest request);
+
+    @POST("/booking//rateDriver")
+    Call<GenericResponse> rateDriver(@Body BookingDetailsRequest bookingDetailsRequest);
 }

@@ -13,6 +13,7 @@ import com.example.spaceowner.model.data.booking.BookingDetailsResponse;
 import com.example.spaceowner.model.data.booking.BookingListRequest;
 import com.example.spaceowner.model.data.booking.BookingListResponse;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import retrofit2.Call;
@@ -45,8 +46,23 @@ public class BookingRepository {
         });
     }
 
-    public void rateDriver(int bookingId, double rating) {
-//        TODO: Add API call to rate driver
+    public void rateDriver(int bookingId, double rating, MutableLiveData<GenericResponse> ratingResponse) {
+        Call<GenericResponse> call = RetrofitClient.getInstance().create(RetrofitAPI.class).rateDriver(new BookingDetailsRequest(bookingId, rating));
+        Log.d("BookingRepositoryRating", "rateDriver: " + call.request().body());
+        call.enqueue(new Callback<GenericResponse>() {
+            @Override
+            public void onResponse(Call<GenericResponse> call, Response<GenericResponse> response) {
+                Log.d("BookingRepositoryRating", "onResponse: " + response.body());
+                if(response.isSuccessful()){
+                    ratingResponse.setValue(response.body());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<GenericResponse> call, Throwable t) {
+                Log.d("BookingRepositoryRating", "onFailure: " + t.getMessage());
+            }
+        });
     }
 
     public void getGenericBookings(String status, MutableLiveData<List<Booking>> bookingsList){
@@ -111,6 +127,24 @@ public class BookingRepository {
             @Override
             public void onFailure(Call<GenericResponse> call, Throwable t) {
                 Log.d("BookingRepositoryDecline", "onFailure: " + t.getMessage());
+            }
+        });
+    }
+
+    public void confirmPayment(int bookingId, MutableLiveData<GenericResponse> paymentResponse) {
+        Call<GenericResponse> call = RetrofitClient.getInstance().create(RetrofitAPI.class).confirmPayment(new BookingDetailsRequest(bookingId));
+        call.enqueue(new Callback<GenericResponse>() {
+            @Override
+            public void onResponse(Call<GenericResponse> call, Response<GenericResponse> response) {
+                Log.d("BookingRepositoryPayment", "onResponse: " + response.body());
+                if(response.isSuccessful()){
+                    paymentResponse.setValue(response.body());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<GenericResponse> call, Throwable t) {
+                Log.d("BookingRepositoryPayment", "onFailure: " + t.getMessage());
             }
         });
     }

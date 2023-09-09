@@ -13,6 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.spaceowner.R;
+import com.example.spaceowner.model.data.GenericResponse;
 import com.example.spaceowner.view.bookings.fragments.adapters.BookingListAdapter;
 import com.example.spaceowner.viewmodel.BookingViewModel;
 import com.example.spaceowner.viewmodel.ViewModelFactory;
@@ -48,6 +49,16 @@ public class CurrentBookingsFragment extends Fragment {
             if (bookings != null) {
                 adapter.setBookings(bookings);
                 adapter.notifyDataSetChanged();
+            }
+        });
+
+        viewModel.getAcceptDeclineResponse().observe(getViewLifecycleOwner(), (response) -> {
+            if(response != null){
+                if(response.isSuccessful()){
+                    viewModel.getAcceptDeclineResponse().setValue(new GenericResponse("null", "null"));
+                    viewModel.fetchActiveBookings();
+                    adapter.notifyDataSetChanged();
+                }
             }
         });
 

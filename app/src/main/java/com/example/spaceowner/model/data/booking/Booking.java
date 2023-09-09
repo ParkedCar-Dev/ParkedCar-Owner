@@ -72,7 +72,8 @@ public class Booking implements Serializable {
     @SerializedName("driver_name")
     private String driverName;
 
-
+    @SerializedName("is_rated")
+    boolean isRated;
 
     public void setDriverRating(double driverRating) {
         this.driverRating = driverRating;
@@ -105,6 +106,7 @@ public class Booking implements Serializable {
         this.driverName = "Dummy Driver Name";
         this.driverRating = 4.5;
         this.status = "success";
+        this.isRated = true;
     }
 
     public Booking(int bookingId, int spaceId, int driverId, long fromTime, long toTime,
@@ -210,7 +212,12 @@ public class Booking implements Serializable {
                     ", mediumTransactionId='" + mediumTransactionId + '\'' +
                     ", driverName='" + driverName + '\'' +
                     ", driverRating=" + driverRating +
+                    ", isRated=" + isRated +
                     '}';
+    }
+
+    public boolean isRated() {
+        return isRated;
     }
 
     public String getStatus() {

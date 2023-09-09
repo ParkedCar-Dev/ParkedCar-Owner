@@ -22,8 +22,8 @@ import java.util.List;
 class BookingListViewHolder extends RecyclerView.ViewHolder {
     Booking booking;
     BookingViewModel viewModel;
-    TextView driverName, rating, fare, timeFrom, timeTo, location, status;
-    Button accept, reject;
+    TextView driverName, rating, fare, timeFrom, timeTo, location, status, bookingId, paymentStatus;
+    Button accept, reject, confirmButton;
 
     public BookingListViewHolder(@NonNull View itemView) {
         super(itemView);
@@ -33,10 +33,17 @@ class BookingListViewHolder extends RecyclerView.ViewHolder {
         timeFrom = itemView.findViewById(R.id.request_card_time_from);
         timeTo = itemView.findViewById(R.id.request_card_time_to);
         location = itemView.findViewById(R.id.request_card_location);
+        bookingId = itemView.findViewById(R.id.booking_id);
+        paymentStatus = itemView.findViewById(R.id.payment_status);
 
         accept = itemView.findViewById(R.id.accept_button);
         reject = itemView.findViewById(R.id.reject_button);
         status = itemView.findViewById(R.id.request_card_status);
+        confirmButton = itemView.findViewById(R.id.confirm_button);
+
+        confirmButton.setVisibility(View.GONE);
+        confirmButton.setHeight(0);
+
         itemView.setOnClickListener(v -> {
             Intent intent = new Intent(itemView.getContext(), BookingDetailsActivity.class);
             intent.putExtra("bookingId", booking.getBookingId());
@@ -52,7 +59,9 @@ class BookingListViewHolder extends RecyclerView.ViewHolder {
         rating.setText(booking.getDriverRating());
         fare.setText(booking.getTotalPrice());
         timeFrom.setText(String.format("From: %s", booking.getFromTime()));
-        timeTo.setText(String.format("  To:%s", booking.getToTime()));
+        timeTo.setText(String.format("To:%s", booking.getToTime()));
+        bookingId.setText(String.format("Booking ID: #%s", booking.getBookingId()));
+        paymentStatus.setText(String.format("%s", booking.getPaymentStatus()));
 
         Log.d("BookingListAdapter", "isSpaceBookings: ");
 
@@ -80,6 +89,17 @@ class BookingListViewHolder extends RecyclerView.ViewHolder {
             reject.setVisibility(View.GONE);
             status.setVisibility(View.VISIBLE);
             status.setText(booking.getStatus());
+        }
+
+        if(booking.getPaymentStatus().equalsIgnoreCase("paid")){
+            confirmButton.setVisibility(View.VISIBLE);
+            confirmButton.setHeight(ViewGroup.LayoutParams.WRAP_CONTENT);
+            confirmButton.setOnClickListener(v -> {
+                viewModel.confirmPayment(booking.getBookingId());
+            });
+        }else{
+            confirmButton.setVisibility(View.GONE);
+            confirmButton.setHeight(0);
         }
     }
 }

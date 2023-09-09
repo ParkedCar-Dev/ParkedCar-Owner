@@ -41,7 +41,7 @@ public class BookingViewModel extends ViewModel {
     }
 
     public void rateDriver(int bookingId, double rating) {
-        bookingRepository.rateDriver(bookingId, rating);
+        bookingRepository.rateDriver(bookingId, rating, acceptDeclineResponse);
     }
 
     public void acceptBooking(int bookingId) {
@@ -57,4 +57,8 @@ public class BookingViewModel extends ViewModel {
     public MutableLiveData<List<Booking>> getActiveBookings() { return activeBookings; }
     public MutableLiveData<List<Booking>> getPastBookings() { return pastBookings; }
     public MutableLiveData<List<Booking>> getRequestedBookings() { return requestedBookings; }
+
+    public void confirmPayment(int bookingId) {
+        bookingRepository.confirmPayment(bookingId, acceptDeclineResponse);
+    }
 }

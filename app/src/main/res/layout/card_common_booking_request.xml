@@ -18,7 +18,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginTop="8dp"
-            android:text="Booking Request"
+            android:text="Address"
             android:textSize="22dp"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
@@ -40,7 +40,6 @@
             android:layout_width="195dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
-
             android:ellipsize="end"
             android:gravity="center_vertical"
             android:lines="2"
@@ -50,6 +49,19 @@
             android:textStyle="bold"
             app:layout_constraintStart_toEndOf="@+id/imageView2"
             app:layout_constraintTop_toBottomOf="@+id/request_card_location" />
+
+        <TextView
+            android:id="@+id/booking_id"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:lines="2"
+            android:text="Booking ID: #123"
+            android:textColor="@color/black"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="@+id/imageView2"
+            app:layout_constraintTop_toBottomOf="@+id/request_card_driver_name" />
 
         <TextView
             android:id="@+id/request_card_time_from"
@@ -62,8 +74,8 @@
             android:textColor="@color/black"
             android:textSize="16sp"
             android:textStyle="bold"
-            app:layout_constraintStart_toStartOf="@+id/imageView2"
-            app:layout_constraintTop_toBottomOf="@+id/request_card_driver_name" />
+            app:layout_constraintStart_toStartOf="@+id/booking_id"
+            app:layout_constraintTop_toBottomOf="@+id/booking_id" />
 
         <TextView
             android:id="@+id/request_card_time_to"
@@ -91,8 +103,9 @@
             android:textColor="@color/black"
             android:textSize="16sp"
             android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@+id/booking_id"
             app:layout_constraintEnd_toStartOf="@+id/imageView7"
-            app:layout_constraintTop_toTopOf="@+id/request_card_time_from" />
+            app:layout_constraintTop_toTopOf="@+id/booking_id" />
 
         <ImageView
             android:id="@+id/imageView7"
@@ -116,6 +129,7 @@
             android:textColor="@color/black"
             android:textSize="16sp"
             android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@+id/request_card_driver_name"
             app:layout_constraintEnd_toStartOf="@+id/imageView4"
             app:layout_constraintTop_toTopOf="@+id/request_card_driver_name" />
 
@@ -169,7 +183,33 @@
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="@+id/request_card_time_to"
             app:layout_constraintEnd_toEndOf="@+id/reject_button"
-            app:layout_constraintTop_toBottomOf="@+id/request_card_time_from" />
+            app:layout_constraintTop_toTopOf="@+id/request_card_time_to" />
+
+        <TextView
+            android:id="@+id/payment_status"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Paid"
+            android:gravity="end|center_vertical"
+            android:lines="2"
+            android:textColor="@color/black"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@+id/request_card_time_from"
+            app:layout_constraintEnd_toEndOf="@+id/imageView7"
+            app:layout_constraintTop_toTopOf="@+id/request_card_time_from" />
+
+        <Button
+            android:id="@+id/confirm_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="4dp"
+            android:backgroundTint="@color/spidermanGreen"
+            android:text="@string/confirm_payment"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/request_card_time_to" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

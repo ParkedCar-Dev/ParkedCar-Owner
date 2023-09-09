@@ -13,8 +13,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import kotlin.collections.ArrayDeque;
-
 public class BookingListResponse {
 
     @SerializedName("status")
@@ -33,7 +31,7 @@ public class BookingListResponse {
     public BookingListResponse() {
         this.status = "success";
         this.message = "get bookings successful";
-        this.bookings = new ArrayDeque<>();
+        this.bookings = new ArrayList<>();
     }
 
     public String getStatus() {

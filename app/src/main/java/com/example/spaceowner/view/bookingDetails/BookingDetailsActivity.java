@@ -7,7 +7,9 @@ import androidx.fragment.app.FragmentManager;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
+import android.util.Log;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
@@ -54,17 +56,11 @@ public class BookingDetailsActivity extends AppCompatActivity {
         button = findViewById(R.id.btn_add_review);
         paymentCard = findViewById(R.id.payment_card);
 
-        rateNow.setOnClickListener(v -> {
-            FragmentManager fm = getSupportFragmentManager();
-            CustomDialog customDialog = new CustomDialog(bookingViewModel);
-            customDialog.show(fm, "Rate Driver");
-        });
-
         bookingViewModel.getBookingDetails(bookingIdFromDifferentActivity);
 
         bookingViewModel.getCurrentBooking().observe(this, booking -> {
             if(booking != null && booking.getBookingId() > 0){
-                bookingId.setText("#" + booking.getBookingId());
+                bookingId.setText("Booking ID: #" + booking.getBookingId());
                 fromTime.setText("From: "+booking.getFromTime());
                 toTime.setText("To: "+booking.getToTime());
                 bookingStatus.setText(booking.getStatus());
@@ -78,8 +74,15 @@ public class BookingDetailsActivity extends AppCompatActivity {
                 paymentStatus.setText(booking.getPaymentStatus());
                 paymentId.setText(String.valueOf(booking.getPaymentId()));
                 paymentDate.setText(booking.getPaymentTime());
-
+//                Log.d("RateNowButton", "booking: " + booking);
+//                Log.d("RateNowButton", "isRated: " + booking.isRated());
                 setButton(booking);
+            }
+        });
+
+        bookingViewModel.getAcceptDeclineResponse().observe(this, response -> {
+            if(response != null && response.isSuccessful()){
+                bookingViewModel.getBookingDetails(bookingIdFromDifferentActivity);
             }
         });
 
@@ -101,8 +104,46 @@ public class BookingDetailsActivity extends AppCompatActivity {
             });
 
             rateNow.setText(booking.getDriverRating());
-            rateNow.setTextSize(20);
+            rateNow.getLayoutParams().height = ViewGroup.LayoutParams.WRAP_CONTENT;
             rateNow.setVisibility(View.VISIBLE);
+        }else if(booking.getPaymentStatus().equalsIgnoreCase("paid")){
+            requestAgain.setVisibility(View.GONE);
+            reportIssue.setVisibility(View.GONE);
+            paymentCard.setVisibility(View.VISIBLE);
+
+            button.setVisibility(View.VISIBLE);
+            button.setText("Confirm Payment");
+            button.setBackgroundColor(Color.parseColor("#4CAF50"));
+            button.setOnClickListener(v -> {
+                bookingViewModel.confirmPayment(booking.getBookingId());
+            });
+            rateNow.setVisibility(View.GONE);
+        }else if(booking.getPaymentStatus().equalsIgnoreCase("confirmed")) {
+            requestAgain.setVisibility(View.GONE);
+            reportIssue.setVisibility(View.GONE);
+            paymentCard.setVisibility(View.VISIBLE);
+
+            button.setVisibility(View.GONE);
+        }
+
+//        Log.d("RateNowButtonSetButton", "setButton: " + booking.isRated());
+//        Log.d("RateNowButtonSetButton", "booking: " + booking.getBookingStatus());
+        if(booking.isRated()){
+//            Log.d("RateNowButton", "setButton: " + booking.isRated());
+//            Log.d("RateNowButton", "booking: " + booking);
+            rateNow.setText(booking.getDriverRating());
+            rateNow.getLayoutParams().height = ViewGroup.LayoutParams.WRAP_CONTENT;
+            rateNow.setVisibility(View.VISIBLE);
+        }else if(!booking.isRated() && booking.getStatus().equalsIgnoreCase("completed")){
+//            Log.d("RateNowButton", "setButton: " + booking.isRated());
+            rateNow.setText("Rate Now");
+            rateNow.getLayoutParams().height = ViewGroup.LayoutParams.WRAP_CONTENT;
+            rateNow.setVisibility(View.VISIBLE);
+            rateNow.setOnClickListener(v -> {
+                FragmentManager fm = getSupportFragmentManager();
+                CustomDialog customDialog = new CustomDialog(bookingViewModel);
+                customDialog.show(fm, "Rate Driver");
+            });
         }
     }
 
