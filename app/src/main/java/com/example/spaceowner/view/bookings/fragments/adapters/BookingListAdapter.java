@@ -1,6 +1,7 @@
 package com.example.spaceowner.view.bookings.fragments.adapters;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -61,7 +62,14 @@ class BookingListViewHolder extends RecyclerView.ViewHolder {
         timeFrom.setText(String.format("From: %s", booking.getFromTime()));
         timeTo.setText(String.format("To:%s", booking.getToTime()));
         bookingId.setText(String.format("Booking ID: #%s", booking.getBookingId()));
-        paymentStatus.setText(String.format("%s", booking.getPaymentStatus()));
+        paymentStatus.setText(String.format("%s", booking.getPaymentStatus().equalsIgnoreCase("unpaid")?"Pending":booking.getPaymentStatus()));
+
+        if(booking.getPaymentStatus().equalsIgnoreCase("confirmed"))
+            paymentStatus.setTextColor(Color.parseColor("#00802B"));
+        else if(booking.getPaymentStatus().equalsIgnoreCase("paid"))
+            paymentStatus.setTextColor(Color.parseColor("#0055FF"));
+        else
+            paymentStatus.setTextColor(Color.RED);
 
         Log.d("BookingListAdapter", "isSpaceBookings: ");
 
@@ -88,7 +96,18 @@ class BookingListViewHolder extends RecyclerView.ViewHolder {
             accept.setVisibility(View.GONE);
             reject.setVisibility(View.GONE);
             status.setVisibility(View.VISIBLE);
-            status.setText(booking.getStatus());
+            status.setText(booking.getStatus().equalsIgnoreCase("unpaid")?"Pending":booking.getStatus());
+
+            if(booking.getStatus().equalsIgnoreCase("requested"))
+                status.setTextColor(Color.BLUE);
+            else if(booking.getStatus().equalsIgnoreCase("active"))
+                status.setTextColor(Color.parseColor("#0055FF"));
+            else if(booking.getStatus().equalsIgnoreCase("completed"))
+                status.setTextColor(Color.parseColor("#00802B"));
+            else if(booking.getStatus().equalsIgnoreCase("cancelled"))
+                status.setTextColor(Color.RED);
+            else
+                status.setTextColor(Color.BLACK);
         }
 
         if(booking.getPaymentStatus().equalsIgnoreCase("paid")){

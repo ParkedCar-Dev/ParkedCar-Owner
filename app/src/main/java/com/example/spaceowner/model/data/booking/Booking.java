@@ -221,7 +221,9 @@ public class Booking implements Serializable {
     }
 
     public String getStatus() {
-        return status;
+        String firstLetter = status.substring(0, 1).toUpperCase();
+        String restLetters = status.substring(1);
+        return firstLetter + restLetters;
     }
 
     public void setStatus(String status) {
@@ -233,7 +235,7 @@ public class Booking implements Serializable {
     }
 
     public String getDriverRating() {
-        return Double.toString(driverRating);
+        return String.format("%.2f", driverRating);
     }
 
     public String getAddress() {
@@ -273,7 +275,9 @@ public class Booking implements Serializable {
     }
 
     public String getPaymentStatus() {
-        return paymentStatus;
+        String firstLetter = paymentStatus.substring(0, 1).toUpperCase();
+        String restLetters = paymentStatus.substring(1);
+        return firstLetter + restLetters;
     }
 
     public String getPaymentMedium() {
