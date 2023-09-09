@@ -82,4 +82,5 @@
     <string name="previous_bookings_and_requests">Previous Requests and Bookings</string>
     <string name="accepted">Accepted</string>
     <string name="confirm_payment">Confirm Payment</string>
+    <string name="show_cancelled_declined_bookings">Show Cancelled Bookings</string>
 </resources>

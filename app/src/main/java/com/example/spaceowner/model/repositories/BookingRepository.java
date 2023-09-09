@@ -95,6 +95,10 @@ public class BookingRepository {
         getGenericBookings("completed", bookingsList);
     }
 
+    public void getPastBookingsWithCancelledOnes(MutableLiveData<List<Booking>> pastBookings) {
+        getGenericBookings("past", pastBookings);
+    }
+
     public void acceptBooking(int bookingId, MutableLiveData<GenericResponse> acceptResponse) {
         Call<GenericResponse> call = RetrofitClient.getInstance().create(RetrofitAPI.class).acceptBooking(new BookingDetailsRequest(bookingId));
         call.enqueue(new Callback<GenericResponse>() {

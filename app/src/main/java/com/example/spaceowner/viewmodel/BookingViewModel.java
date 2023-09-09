@@ -15,6 +15,7 @@ public class BookingViewModel extends ViewModel {
     private MutableLiveData<List<Booking>> activeBookings, pastBookings, requestedBookings;
     private BookingRepository bookingRepository;
     private MutableLiveData<GenericResponse> acceptDeclineResponse;
+    private boolean showCancelled = false;
     public BookingViewModel(BookingRepository bookingRepository) {
         this.bookingRepository = bookingRepository;
         currentBooking = new MutableLiveData<>(new Booking());
@@ -33,7 +34,10 @@ public class BookingViewModel extends ViewModel {
     }
 
     public void fetchPastBookings(){
-        bookingRepository.getPastBookings(pastBookings);
+        if(showCancelled)
+            bookingRepository.getPastBookingsWithCancelledOnes(pastBookings);
+        else
+            bookingRepository.getPastBookings(pastBookings);
     }
 
     public void fetchRequestedBookings(){
@@ -60,5 +64,9 @@ public class BookingViewModel extends ViewModel {
 
     public void confirmPayment(int bookingId) {
         bookingRepository.confirmPayment(bookingId, acceptDeclineResponse);
+    }
+
+    public void setShowCancelled(boolean isChecked) {
+        showCancelled = isChecked;
     }
 }

@@ -15,9 +15,12 @@ import com.example.spaceowner.model.data.GenericResponse;
 import com.example.spaceowner.view.bookings.fragments.adapters.BookingListAdapter;
 import com.example.spaceowner.viewmodel.BookingViewModel;
 import com.example.spaceowner.viewmodel.ViewModelFactory;
+import com.google.android.material.switchmaterial.SwitchMaterial;
 
 public class PreviousBookingsFragment extends Fragment {
     BookingViewModel viewModel;
+    SwitchMaterial cancelledSwitch;
+    boolean showCancelled = false;
     public PreviousBookingsFragment() {
         viewModel = new ViewModelFactory().create(BookingViewModel.class);
     }
@@ -37,11 +40,15 @@ public class PreviousBookingsFragment extends Fragment {
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        cancelledSwitch = getView().findViewById(R.id.cancelledButton);
+
         RecyclerView recyclerView = getView().findViewById(R.id.previous_bookings_recyclerview);
         BookingListAdapter adapter = new BookingListAdapter(viewModel);
         recyclerView.setAdapter(adapter);
         LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
         recyclerView.setLayoutManager(layoutManager);
+
+        viewModel.setShowCancelled(cancelledSwitch.isChecked());
 
         viewModel.getPastBookings().observe(getViewLifecycleOwner(), (bookings) -> {
             if(bookings != null){
@@ -58,6 +65,12 @@ public class PreviousBookingsFragment extends Fragment {
                     adapter.notifyDataSetChanged();
                 }
             }
+        });
+
+        cancelledSwitch.setOnCheckedChangeListener((buttonView, isChecked) -> {
+            viewModel.setShowCancelled(isChecked);
+            viewModel.fetchPastBookings();
+            adapter.notifyDataSetChanged();
         });
 
         viewModel.fetchPastBookings();
